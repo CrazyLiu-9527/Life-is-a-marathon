@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Concurrency/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Concurrency/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Concurrency/src/main/resources/test.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1c7JjELolKVQm2e6ygqvFJ56FiF" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Concurrency/src/main/resources/pic" />
+    <property name="nodejs_interpreter_path" value="D:/Work/Nodejs/node" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15654038" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Concurrency\src\main\resources\pic" />
+    </key>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="" />
+      <created>1589873830320</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589873830320</updated>
+      <workItem from="1589873832048" duration="1356000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="178" key="#Project_Structure" timestamp="1589873874262">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589873874262" />
+    <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589874329422">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589874329422" />
+    <state x="453" y="111" key="CommitChangelistDialog2" timestamp="1589875295617">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875295617" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589875302128">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875302128" />
+    <state x="334" y="214" key="new project wizard" timestamp="1589875269240">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="334" y="214" key="new project wizard/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875269240" />
+  </component>
+</project>
