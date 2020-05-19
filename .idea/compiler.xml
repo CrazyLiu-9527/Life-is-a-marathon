@@ -12,9 +12,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Concurrency" target="1.5" />
-      <module name="DesignPatterns" target="1.5" />
-      <module name="Life-is-a-marathon" target="1.5" />
+      <module name="Concurrency" target="8" />
+      <module name="DesignPatterns" target="8" />
+      <module name="Life-is-a-marathon" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

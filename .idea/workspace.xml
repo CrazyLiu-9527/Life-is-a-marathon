@@ -2,28 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/AppleCharger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/AppleHeadSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/ApplePhone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/ApplePhoneFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Charger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Factory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HeadSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiCharger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiHeadSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiPhone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiPhoneFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Phone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiCharger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiHeadSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiPhone.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiPhoneFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/4.AbstractFactory.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DesignPatterns/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v1/Bean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v1/BeanProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v1/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v2/Bean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v2/BeanProxy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v2/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/spring_auto.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/spring_config.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DesignPatterns/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/2.SimpleFactory.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/2.SimpleFactory.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/3.FactoryMethod.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/3.FactoryMethod.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +47,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DesignPatterns/src/main/java/Spring/v2" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -68,15 +55,51 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="D:/Work/Nodejs/node" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15654038" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\java\Spring\v2" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\java\AbstractFactory" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Concurrency\src\main\resources\pic" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Spring.v2.Main" />
+      <module name="DesignPatterns" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Spring.v2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Spring.v1.Main" />
+      <module name="DesignPatterns" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Spring.v1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -101,7 +124,7 @@
       <option name="presentableId" value="Default" />
       <updated>1589873830320</updated>
       <workItem from="1589873832048" duration="1525000" />
-      <workItem from="1589887026455" duration="4428000" />
+      <workItem from="1589887026455" duration="5491000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -116,16 +139,27 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Add module concurrency" />
     <option name="LAST_COMMIT_MESSAGE" value="Add module concurrency" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Project_Structure" timestamp="1589891458115">
+    <state x="552" y="178" key="#Project_Structure" timestamp="1589892522898">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589891458115" />
+    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589892522898" />
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589874329422">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -142,6 +176,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875295617" />
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom" timestamp="1589892577695">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589892577695" />
+    <state width="1877" height="274" key="GridCell.Tab.0.center" timestamp="1589892577695">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589892577695" />
+    <state width="1877" height="274" key="GridCell.Tab.0.left" timestamp="1589892577695">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589892577695" />
+    <state width="1877" height="274" key="GridCell.Tab.0.right" timestamp="1589892577695">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="274" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589892577695" />
+    <state x="461" y="161" key="SettingsEditor" timestamp="1589892505479">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="161" key="SettingsEditor/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589892505479" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589875356583">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -150,5 +204,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="214" key="new project wizard/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875269240" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/ApplePhoneFactory.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
