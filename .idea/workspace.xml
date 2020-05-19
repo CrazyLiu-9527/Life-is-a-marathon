@@ -2,16 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Concurrency/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Concurrency/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Concurrency/src/main/resources/test.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/AppleCharger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/AppleHeadSet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/ApplePhone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/ApplePhoneFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Charger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Factory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HeadSet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiCharger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiHeadSet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiPhone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/HuaWeiPhoneFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/Phone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiCharger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiHeadSet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiPhone.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory/XiaoMiPhoneFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/4.AbstractFactory.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/2.SimpleFactory.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/2.SimpleFactory.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/3.FactoryMethod.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/3.FactoryMethod.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -35,7 +60,13 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Concurrency/src/main/resources/pic" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DesignPatterns/src/main/java/AbstractFactory" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="D:/Work/Nodejs/node" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15654038" />
@@ -43,6 +74,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\java\AbstractFactory" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Concurrency\src\main\resources\pic" />
     </key>
   </component>
@@ -68,8 +100,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589873830320</updated>
-      <workItem from="1589873832048" duration="1356000" />
+      <workItem from="1589873832048" duration="1525000" />
+      <workItem from="1589887026455" duration="4428000" />
     </task>
+    <task id="LOCAL-00001" summary="Add module concurrency">
+      <created>1589875296410</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589875296410</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -77,24 +118,34 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Add module concurrency" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add module concurrency" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Project_Structure" timestamp="1589873874262">
+    <state x="552" y="178" key="#Project_Structure" timestamp="1589891458115">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589873874262" />
+    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589891458115" />
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589874329422">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589874329422" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1589888185594">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589888185594" />
+    <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589890698689">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589890698689" />
     <state x="453" y="111" key="CommitChangelistDialog2" timestamp="1589875295617">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875295617" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589875302128">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589875356583">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875302128" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875356583" />
     <state x="334" y="214" key="new project wizard" timestamp="1589875269240">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
