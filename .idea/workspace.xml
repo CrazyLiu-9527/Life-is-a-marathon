@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/ChainOfResponsibility/DepartHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/ChainOfResponsibility/Event.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/ChainOfResponsibility/GroupHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/ChainOfResponsibility/Handler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/ChainOfResponsibility/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/ChainOfResponsibility/PresidentHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/7.ChainOfResponsibility.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DesignPatterns/target/classes/4.AbstractFactory.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/target/classes/4.AbstractFactory.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DesignPatterns/target/classes/Observer.md" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Facade/CircleShape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Facade/Facade.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Facade/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Facade/RectangleShape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Facade/Shape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/java/Facade/TriangleShape.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/8.Facade.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/2.SimpleFactory.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/2.SimpleFactory.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/3.FactoryMethod.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/3.FactoryMethod.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DesignPatterns/src/main/resources/6.Observer.md" beforeDir="false" afterPath="$PROJECT_DIR$/DesignPatterns/src/main/resources/6.Observer.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +153,7 @@
       <option name="presentableId" value="Default" />
       <updated>1589873830320</updated>
       <workItem from="1589873832048" duration="1525000" />
-      <workItem from="1589887026455" duration="13272000" />
+      <workItem from="1589887026455" duration="17445000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -192,10 +193,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589874329422" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1589957231179">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1589976008946">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589957231179" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589976008946" />
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589890698689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
