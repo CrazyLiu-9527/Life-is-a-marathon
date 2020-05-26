@@ -31,6 +31,7 @@ public class Main {
 
         /**
          * jdk动态代理
+         * 实现传入的BuyHouse接口的方法，生成一个对用户不可见的第阿里类
          */
         BuyHouse proxyBuyHouse = (BuyHouse) Proxy.newProxyInstance(BuyHouse.class.getClassLoader(), new Class[]{BuyHouse.class}, new DynamicProxyHandler(buyHouse));
         proxyBuyHouse.buyHouse();
@@ -38,6 +39,7 @@ public class Main {
 
         /**
          * cglib动态代理
+         * 摆脱了jdk动态代理只能实现接口的桎梏，但是cglib依然不能继承final类
          */
         CglibProxyHandler cglibProxyHandler = new CglibProxyHandler();
         BuyHouse buyHouseCglibProxy = (BuyHouseImpl) cglibProxyHandler.getInstance(buyHouse);
