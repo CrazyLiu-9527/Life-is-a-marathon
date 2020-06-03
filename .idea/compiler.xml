@@ -8,11 +8,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="DesignPatterns" />
         <module name="Life-is-a-marathon" />
+        <module name="MySQL" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="DesignPatterns" target="8" />
+      <module name="DesignPatterns" target="1.5" />
       <module name="Life-is-a-marathon" target="8" />
+      <module name="MySQL" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
