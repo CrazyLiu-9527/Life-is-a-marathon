@@ -2,19 +2,24 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Concurrency" />
         <module name="DesignPatterns" />
+        <module name="Spring" />
         <module name="Life-is-a-marathon" />
         <module name="MySQL" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Concurrency" target="1.5" />
       <module name="DesignPatterns" target="1.5" />
       <module name="Life-is-a-marathon" target="8" />
       <module name="MySQL" target="1.5" />
+      <module name="Spring" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
