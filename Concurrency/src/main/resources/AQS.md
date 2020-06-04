@@ -211,7 +211,7 @@ private Node enq(final Node node) {
 
 接着执行第二遍循环，进入`else`逻辑，此时已经有了`head`节点，这里要操作的就是将**线程二**对应的`Node`节点挂到`head`节点后面。此时队列中就有了两个`Node`节点：
 
-![img](https://pic4.zhimg.com/80/v2-3c5099471ca9d71af5cd996b6b985343_720w.jpg)
+![img](pic/v2-3c5099471ca9d71af5cd996b6b985343_720w.jpg)
 
 
 

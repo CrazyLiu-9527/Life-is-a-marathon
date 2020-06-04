@@ -4,7 +4,7 @@ IoC Inverse of Control 反转控制的概念，就是将原本在程序中手动
 
 DI：Dependency Injection 依赖注入，在Spring框架负责创建Bean对象时，动态的将依赖对象注入到Bean组件
 
-[![1d52483d-0b4c-4c62-9bac-a9a96d1a87d4](https://images2015.cnblogs.com/blog/799093/201607/799093-20160724232925685-1218020111.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232924591-1136049226.png)
+[![1d52483d-0b4c-4c62-9bac-a9a96d1a87d4](pic/799093-20160724232925685-1218020111.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232924591-1136049226.png)
 
 面试题： IoC 和 DI的区别？
 
@@ -18,8 +18,6 @@ IoC 控制反转，指将对象的创建权，反转到Spring容器 ， DI 依�
 
 开发中基本都在使用ApplicationContext, web项目使用WebApplicationContext ，很少用到BeanFactory
 
- 
-
 ```java
 BeanFactory beanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
 IHelloService helloService = (IHelloService) beanFactory.getBean("helloService");
@@ -30,7 +28,9 @@ helloService.sayHello();
 
   1）使用类构造器实例化(默认无参数)
 
-  <bean id="bean1" class="cn.itcast.spring.b_instance.Bean1"></bean> 
+```xml
+<bean id="bean1" class="cn.itcast.spring.b_instance.Bean1"></bean> 
+```
 
   2）使用静态工厂方法实例化(简单工厂模式)
 
@@ -38,24 +38,30 @@ helloService.sayHello();
 //下面这段配置的含义：调用Bean2Factory的getBean2方法得到bean2
 ```
 
- <bean id="bean2" class="cn.itcast.spring.b_instance.Bean2Factory" factory-method="getBean2"></bean> 
+```xml
+<bean id="bean2" class="cn.itcast.spring.b_instance.Bean2Factory" factory-method="getBean2"></bean> 
+```
 
   3）使用实例工厂方法实例化(工厂方法模式)
 
 //先创建工厂实例bean3Facory，再通过工厂实例创建目标bean实例
 
+```xml
 <bean id="bean3Factory" class="cn.itcast.spring.b_instance.Bean3Factory"></bean>
 <bean id="bean3" factory-bean="bean3Factory" factory-method="getBean3"></bean>
+```
+
+
 
 ## 4.简单的说一下spring的生命周期？
 
   1)在配置 <bean> 元素，通过 init-method 指定Bean的初始化方法，通过 destroy-method 指定Bean销毁方法
 
-  <beanid="lifeCycleBean"class="cn.itcast.spring.d_lifecycle.LifeCycleBean"init-method="setup"destroy-method="teardown"></bean> 
+```xml
+<beanid="lifeCycleBean"class="cn.itcast.spring.d_lifecycle.LifeCycleBean"init-method="setup"destroy-method="teardown"></bean> 
+```
 
 需要注意的问题：
-
- 
 
   \* destroy-method 只对 scope="singleton" 有效 
 
@@ -82,20 +88,21 @@ applicationContext.close();
 
  
 
-```
+```java
 publicclassMyBeanPostProcessorimplementsBeanPostProcessor{
-publicObject postProcessAfterInitialization(Object bean,String beanName)
-throwsBeansException{
-System.out.println("第八步：后处理Bean，after初始化。");
-//后处理Bean，在这里加上一个动态代理，就把这个Bean给修改了。
-return bean;//返回bean，表示没有修改，如果使用动态代理，返回代理对象，那么就修改了。
-}
-publicObject postProcessBeforeInitialization(Object bean,String beanName)
-throwsBeansException{
-System.out.println("第五步：后处理Bean的：before初始化！！");
-//后处理Bean，在这里加上一个动态代理，就把这个Bean给修改了。
-return bean;//返回bean本身，表示没有修改。
-}
+	publicObject postProcessAfterInitialization(Object bean,String beanName)
+	throwsBeansException{
+		System.out.println("第八步：后处理Bean，after初始化。");
+		//后处理Bean，在这里加上一个动态代理，就把这个Bean给修改了。
+		return bean;//返回bean，表示没有修改，如果使用动态代理，返回代理对象，那么就修改了。
+	}
+    
+	publicObject postProcessBeforeInitialization(Object bean,String beanName)
+		throwsBeansException{
+			System.out.println("第五步：后处理Bean的：before初始化！！");
+			//后处理Bean，在这里加上一个动态代理，就把这个Bean给修改了。
+			return bean;//返回bean本身，表示没有修改。
+	}
 }
 ```
 
@@ -103,7 +110,7 @@ return bean;//返回bean本身，表示没有修改。
 
 ⑥如果Bean实现InitializingBean 执行 afterPropertiesSet
 
-⑦调用<bean init-method="init"> 指定初始化方法 init
+⑦调用`<bean init-method="init">` 指定初始化方法 init
 
 ⑧如果存在类实现 BeanPostProcessor（处理Bean） ，执行postProcessAfterInitialization
 
@@ -111,7 +118,7 @@ return bean;//返回bean本身，表示没有修改。
 
 ⑩如果Bean实现 DisposableBean 执行 destroy
 
-⑪调用<bean destroy-method="customerDestroy"> 指定销毁方法 customerDestroy
+⑪调用`<bean destroy-method="customerDestroy">` 指定销毁方法 customerDestroy
 
 ## 5.请介绍一下Spring框架中Bean的生命周期和作用域
 
@@ -119,7 +126,7 @@ return bean;//返回bean本身，表示没有修改。
 
 (1)bean定义
 
-  在配置文件里面用<bean></bean>来进行定义。
+  在配置文件里面用`<bean></bean>`来进行定义。
 
 (2)bean初始化
 
@@ -127,7 +134,7 @@ return bean;//返回bean本身，表示没有修改。
 
 A.在配置文件中通过指定init-method属性来完成
 
-B.实现org.springframwork.beans.factory.InitializingBean接口
+B.实现`org.springframwork.beans.factory.InitializingBean`接口
 
 (3)bean调用
 
@@ -139,7 +146,7 @@ B.实现org.springframwork.beans.factory.InitializingBean接口
 
 A.使用配置文件指定的destroy-method属性
 
-B.实现org.springframwork.bean.factory.DisposeableBean接口
+B.实现`org.springframwork.bean.factory.DisposeableBean`接口
 
 \##作用域
 
@@ -167,13 +174,13 @@ global session
 
 ## 6.Bean注入属性有哪几种方式？
 
-[![65bac0a5-b37d-409e-8d5d-6f969e10bfa1](https://images2015.cnblogs.com/blog/799093/201607/799093-20160724232926794-492011160.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232926263-388770666.png)
+[![65bac0a5-b37d-409e-8d5d-6f969e10bfa1](pic/799093-20160724232926794-492011160.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232926263-388770666.png)
 
 spring支持构造器注入和setter方法注入
 
-  构造器注入，通过 <constructor-arg> 元素完成注入
+  构造器注入，通过 `<constructor-arg>` 元素完成注入
 
-  setter方法注入， 通过<property> 元素完成注入【开发中常用方式】
+  setter方法注入， 通过`<property>` 元素完成注入【开发中常用方式】
 
 ## 7.什么是AOP，AOP的作用是什么？
 
@@ -181,7 +188,7 @@ spring支持构造器注入和setter方法注入
 
 Spring的一个关键的组件就是AOP框架，可以自由选择是否使用AOP 提供声明式企业服务，特别是为了替代EJB声明式服务。最重要的服务是声明性事务管理，这个服务建立在Spring的抽象事物管理之上。允许用户实现自定义切面，用AOP来完善OOP的使用,可以把Spring AOP看作是对Spring的一种增强
 
-[![5bc3b10b-90ce-4880-826e-efa36f77ac1a](https://images2015.cnblogs.com/blog/799093/201607/799093-20160724232928451-436394388.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232927607-736716234.png)
+[![5bc3b10b-90ce-4880-826e-efa36f77ac1a](pic/799093-20160724232928451-436394388.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232927607-736716234.png)
 
 ## 8.Spring的核心类有哪些，各有什么作用？
 
@@ -214,6 +221,7 @@ ApplicationContext:提供框架的实现，包括BeanFactory的所有功能
 
 ContextLoaderListener是一个ServletContextListener, 它在你的web应用启动的时候初始化。缺省情况下， 它会在WEB-INF/applicationContext.xml文件找Spring的配置。 你可以通过定义一个<context-param>元素名字为”contextConfigLocation”来改变Spring配置文件的 位置。示例如下： 
 
+```xml
 <listener> 
     <listener-class>org.springframework.web.context.ContextLoaderListener
         <context-param> 
@@ -222,6 +230,9 @@ ContextLoaderListener是一个ServletContextListener, 它在你的web应用启�
         </context-param>   
     </listener-class> 
 </listener> 
+```
+
+
 
 ## 11.Spring里面如何定义hibernate mapping？
 
@@ -257,7 +268,7 @@ ThreadLocal和线程同步机制都是为了解决多线程中相同变量的访
 
 ## 13.为什么要有事物传播行为？
 
-[![22b1ecd2-fcef-4e6b-a255-d65272bdf650](https://images2015.cnblogs.com/blog/799093/201607/799093-20160724232929357-689970095.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232928935-1122278386.png)
+[![22b1ecd2-fcef-4e6b-a255-d65272bdf650](pic/799093-20160724232929357-689970095.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232928935-1122278386.png)
 
 ## 14.介绍一下Spring的事物管理
 
@@ -273,9 +284,7 @@ PlatformTransactionManager这个是spring提供的用于管理事务的基础接
 
 一般事务定义步骤：
 
- 
-
-```
+```java
 TransactionDefinition td =newTransactionDefinition();
 TransactionStatus ts = transactionManager.getTransaction(td);
 try{ 
@@ -292,6 +301,7 @@ try{
 
 编程式主要使用transactionTemplate。省略了部分的提交，回滚，一系列的事务对象定义，需注入事务管理对象.
 
+```java
  void add(){
     transactionTemplate.execute(newTransactionCallback(){
         pulic Object doInTransaction(TransactionStatus ts){
@@ -299,6 +309,7 @@ try{
         }
     }
 }
+```
 
 声明式：
 
@@ -342,7 +353,7 @@ AOP代理（AOP Proxy）： AOP框架创建的对象，用来实现切面契约�
 
 织入（Weaving）：把切面（aspect）连接到其它的应用程序类型或者对象上，并创建一个被通知（advised）的对象。 这些可以在编译时（例如使用AspectJ编译器），类加载时和运行时完成。 Spring和其他纯Java AOP框架一样，在运行时完成织入。
 
-[![b541ca1e-2fd9-4dff-9267-14d6e4c8f085](https://images2015.cnblogs.com/blog/799093/201607/799093-20160724232930435-505426412.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232929888-1552179747.png)
+[![b541ca1e-2fd9-4dff-9267-14d6e4c8f085](pic/799093-20160724232930435-505426412.png)](http://images2015.cnblogs.com/blog/799093/201607/799093-20160724232929888-1552179747.png)
 
 ## 16.通知有哪些类型？
 
