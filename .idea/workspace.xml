@@ -2,21 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/Spring事务管理.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724232925685-1218020111-1591269919516.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724232925685-1218020111.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724232926794-492011160.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724232928451-436394388.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724232929357-689970095.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724232930435-505426412.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/799093-20160724233025857-1256444961.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/a616b84d-9eea-4ad1-b4fc-461ff05e951d.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/ae964c2c-7289-441c-bddd-511161f51ee1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/bda7231b-ab05-4e23-95ee-89ac90ac7fcf.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/ed279f05-f5ad-443e-84e9-513a9e777139.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/f6c6f0aa-0f26-49e1-84b3-7f838c7379d1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spring/src/main/resources/spring.md" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/src/main/resources/spring.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spring/src/main/resources/springmvc.md" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/src/main/resources/springmvc.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/Spring bean.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/Spring注解.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/Spring相关教程资料.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/3e9878440a2d4b4c8889e76fcc378c75.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/48376272.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/663d1ec1-7ebc-41ab-8431-159dc1ec6589.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/c7bacd12-1c1a-4e41-aaaf-4cad840fc073.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/pic/ee7fb1a1c06f43a88f5fcac2c3ca6daf.jfif" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
