@@ -42,29 +42,122 @@
 **当一个 bean 的作用域为 singleton，那么Spring IoC容器中只会存在一个共享的 bean 实例，并且所有对 bean 的请求，只要 id 与该 bean 定义相匹配，则只会返回bean的同一实例。** singleton 是单例类型(对应于单例模式)，就是在创建起容器时就同时自动创建了一个bean的对象，不管你是否使用，但我们可以指定Bean节点的 `lazy-init=”true”` 来延迟初始化bean，这时候，只有在第一次获取bean时才会初始化bean，即第一次请求该bean时才初始化。 每次获取到的对象都是同一个对象。注意，singleton 作用域是Spring中的缺省作用域。要在XML中将 bean 定义成 singleton ，可以这样配置：
 
 ```xml
-<bean id="ServiceImpl" class="cn.csdn.service.ServiceImpl" scope="singleton">
+<bean id="ServiceImpl" class="cn.csdn.service.ServiceImpl" lazy-init="true"/>  
 ```
 
-也可以通过 `@Scope` 注解（它可以显示指定bean的作用范围。）的方式
+如果想对所有的默认单例bean都应用延迟初始化，可以在根节点beans设置default-lazy-init属性为true，如下所示：
+
+```xml
+<beans default-lazy-init="true" …>
+```
+
+默认情况下，Spring 在读取 xml 文件的时候，就会创建对象。在创建对象的时候先调用构造器，然后调用 init-method 属性值中所指定的方法。对象在被销毁的时候，会调用 destroy-method 属性值中所指定的方法（例如调用Container.destroy()方法的时候）。写一个测试类，代码如下：
 
 ```java
-@Service
-@Scope("singleton")
-public class ServiceImpl{
+//使用注解
+@Component
+public class LifeBean {
+    private String name;  
 
+    public LifeBean(){  
+        System.out.println("LifeBean()构造函数");  
+    }  
+    public String getName() {  
+        return name;  
+    }  
+
+    public void setName(String name) {  
+        System.out.println("setName()");  
+        this.name = name;  
+    }  
+
+    //使用注解 init-method
+    @PostConstruct
+    public void init(){  
+        System.out.println("this is init of lifeBean");  
+    }  
+
+    //使用注解 destory-method
+    @PreDestroy
+    public void destory(){  
+        System.out.println("this is destory of lifeBean " + this);  
+    }  
 }
+```
+
+　life.xml配置如下：
+
+```xml
+<bean id="life_singleton" class="com.bean.LifeBean" scope="singleton" 
+            init-method="init" destroy-method="destory" lazy-init="true"/>
+```
+
+测试代码：
+
+```java
+public class LifeTest {
+    @Test 
+    public void test() {
+        AbstractApplicationContext container = 
+        new ClassPathXmlApplicationContext("life.xml");
+        LifeBean life1 = (LifeBean)container.getBean("life");
+        System.out.println(life1);
+        container.close();
+    }
+}
+```
+
+运行结果：
+
+```
+LifeBean()构造函数
+this is init of lifeBean
+com.bean.LifeBean@573f2bb1
+……
+this is destory of lifeBean com.bean.LifeBean@573f2bb1
 ```
 
 ### 2. prototype——每次请求都会创建一个新的 bean 实例
 
-**当一个bean的作用域为 prototype，表示一个 bean 定义对应多个对象实例。** **prototype 作用域的 bean 会导致在每次对该 bean 请求**（将其注入到另一个 bean 中，或者以程序的方式调用容器的 getBean() 方法**）时都会创建一个新的 bean 实例。prototype 是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象。根据经验，对有状态的 bean 应该使用 prototype 作用域，而对无状态的 bean 则应该使用 singleton 作用域。**  在 XML 中将 bean 定义成 prototype ，可以这样配置：
+**当一个bean的作用域为 prototype，表示一个 bean 定义对应多个对象实例。** **prototype 作用域的 bean 会导致在每次对该 bean 请求**（将其注入到另一个 bean 中，或者以程序的方式调用容器的 getBean() 方法**）时都会创建一个新的 bean 实例。prototype 是原型类型，它在我们创建容器的时候并没有实例化，而是当我们获取bean的时候才会去创建一个对象，而且我们每次获取到的对象都不是同一个对象。根据经验，对有状态的 bean 应该使用 prototype 作用域，而对无状态的 bean 则应该使用 singleton 作用域。**  在 XML 中将 bean 定义成 prototype ，可以这样配置：为了测试prototype bean的生命周期life.xml配置如下：
+
+```xml
+<bean id="life_prototype" class="com.bean.LifeBean" scope="prototype" init-method="init" destroy-method="destory"/>
+```
+
+测试程序：
 
 ```java
-<bean id="account" class="com.foo.DefaultAccount" scope="prototype"/>  
- 或者
-<bean id="account" class="com.foo.DefaultAccount" singleton="false"/> 
+public class LifeTest {
+    @Test 
+    public void test() {
+        AbstractApplicationContext container = new ClassPathXmlApplicationContext("life.xml");
+        LifeBean life1 = (LifeBean)container.getBean("life_singleton");
+        System.out.println(life1);
+
+        LifeBean life3 = (LifeBean)container.getBean("life_prototype");
+        System.out.println(life3);
+        container.close();
+    }
+}
 ```
-通过 `@Scope` 注解的方式实现就不做演示了。
+
+运行结果：
+
+```
+LifeBean()构造函数
+this is init of lifeBean
+com.bean.LifeBean@573f2bb1
+LifeBean()构造函数
+this is init of lifeBean
+com.bean.LifeBean@5ae9a829
+……
+this is destory of lifeBean com.bean.LifeBean@573f2bb1
+```
+
+可以发现，对于作用域为 prototype 的 bean ，其`destroy`方法并没有被调用。**如果 bean 的 scope 设为prototype时，当容器关闭时，`destroy` 方法不会被调用。对于 prototype 作用域的 bean，有一点非常重要，那就是 Spring不能对一个 prototype bean 的整个生命周期负责：容器在初始化、配置、装饰或者是装配完一个prototype实例后，将它交给客户端，随后就对该prototype实例不闻不问了。** 不管何种作用域，容器都会调用所有对象的初始化生命周期回调方法。但对prototype而言，任何配置好的析构生命周期回调方法都将不会被调用。**清除prototype作用域的对象并释放任何prototype bean所持有的昂贵资源，都是客户端代码的职责**（让Spring容器释放被prototype作用域bean占用资源的一种可行方式是，通过使用bean的后置处理器，该处理器持有要被清除的bean的引用）。谈及prototype作用域的bean时，在某些方面你可以将Spring容器的角色看作是Java new操作的替代者，任何迟于该时间点的生命周期事宜都得交由客户端来处理。
+
+**Spring 容器可以管理 singleton 作用域下 bean 的生命周期，在此作用域下，Spring 能够精确地知道bean何时被创建，何时初始化完成，以及何时被销毁。而对于 prototype 作用域的bean，Spring只负责创建，当容器创建了 bean 的实例后，bean 的实例就交给了客户端的代码管理，Spring容器将不再跟踪其生命周期，并且不会管理那些被配置成prototype作用域的bean的生命周期。**
 
 ### 3. request——每一次HTTP请求都会产生一个新的bean，该bean仅在当前HTTP request内有效
 
@@ -84,7 +177,7 @@ public class ServiceImpl{
 
 ### 5. globalSession
 
-global session 作用域类似于标准的 HTTP session 作用域，不过仅仅在基于 portlet 的 web 应用中才有意义。Portlet 规范定义了全局 Session 的概念，它被所有构成某个 portlet web 应用的各种不同的 portle t所共享。在global session 作用域中定义的 bean 被限定于全局portlet Session的生命周期范围内。
+global session 作用域类似于标准的 HTTP session 作用域，不过仅仅在基于 portlet 的 web 应用中才有意义。Portlet 规范定义了全局 Session 的概念，它被所有构成某个 portlet web 应用的各种不同的 portlet所共享。在global session 作用域中定义的 bean 被限定于全局portlet Session的生命周期范围内。
 
 ```xml
 <bean id="user" class="com.foo.Preferences "scope="globalSession"/>
@@ -126,7 +219,6 @@ Spring容器关闭
 ```
 
 先来看看，Spring在Bean从创建到销毁的生命周期中可能做得事情。
-
 
 ### initialization 和 destroy
 
@@ -321,7 +413,7 @@ public class CustomerBeanPostProcessor implements BeanPostProcessor {
 
 
 
-![字节跳动面试题：“请你描述下 Spring Bean 的生命周期？”](pic/ee7fb1a1c06f43a88f5fcac2c3ca6daf.jfif)
+![ Spring Bean 的生命周期](pic/ee7fb1a1c06f43a88f5fcac2c3ca6daf.jfif)
 
 ### 生命周期的概要流程
 
@@ -332,7 +424,7 @@ Bean 的生命周期概括起来就是 **4 个阶段**：
 3. 初始化（Initialization）
 4. 销毁（Destruction）
 
-![字节跳动面试题：“请你描述下 Spring Bean 的生命周期？”](pic/3e9878440a2d4b4c8889e76fcc378c75.jfif)
+![ Spring Bean 的生命周期](pic/3e9878440a2d4b4c8889e76fcc378c75.jfif)
 
 
 
@@ -343,124 +435,7 @@ Bean 的生命周期概括起来就是 **4 个阶段**：
 
 
 
-**其实很多时候我们并不会真的去实现上面说描述的那些接口，那么下面我们就除去那些接口，针对bean的单例和非单例来描述下bean的生命周期：**
-
-### 单例管理的对象
-
-当scope=”singleton”，即默认情况下，会在启动容器时（即实例化容器时）时实例化。但我们可以指定Bean节点的lazy-init=”true”来延迟初始化bean，这时候，只有在第一次获取bean时才会初始化bean，即第一次请求该bean时才初始化。如下配置：
-
-```xml
-<bean id="ServiceImpl" class="cn.csdn.service.ServiceImpl" lazy-init="true"/>  
-```
-
-如果想对所有的默认单例bean都应用延迟初始化，可以在根节点beans设置default-lazy-init属性为true，如下所示：
-
-```xml
-<beans default-lazy-init="true" …>
-```
-
-默认情况下，Spring 在读取 xml 文件的时候，就会创建对象。在创建对象的时候先调用构造器，然后调用 init-method 属性值中所指定的方法。对象在被销毁的时候，会调用 destroy-method 属性值中所指定的方法（例如调用Container.destroy()方法的时候）。写一个测试类，代码如下：
-
-```java
-public class LifeBean {
-    private String name;  
-
-    public LifeBean(){  
-        System.out.println("LifeBean()构造函数");  
-    }  
-    public String getName() {  
-        return name;  
-    }  
-
-    public void setName(String name) {  
-        System.out.println("setName()");  
-        this.name = name;  
-    }  
-
-    public void init(){  
-        System.out.println("this is init of lifeBean");  
-    }  
-
-    public void destory(){  
-        System.out.println("this is destory of lifeBean " + this);  
-    }  
-}
-```
-　life.xml配置如下：
-
-```xml
-<bean id="life_singleton" class="com.bean.LifeBean" scope="singleton" 
-            init-method="init" destroy-method="destory" lazy-init="true"/>
-```
-
-测试代码：
-
-```java
-public class LifeTest {
-    @Test 
-    public void test() {
-        AbstractApplicationContext container = 
-        new ClassPathXmlApplicationContext("life.xml");
-        LifeBean life1 = (LifeBean)container.getBean("life");
-        System.out.println(life1);
-        container.close();
-    }
-}
-```
-
-运行结果：
-
-```
-LifeBean()构造函数
-this is init of lifeBean
-com.bean.LifeBean@573f2bb1
-……
-this is destory of lifeBean com.bean.LifeBean@573f2bb1
-```
-
-### 非单例管理的对象
-
-当`scope=”prototype”`时，容器也会延迟初始化 bean，Spring 读取xml 文件的时候，并不会立刻创建对象，而是在第一次请求该 bean 时才初始化（如调用getBean方法时）。在第一次请求每一个 prototype 的bean 时，Spring容器都会调用其构造器创建这个对象，然后调用`init-method`属性值中所指定的方法。对象销毁的时候，Spring 容器不会帮我们调用任何方法，因为是非单例，这个类型的对象有很多个，Spring容器一旦把这个对象交给你之后，就不再管理这个对象了。
-
-为了测试prototype bean的生命周期life.xml配置如下：
-
-```xml
-<bean id="life_prototype" class="com.bean.LifeBean" scope="prototype" init-method="init" destroy-method="destory"/>
-```
-
-测试程序：
-
-```java
-public class LifeTest {
-    @Test 
-    public void test() {
-        AbstractApplicationContext container = new ClassPathXmlApplicationContext("life.xml");
-        LifeBean life1 = (LifeBean)container.getBean("life_singleton");
-        System.out.println(life1);
-
-        LifeBean life3 = (LifeBean)container.getBean("life_prototype");
-        System.out.println(life3);
-        container.close();
-    }
-}
-```
-
-运行结果：
-
-```
-LifeBean()构造函数
-this is init of lifeBean
-com.bean.LifeBean@573f2bb1
-LifeBean()构造函数
-this is init of lifeBean
-com.bean.LifeBean@5ae9a829
-……
-this is destory of lifeBean com.bean.LifeBean@573f2bb1
-```
-
-可以发现，对于作用域为 prototype 的 bean ，其`destroy`方法并没有被调用。**如果 bean 的 scope 设为prototype时，当容器关闭时，`destroy` 方法不会被调用。对于 prototype 作用域的 bean，有一点非常重要，那就是 Spring不能对一个 prototype bean 的整个生命周期负责：容器在初始化、配置、装饰或者是装配完一个prototype实例后，将它交给客户端，随后就对该prototype实例不闻不问了。** 不管何种作用域，容器都会调用所有对象的初始化生命周期回调方法。但对prototype而言，任何配置好的析构生命周期回调方法都将不会被调用。**清除prototype作用域的对象并释放任何prototype bean所持有的昂贵资源，都是客户端代码的职责**（让Spring容器释放被prototype作用域bean占用资源的一种可行方式是，通过使用bean的后置处理器，该处理器持有要被清除的bean的引用）。谈及prototype作用域的bean时，在某些方面你可以将Spring容器的角色看作是Java new操作的替代者，任何迟于该时间点的生命周期事宜都得交由客户端来处理。
-
-**Spring 容器可以管理 singleton 作用域下 bean 的生命周期，在此作用域下，Spring 能够精确地知道bean何时被创建，何时初始化完成，以及何时被销毁。而对于 prototype 作用域的bean，Spring只负责创建，当容器创建了 bean 的实例后，bean 的实例就交给了客户端的代码管理，Spring容器将不再跟踪其生命周期，并且不会管理那些被配置成prototype作用域的bean的生命周期。**
+**其实很多时候我们并不会真的去实现上面说描述的那些接口**
 
 
 # 三 说明
