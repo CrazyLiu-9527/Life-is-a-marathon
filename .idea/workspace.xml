@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/20170513085533480.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/20170513151544085.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/20170513163057795.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/20170513171112915.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/20170513174622751.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/深入理解Java枚举类型.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Spring/src/main/resources/Spring IOC和AOP的理解.md" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/src/main/resources/Spring IOC和AOP的理解.md" afterDir="false" />
-    </list>
+    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
