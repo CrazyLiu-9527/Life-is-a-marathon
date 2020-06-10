@@ -7,16 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Concurrency" />
-        <module name="DesignPatterns" />
         <module name="Spring" />
-        <module name="Life-is-a-marathon" />
         <module name="MySQL" />
+        <module name="DesignPatterns" />
+        <module name="Life-is-a-marathon" />
+        <module name="JavaBasic" />
+        <module name="Concurrency" />
+        <module name="DataStructure" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Concurrency" target="1.5" />
+      <module name="DataStructure" target="1.5" />
+      <module name="DataStructure &amp; Algorithms" target="1.5" />
+      <module name="DataStructure&amp;Algorithms" target="1.5" />
       <module name="DesignPatterns" target="1.5" />
+      <module name="JavaBasic" target="1.5" />
       <module name="Life-is-a-marathon" target="8" />
       <module name="MySQL" target="1.5" />
       <module name="Spring" target="1.5" />
