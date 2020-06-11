@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/pic/167c4d5f4661d8d6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/pic/167c4d5f4688a9c6" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/pic/167c4d5f469511da" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/pic/16ad9dbc177d9abb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/pic/16ad9dbc1863188b" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/pic/16ad9dbc2a4e3900" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/序列化和反序列化.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/深克隆与浅克隆.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaBasic/src/main/resources/Untitled 1.md" beforeDir="false" />
-    </list>
+    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -184,7 +174,7 @@
       <workItem from="1591261745626" duration="723000" />
       <workItem from="1591758445578" duration="586000" />
       <workItem from="1591774830891" duration="1200000" />
-      <workItem from="1591843081806" duration="1438000" />
+      <workItem from="1591843081806" duration="1440000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
