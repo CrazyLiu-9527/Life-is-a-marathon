@@ -139,7 +139,7 @@ public class Apple implements Fruit{
 
 代理类Agent.java：
 
-```
+```Java
 public class DynamicAgent {
 
 	//实现InvocationHandler接口，并且可以初始化被代理类的对象
