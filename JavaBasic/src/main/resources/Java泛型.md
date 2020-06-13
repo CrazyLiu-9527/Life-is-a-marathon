@@ -335,11 +335,11 @@ class Pair {
 public class ReflectInGeneric {
     public static void main(String[] args) throws IllegalArgumentException, 
                         SecurityException, IllegalAccessException, InvocationTargetException, NoSuchMethodException {  
-        ArrayList<Integer> array=new ArrayList<Integer>();  
-        array.add(1);//这样调用add方法只能存储整形，因为泛型类型的实例为Integer  
-        array.getClass().getMethod("add", Object.class).invoke(array, "asd");  
-        for (int i=0;i<array.size();i++) {  
-            System.out.println(array.get(i));  
+        ArrayList<Integer> Array=new ArrayList<Integer>();  
+        Array.add(1);//这样调用add方法只能存储整形，因为泛型类型的实例为Integer  
+        Array.getClass().getMethod("add", Object.class).invoke(Array, "asd");  
+        for (int i=0;i<Array.size();i++) {  
+            System.out.println(Array.get(i));  
         }  
     }  
 }

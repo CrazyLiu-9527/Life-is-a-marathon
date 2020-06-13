@@ -22,9 +22,9 @@ public final class String
 final修饰的String，代表了String的不可继承性，final修饰的char[]代表了被存储的数据不可更改性。但是：虽然final代表了不可变，但仅仅是引用地址不可变，并不代表了数组本身不会变,请看下面图片。
 
 ```java
-final int[] array = {1,2,3,4,5};		//array:{1,2,3,4,5}
-array[3] = 100;
-System.out.println(array);				//array:{1,2,3,4,5}
+final int[] Array = {1,2,3,4,5};		//Array:{1,2,3,4,5}
+Array[3] = 100;
+System.out.println(Array);				//Array:{1,2,3,4,5}
 ```
 
   final也可以将数组本身改变的，这个时候，起作用的还有**private**，正是因为两者保证了String的不可变性。

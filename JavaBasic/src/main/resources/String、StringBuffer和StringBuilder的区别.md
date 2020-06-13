@@ -38,7 +38,7 @@ synchronized String toString() {
 
 ```java
 @Overridepublic String toString() {    
-    // Create a copy, don't share the array    
+    // Create a copy, don't share the Array    
     return new String(value, 0, count);
 }
 ```

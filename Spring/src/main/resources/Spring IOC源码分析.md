@@ -540,7 +540,7 @@ protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) throws BeansE
 // 上面虽然有两个分支，不过第二个分支很快通过解析路径转换为 Resource 以后也会进到这里
 @Override
 public int loadBeanDefinitions(Resource... resources) throws BeanDefinitionStoreException {
-   Assert.notNull(resources, "Resource array must not be null");
+   Assert.notNull(resources, "Resource Array must not be null");
    int counter = 0;
    // 注意这里是个 for 循环，也就是每个文件是一个 resource
    for (Resource resource : resources) {
