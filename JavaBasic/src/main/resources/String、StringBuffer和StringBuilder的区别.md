@@ -1,19 +1,10 @@
-
-1
-
- **碎碎念** 
+1.**碎碎念** 
 
 这是一道老生常谈的问题了，字符串是不仅是 Java 中非常重要的一个对象，它在其他语言中也存在。比如 **C++、Visual Basic、C# 等**。字符串使用 String 来表示，字符串一旦被创建出来就不会被修改，当你想修改 StringBuffer 或者是 StringBuilder，出于效率的考量，虽然 String 可以通过 + 来创建多个对象达到字符串拼接的效果，但是这种拼接的效率相比 StringBuffer 和 StringBuilder，那就是心有余而力不足了。本篇文章我们一起来深入了解一下这三个对象。
 
 
 
-![img](640.png)
-
-
-
-2
-
- **简单认识这三个对象** 
+2.**简单认识这三个对象** 
 
 
 
@@ -21,7 +12,7 @@
 
 String 表示的就是 Java 中的字符串，我们日常开发用到的使用 `""` 双引号包围的数都是字符串的实例。String 类其实是通过 char 数组来保存字符串的。下面是一个典型的字符串的声明
 
-```
+```java
 String s = "abc";
 ```
 
@@ -29,13 +20,13 @@ String s = "abc";
 
 字符串是恒定的，一旦创建出来就不会被修改，怎么理解这句话？我们可以看下 String 源码的声明
 
-![img](640.png)
+ ![img](pic/640-1592302173047.png) 
 
 告诉我你看到了什么？String 对象是由`final` 修饰的，一旦使用 final 修饰的类不能被继承、方法不能被重写、属性不能被修改。而且 String 不只只有类是 final 的，它其中的方法也是由 final 修饰的，换句话说，Sring 类就是一个典型的 `Immutable` 类。也由于 String 􏰆的不可变性，类似字符串拼接、字符串截取等操作都会产生新的 Strign 对象。
 
 所以请你告诉我下面
 
-```
+```java
 String s1 = "aaa";
 String s2 = "bbb" + "ccc";
 String s3 = s1 + "bbb";
@@ -44,13 +35,25 @@ String s4 = new String("aaa");
 
 分别创建了几个对象？
 
-![img](640.png)
+ ![img](pic/640-1592302186235.png) 
 
 - 首先第一个问题，s1 创建了几个对象。字符串在创建对象时，会在常量池中看有没有 aaa 这个字符串；如果没有此时还会在常量池中创建一个；如果有则不创建。我们默认是没有的情况，所以会创建一个对象。下同。
 - 那么 s2 创建了几个对象呢？是两个对象还是一个对象？我们可以使用 `javap -c` 看一下反汇编代码
 
 ```
-public class com.sendmessage.api.StringDemo {  public com.sendmessage.api.StringDemo();    Code:       0: aload_0       1: invokespecial #1                  // 执行对象的初始化方法       4: return  public static void main(java.lang.String[]);    Code:       0: ldc           #2                  // 将 String aaa 执行入栈操作       2: astore_1													# pop出栈引用值，将其（引用）赋值给局部变量表中的变量 s1       3: ldc           #3                  // String bbbccc       5: astore_2       6: return}
+public class com.sendmessage.api.StringDemo {
+	public com.sendmessage.api.StringDemo();
+    Code:    
+    	0: aload_0       
+    	1: invokespecial #1                  // 执行对象的初始化方法   
+        4: return  public static void main(java.lang.String[]);
+	Code:
+    	0: ldc    #2                  // 将 String aaa 执行入栈操作   
+        2: astore_1    # pop出栈引用值，将其（引用）赋值给局部变量表中的变量 s1     
+        3: ldc    #3                  // String bbbccc      
+        5: astore_2     
+        6: return
+}
 ```
 
 编译器做了优化 `String s2 = "bbb" + "ccc"` 会直接被优化为 `bbbccc`。也就是直接创建了一个 bbbccc 对象。
@@ -61,47 +64,57 @@ public class com.sendmessage.api.StringDemo {  public com.sendmessage.api.String
 
 - 下面来看 s3，s3 创建了几个对象呢？是一个还是两个？还是有其他选项？我们使用 javap -c 来看一下
 
-![img](640.png)
+ ![img](pic/640-1592302200972.png) 
 
 我们可以看到，s3 执行 + 操作会创建一个 `StringBuilder` 对象然后执行初始化。执行 + 号相当于是执行 `new StringBuilder.append()` 操作。所以
 
-```
-String s3 = s1 + "bbb";==  String s3 = new StringBuilder().append(s1).append("bbb").toString();// Stringbuilder.toString() 方法也会创建一个 String public String toString() {  // Create a copy, don't share the array  return new String(value, 0, count);}
+```Java
+String s3 = s1 + "bbb";
+==  
+String s3 = new StringBuilder().append(s1).append("bbb").toString();
+
+// Stringbuilder.toString() 方法也会创建一个 String 
+public String toString() {
+	// Create a copy, don't share the array  
+	return new String(value, 0, count);
+}
 ```
 
 所以 s3 执行完成后，相当于创建了 3 个对象。
 
 - 下面来看 s4 创建了几个对象，在创建这个对象时因为使用了 new 关键字，所以肯定会在堆中创建一个对象。然后会在常量池中看有没有 aaa 这个字符串；如果没有此时还会在常量池中创建一个；如果有则不创建。所以可能是创建一个或者两个对象，但是一定存在两个对象。
 
-![img](640.png)
+
 
 说完了 String 对象，我们再来说一下 StringBuilder 和 StringBuffer 对象。
 
 上面的 String 对象竟然和 StringBuilder 产生了千丝万缕的联系。不得不说 StringBuilder 是一个牛逼的对象。String 对象底层是使用了 StringBuilder 对象的 append 方法进行字符串拼接的，不由得对 StringBuilder 心生敬意。
 
-![img](640.png)
+
 
 不由得我们想要真正认识一下这个 StringBuilder 大佬，但是在认识大佬前，还有一个大 boss 就是 StringBuffer 对象，这也是你不得不跨越的鸿沟。
 
-![img](640.png)
+
 
 ### StringBuffer
 
 `StringBuffer 对象` 代表一个可变的字符串序列，当一个 StringBuffer 被创建以后，通过 StringBuffer 的一系列方法可以实现字符串的拼接、截取等操作。一旦通过 StringBuffer 生成了最终想要的字符串后，就可以调用其 `toString` 方法来生成一个新的字符串。例如
 
-```
-StringBuffer b = new StringBuffer("111");b.append("222");System.out.println(b);
+```Java
+StringBuffer b = new StringBuffer("111");
+b.append("222");
+System.out.println(b);
 ```
 
 我们上面提到 `+` 操作符连接两个字符串，会自动执行 `toString()` 方法。那你猜 StringBuffer.append 方法会自动调用吗？直接看一下反汇编代码不就完了么？
 
-![img](640.png)
+ ![img](pic/640-1592302305805.png) 
 
 上图左边是手动调用 toString 方法的代码，右图是没有调用 toString 方法的代码，可以看到，toString() 方法不像 `+` 一样自动被调用。
 
 StringBuffer 是线程安全的，我们可以通过它的源码可以看出
 
-![img](640-1592300991914.png)
+ ![img](pic/640-1592302315516.png) 
 
 StringBuffer 在字符串拼接上面直接使用 `synchronized` 关键字加锁，从而保证了线程安全性。
 
@@ -109,33 +122,38 @@ StringBuffer 在字符串拼接上面直接使用 `synchronized` 关键字加锁
 
 最后来认识大佬了，StringBuilder 其实是和 StringBuffer 几乎一样，只不过 StringBuilder 是`非线程安全`的。并且，为什么 + 号操作符使用 StringBuilder 作为拼接条件而不是使用 StringBuffer 呢？我猜测原因是加锁是一个比较耗时的操作，而加锁会影响性能，所以 String 底层使用 StringBuilder 作为字符串拼接。
 
-![img](640.png)
+ ![img](pic/640-1592302323751.png) 
 
 
 
 ![img](https://mmbiz.qpic.cn/mmbiz_png/libYRuvULTdWdSkaoLmpX9gU5kQZqCJmd0mQhCByfa72vczDC0ldjCiaOom45FWxmfVtiaTZa2UUKPbWyk4YwicibRQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
 
-3
-
- 理解 String、StringBuilder、StringBuffer
+3. **理解 String、StringBuilder、StringBuffer**
 
 
 
 我们上面说到，使用 `+` 连接符时，JVM 会隐式创建 StringBuilder 对象，这种方式在大部分情况下并不会造成效率的损失，不过在进行大量循环拼接字符串时则需要注意。如下这段代码
 
-```
-String s = "aaaa";for (int i = 0; i < 100000; i++) {    s += "bbb";}
+```java
+String s = "aaaa";
+for (int i = 0; i < 100000; i++) {
+	s += "bbb";
+}
 ```
 
 这是一段很普通的代码，只不过对字符串 s 进行了 + 操作，我们通过反编译代码来看一下。
 
-```
-// 经过反编译后String s = "aaa";for(int i = 0; i < 10000; i++) {     s = (new StringBuilder()).append(s).append("bbb").toString();    }
+```java 
+// 经过反编译后
+String s = "aaa";
+for(int i = 0; i < 10000; i++) {
+	s = (new StringBuilder()).append(s).append("bbb").toString();    
+}
 ```
 
 你能看出来需要注意的地方了吗？在每次进行循环时，都会创建一个 `StringBuilder`对象，每次都会把一个新的字符串元素 `bbb` 拼接到 `aaa` 的后面，所以，执行几次后的结果如下
 
-![img](640.png)
+ ![img](pic/640-1592302396694.png) 
 
 每次都会创建一个 StringBuilder ，并把引用赋给 StringBuilder 对象，因此每个 StringBuilder 对象都是`强引用`， 这样在创建完毕后，内存中就会多了很多 StringBuilder 的无用对象。了解更多关于引用的知识，请看
 
@@ -143,10 +161,14 @@ String s = "aaaa";for (int i = 0; i < 100000; i++) {    s += "bbb";}
 
 这样由于大量 StringBuilder 创建在堆内存中，肯定会造成效率的损失，所以在这种情况下建议在循环体外创建一个 StringBuilder 对象调用 `append()`方法手动拼接。
 
-例如
+例如：
 
-```
-StringBuilder builder = new StringBuilder("aaa");for (int i = 0; i < 10000; i++) {    builder.append("bbb");}builder.toString();
+```java 
+StringBuilder builder = new StringBuilder("aaa");
+for (int i = 0; i < 10000; i++) {
+	builder.append("bbb");
+}
+builder.toString();
 ```
 
 这段代码中，只会创建一个 builder 对象，每次循环都会使用这个 builder 对象进行拼接，因此提高了拼接效率。
@@ -159,8 +181,21 @@ String 在 JDK1.6 之后提供了 `intern()` 方法，intern 方法是一个 `na
 
 下面我们来看一段代码，来认识一下 `intern` 方法
 
-```
-public static void main(String[] args) {  String a = new String("ab");  String b = new String("ab");  String c = "ab";  String d = "a";  String e = new String("b");  String f = d + e;  System.out.println(a.intern() == b);  System.out.println(a.intern() == b.intern());  System.out.println(a.intern() == c);  System.out.println(a.intern() == f);}
+```java
+public static void main(String[] args) {
+
+	String a = new String("ab");  
+	String b = new String("ab");  
+	String c = "ab";  
+	String d = "a";  
+	String e = new String("b");  
+	String f = d + e;  
+
+	System.out.println(a.intern() == b);  
+	System.out.println(a.intern() == b.intern()); 
+	System.out.println(a.intern() == c); 
+	System.out.println(a.intern() == f);
+}
 ```
 
 上述的执行结果是什么呢？我们先把答案贴出来，以防心急的同学想急于看到结果，他们的答案是
@@ -169,11 +204,11 @@ false true true false
 
 和你预想的一样吗？为什么会这样呢？我们先来看一下 intern 方法的官方解释
 
-![img](640.png)
+ ![img](pic/640-1592302476612.png) 
 
 这里你需要知道 JVM 的内存模型
 
-![img](640-1592300991915.png)
+![img](pic/640-1592300991915.png)
 
 - `虚拟机栈` : Java 虚拟机栈是线程私有的数据区，Java 虚拟机栈的生命周期与线程相同，虚拟机栈也是局部变量的存储位置。方法在执行过程中，会在虚拟机栈种创建一个 `栈帧(stack frame)`。
 - `本地方法栈`: 本地方法栈也是线程私有的数据区，本地方法栈存储的区域主要是 Java 中使用 `native` 关键字修饰的方法所存储的区域
@@ -190,25 +225,27 @@ false true true false
 
 所以我们对上面的结论进行分析
 
-```
-String a = new String("ab");String b = new String("ab");System.out.println(a.intern() == b);
+```java
+String a = new String("ab");
+String b = new String("ab");
+System.out.println(a.intern() == b);
 ```
 
 输出什么？false，为什么呢？画一张图你就明白了（图画的有些问题，栈应该是后入先出，所以 b 应该在 a 上面，不过不影响效果）
 
-![img](640.png)
+ ![img](pic/640-1592302503530.png) 
 
 a.intern 返回的是常量池中的 ab，而 b 是直接返回的是堆中的 ab。地址不一样，肯定输出 false
 
 所以第二个
 
-```
+```java
 System.out.println(a.intern() == b.intern());
 ```
 
 也就没问题了吧，它们都返回的是字符串常量池中的 ab，地址相同，所以输出 true
 
-![img](640-1592300991915.png)
+ ![img](pic/640-1592302513192.png) 
 
 然后来看第三个
 
@@ -218,17 +255,17 @@ System.out.println(a.intern() == c);
 
 图示如下
 
-![img](640-1592300991913.png)
+ ![img](pic/640-1592302525272.png) 
 
 a 不会变，因为常量池中已经有了 ab ，所以 c 不会再创建一个 ab 字符串，这是编译器做的优化，为了提高效率。
 
 下面来看最后一个
 
-```
+```java
 System.out.println(a.intern() == f);
 ```
 
-![img](640-1592300991914.png)
+ ![img](pic/640-1592302533569.png) 
 
 ### String
 
@@ -246,21 +283,24 @@ String 没有继承任何接口，不过实现了三个接口，分别是 Serial
 
 也就是说
 
-```
-String str = "abc"; // === char data[] = {'a', 'b', 'c'};String str = new String(data);
+```java
+String str = "abc"; 
+// === 
+char data[] = {'a', 'b', 'c'};
+String str = new String(data);
 ```
 
 原来这么回事啊！
 
-![img](640-1592300991914.png)
+![img](pic/640-1592300991914.png)
 
 所以，String 中有一个用于存储字符的 char 数组 `value[]`，这个数组存储了每个字符。另外一个就是 hash 属性，它用于缓存字符串的哈希码。因为 String 经常被用于比较，比如在 HashMap 中。如果每次进行比较都重新计算其 hashcode 的值的话，那无疑是比较麻烦的，而保存一个 hashcode 的缓存无疑能优化这样的操作。
 
-![img](640-1592300991915.png)
+ ![img](pic/640-1592302563096.png) 
 
 String 可以通过许多途径创建，也可以根据 Stringbuffer 和 StringBuilder 进行创建。
 
-![img](640-1592300991915.png)
+ ![img](pic/640-1592302567639.png) 
 
 毕竟我们本篇文章探讨的不是源码分析的文章，所以涉及到的源码不会很多。
 
@@ -287,8 +327,10 @@ StringBuilder 类表示一个可变的字符序列，我们知道，StringBuilde
 
 首先我们来看一下 StringBuilder 的定义
 
-```
-public final class StringBuilder extends AbstractStringBuilder    implements java.io.Serializable, CharSequence {...}
+```java
+public final class StringBuilder
+	extends AbstractStringBuilder
+    implements java.io.Serializable, CharSequence {...}
 ```
 
 StringBuilder 被 final 修饰，表示 StringBuilder 是不可被继承的，StringBuilder 类继承于 **AbstractStringBuilder类**。实际上，AbstractStringBuilder 类具体实现了可变字符序列的一系列操作，比如：append()、insert()、delete()、replace()、charAt() 方法等。
@@ -300,8 +342,9 @@ StringBuilder 实现了 2 个接口
 
 StringBuilder 使用 AbstractStringBuilder 类中的两个变量作为元素
 
-```
-char[] value; // 存储字符数组int count; // 字符串使用的计数
+```java
+char[] value; // 存储字符数组
+int count; // 字符串使用的计数
 ```
 
 ### StringBuffer
@@ -314,8 +357,10 @@ StringBuffer 也是继承于 AbstractStringBuilder ，使用 value 和 count 分
 
 首先先注意一下 StringBuilder 的初始容量
 
-```
-public StringBuilder() {  super(16);}
+```java
+public StringBuilder() {  
+    super(16);
+}
 ```
 
 StringBuilder 的初始容量是 16，当然也可以指定 StringBuilder 的初始容量。
