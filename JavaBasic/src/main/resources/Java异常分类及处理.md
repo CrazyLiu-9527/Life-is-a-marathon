@@ -30,7 +30,7 @@ Error 用来指示运行时环境发生的错误 ; 例如 JVM 内存溢出 ; 一
 
 异常类有两个主要的子类 : **检查性异常类** 和 **运行时异常类 (RuntimeException)** ;
 
-![exception_type](https://tojohnonly.github.io/images/73-Java%E5%BC%82%E5%B8%B8%E8%AF%A6%E8%A7%A3/exception_type.png)
+ ![img](pic/1724e86245f88374) 
 
 ### 检查型异常 (CheckedException)
 
