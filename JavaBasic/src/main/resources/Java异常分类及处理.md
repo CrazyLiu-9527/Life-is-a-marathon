@@ -184,7 +184,7 @@ public class ExcepTest{
 >
 > - Java.lang.ClassLoader 的子类，用户可以定制类的加载方式。
 
-![img](640-1592301063817.png)
+![img](pic/640-1592301063817.png)
 
 另一方面，ClassNotFoundException 与编译时期无关，当你尝试在运行时使用反射加载类时，ClassNotFoundException 就会出现。
 
@@ -193,6 +193,6 @@ public class ExcepTest{
 - NoClassDefFoundError 是 JVM 引起的错误，是 unchecked，未经检查的。因此不会使用 try-catch 或者 finally 语句块；另外，ClassNotFoundException 是受检异常，因此需要 try-catch 语句块或者 try-finally 语句块包围，否则会导致编译错误。
 - 调用 **Class.forName()、ClassLoader.findClass() 和 ClassLoader.loadClass()** 等方法时可能会引起 `java.lang.ClassNotFoundException`，如图所示
 
-![img](640-1592301063799.png)
+![img](pic/640-1592301063799.png)
 
 - NoClassDefFoundError 是链接错误，发生在链接阶段，当解析引用找不到对应的类，就会触发；而 ClassNotFoundException 是发生在运行时的异常。

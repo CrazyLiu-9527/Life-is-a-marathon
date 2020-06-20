@@ -138,9 +138,13 @@ public class Test<T1,T2,T3> {
 
 ## 3. 接下来说说List<T>，List<Object>，List<?>区别
 
-> **ArrayList al=new ArrayList();**  指定集合元素只能是T类型
+接下来说说List<T>，List<Object>，List<?>区别
 
->  **ArrayList al=new ArrayList();**  集合元素可以是任意类型，这种没有意义，一般是方法中，只是为了说明用法
+**ArrayList al=new ArrayList<T>();**  指定集合元素只能是T类型
+
+**ArrayList al=new ArrayList();**  集合元素可以是任意类型，这种没有意义，一般是方法中，只是为了说明用法
+
+
 
 **ArrayList al=new ArrayList();**
  泛型的限定：
@@ -205,9 +209,9 @@ public class TestDifferenceBetweenObjectAndT {
 }
 ```
 
-![img](https:////upload-images.jianshu.io/upload_images/1784147-a7cf72b87560aa1e.png?imageMogr2/auto-orient/strip|imageView2/2/w/863/format/webp)
+![img](pic/1784147-a7cf72b87560aa1e.webp)
 
-image.png
+
 
 ## 4. 最后来说说T，Class<T>，Class<?>区别
 
@@ -294,6 +298,7 @@ public class GenericType {
         System.out.println(arrayString.getClass()==arrayInteger.getClass());  
     }  
 }
+
 输出：
 true
 ```
@@ -343,8 +348,8 @@ public class ReflectInGeneric {
         }  
     }  
 }
-输出：
 
+输出：
 1
 asd
 ```
@@ -374,71 +379,71 @@ asd
 这和上一个面试题有联系，有时面试官会用这个问题来评估你对泛型的理解，而不是直接问你什么是限定通配符和非限定通配符。这两个List的声明都是限定通配符的例子，List<? extends T>可以接受任何继承自T的类型的List，而List<? super T>可以接受任何T的父类构成的List。例如List<? extends Number>可以接受List<Integer>或List<Float>。在本段出现的连接中可以找到更多信息。
 
 5. 如何编写一个泛型方法，让它能接受泛型参数并返回泛型类型?
-  编写泛型方法并不困难，你需要用泛型类型来替代原始类型，比如使用T, E or K,V等被广泛认可的类型占位符。泛型方法的例子请参阅Java集合类框架。最简单的情况下，一个泛型方法可能会像这样:
-
-  ```java
-  public V put(K key, V value) {
-      return cache.put(key, value);
-  }
-  ```
-
+    编写泛型方法并不困难，你需要用泛型类型来替代原始类型，比如使用T, E or K,V等被广泛认可的类型占位符。泛型方法的例子请参阅Java集合类框架。最简单的情况下，一个泛型方法可能会像这样:
+    
+    ```java
+    public V put(K key, V value) {
+          return cache.put(key, value);
+      }
+    ```
+    
 6. Java中如何使用泛型编写带有参数的类?
-  这是上一道面试题的延伸。面试官可能会要求你用泛型编写一个类型安全的类，而不是编写一个泛型方法。关键仍然是使用泛型类型来代替原始类型，而且要使用JDK中采用的标准占位符。
+     这是上一道面试题的延伸。面试官可能会要求你用泛型编写一个类型安全的类，而不是编写一个泛型方法。关键仍然是使用泛型类型来代替原始类型，而且要使用JDK中采用的标准占位符。
 
 7. 编写一段泛型程序来实现LRU缓存?
-  对于喜欢Java编程的人来说这相当于是一次练习。给你个提示，LinkedHashMap可以用来实现固定大小的LRU缓存，当LRU缓存已经满了的时候，它会把最老的键值对移出缓存。LinkedHashMap提供了一个称为removeEldestEntry()的方法，该方法会被put()和putAll()调用来删除最老的键值对。
+     对于喜欢Java编程的人来说这相当于是一次练习。给你个提示，LinkedHashMap可以用来实现固定大小的LRU缓存，当LRU缓存已经满了的时候，它会把最老的键值对移出缓存。LinkedHashMap提供了一个称为removeEldestEntry()的方法，该方法会被put()和putAll()调用来删除最老的键值对。
 
 8. 你可以把List<String>传递给一个接受List<Object>参数的方法吗？
-  对任何一个不太熟悉泛型的人来说，这个Java泛型题目看起来令人疑惑，因为乍看起来String是一种Object，所以List<String>应当可以用在需要List<Object>的地方，但是事实并非如此。真这样做的话会导致编译错误。如果你再深一步考虑，你会发现Java这样做是有意义的，因为List<Object>可以存储任何类型的对象包括String, Integer等等，而List<String>却只能用来存储Strings。
+     对任何一个不太熟悉泛型的人来说，这个Java泛型题目看起来令人疑惑，因为乍看起来String是一种Object，所以List<String>应当可以用在需要List<Object>的地方，但是事实并非如此。真这样做的话会导致编译错误。如果你再深一步考虑，你会发现Java这样做是有意义的，因为List<Object>可以存储任何类型的对象包括String, Integer等等，而List<String>却只能用来存储Strings。
 
-  ```java
-  List<Object> objectList;
-  List<String> stringList;
-        
-  objectList = stringList;  //compilation error incompatible types
-  ```
+     ```java
+       List<Object> objectList;
+       List<String> stringList;
+             
+       objectList = stringList;  //compilation error incompatible types
+     ```
 
 9. Array中可以用泛型吗?
-  这可能是Java泛型面试题中最简单的一个了，当然前提是你要知道Array事实上并不支持泛型，这也是为什么Joshua Bloch在Effective Java一书中建议使用List来代替Array，因为List可以提供编译期的类型安全保证，而Array却不能。
+     这可能是Java泛型面试题中最简单的一个了，当然前提是你要知道Array事实上并不支持泛型，这也是为什么Joshua Bloch在Effective Java一书中建议使用List来代替Array，因为List可以提供编译期的类型安全保证，而Array却不能。
 
 10. 如何阻止Java中的类型未检查的警告?
-    如果你把泛型和原始类型混合起来使用，例如下列代码，Java 5的javac编译器会产生类型未检查的警告
-    ，例如List<String> rawList = new ArrayList()
-    注意: Hello.java使用了未检查或称为不安全的操作;
-    这种警告可以使用@SuppressWarnings("unchecked")注解来屏蔽。
+     如果你把泛型和原始类型混合起来使用，例如下列代码，Java 5的javac编译器会产生类型未检查的警告
+     ，例如List<String> rawList = new ArrayList()
+     注意: Hello.java使用了未检查或称为不安全的操作;
+     这种警告可以使用@SuppressWarnings("unchecked")注解来屏蔽。
 
 11. Java中List<Object>和原始类型List之间的区别?
-    原始类型和带参数类型<Object>之间的主要区别是，在编译时编译器不会对原始类型进行类型安全检查，却会对带参数的类型进行检查，通过使用Object作为类型，可以告知编译器该方法可以接受任何类型的对象，比如String或Integer。这道题的考察点在于对泛型中原始类型的正确理解。它们之间的第二点区别是，你可以把任何带参数的泛型类型传递给接受原始类型List的方法，但却不能把List<String>传递给接受List<Object>的方法，因为会产生编译错误。
+      原始类型和带参数类型<Object>之间的主要区别是，在编译时编译器不会对原始类型进行类型安全检查，却会对带参数的类型进行检查，通过使用Object作为类型，可以告知编译器该方法可以接受任何类型的对象，比如String或Integer。这道题的考察点在于对泛型中原始类型的正确理解。它们之间的第二点区别是，你可以把任何带参数的泛型类型传递给接受原始类型List的方法，但却不能把List<String>传递给接受List<Object>的方法，因为会产生编译错误。
 
 12. Java中List<?>和List<Object>之间的区别是什么?
-    这道题跟上一道题看起来很像，实质上却完全不同。List<?> 是一个未知类型的List，而List<Object>其实是任意类型的List。你可以把List<String>, List<Integer>赋值给List<?>，却不能把List<String>赋值给List<Object>。   
+      这道题跟上一道题看起来很像，实质上却完全不同。List<?> 是一个未知类型的List，而List<Object>其实是任意类型的List。你可以把List<String>, List<Integer>赋值给List<?>，却不能把List<String>赋值给List<Object>。   
 
-    ```java
-    List<?> listOfAnyType;
-    List<Object> listOfObject = new ArrayList<Object>();
-    List<String> listOfString = new ArrayList<String>();
-    List<Integer> listOfInteger = new ArrayList<Integer>();
-          
-    listOfAnyType = listOfString; //legal
-    listOfAnyType = listOfInteger; //legal
-    listOfObjectType = (List<Object>) listOfString; //compiler error - in-convertible types
-    ```
+      ```java
+      List<?> listOfAnyType;
+      List<Object> listOfObject = new ArrayList<Object>();
+      List<String> listOfString = new ArrayList<String>();
+      List<Integer> listOfInteger = new ArrayList<Integer>();
+            
+      listOfAnyType = listOfString; //legal
+      listOfAnyType = listOfInteger; //legal
+      listOfObjectType = (List<Object>) listOfString; //compiler error - in-convertible types
+      ```
 
 13. List<String>和原始类型List之间的区别.
-    该题类似于“原始类型和带参数类型之间有什么区别”。带参数类型是类型安全的，而且其类型安全是由编译器保证的，但原始类型List却不是类型安全的。你不能把String之外的任何其它类型的Object存入String类型的List中，而你可以把任何类型的对象存入原始List中。使用泛型的带参数类型你不需要进行类型转换，但是对于原始类型，你则需要进行显式的类型转换。
+      该题类似于“原始类型和带参数类型之间有什么区别”。带参数类型是类型安全的，而且其类型安全是由编译器保证的，但原始类型List却不是类型安全的。你不能把String之外的任何其它类型的Object存入String类型的List中，而你可以把任何类型的对象存入原始List中。使用泛型的带参数类型你不需要进行类型转换，但是对于原始类型，你则需要进行显式的类型转换。
 
-    ```java
-    List listOfRawTypes = new ArrayList();
-    listOfRawTypes.add("abc");
-    listOfRawTypes.add(123); //编译器允许这样 - 运行时却会出现异常
-    String item = (String) listOfRawTypes.get(0); //需要显式的类型转换
-    item = (String) listOfRawTypes.get(1); //抛ClassCastException，因为Integer不能被转换为String
-          
-    List<String> listOfString = new ArrayList();
-    listOfString.add("abcd");
-    listOfString.add(1234); //编译错误，比在运行时抛异常要好
-    item = listOfString.get(0); //不需要显式的类型转换 - 编译器自动转换
-    ```
+      ```java
+      List listOfRawTypes = new ArrayList();
+      listOfRawTypes.add("abc");
+      listOfRawTypes.add(123); //编译器允许这样 - 运行时却会出现异常
+      String item = (String) listOfRawTypes.get(0); //需要显式的类型转换
+      item = (String) listOfRawTypes.get(1); //抛ClassCastException，因为Integer不能被转换为String
+            
+      List<String> listOfString = new ArrayList();
+      listOfString.add("abcd");
+      listOfString.add(1234); //编译错误，比在运行时抛异常要好
+      item = listOfString.get(0); //不需要显式的类型转换 - 编译器自动转换
+      ```
 
-    
+      
 
