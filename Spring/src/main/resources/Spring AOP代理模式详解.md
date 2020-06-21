@@ -14,7 +14,7 @@
 
 接口类：
 
-```
+```java
 interface Person {
     void speak();
 }
@@ -22,7 +22,7 @@ interface Person {
 
 真实实体类：
 
-```
+```java
 class Actor implements Person {
     private String content;
     public Actor(String content) {
@@ -38,7 +38,7 @@ class Actor implements Person {
 
 代理类：
 
-```
+```java
 class Agent implements Person {
     private Actor actor;
     private String before;
@@ -62,7 +62,7 @@ class Agent implements Person {
 
 测试方法:
 
-```
+```java
 public class StaticProxy {
     public static void main(String[] args) {
         Actor actor = new Actor("I am a famous actor!");
@@ -86,7 +86,7 @@ public class StaticProxy {
 
 首先是java.lang.reflect包里的InvocationHandler接口：
 
-```
+```java
 public interface InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args)
         throws Throwable;
@@ -103,7 +103,7 @@ public interface InvocationHandler {
 
 另外一个很重要的静态方法是java.lang.reflect包中的Proxy类的newProxyInstance方法：
 
-```
+```java
 public static Object newProxyInstance(ClassLoader loader,
                                       Class<?>[] interfaces,
                                       InvocationHandler h)
@@ -120,7 +120,7 @@ public static Object newProxyInstance(ClassLoader loader,
 
 Fruit接口：
 
-```
+```java
 public interface Fruit {
     public void show();
 }
@@ -128,7 +128,7 @@ public interface Fruit {
 
 Apple实现Fruit接口：
 
-```
+```java
 public class Apple implements Fruit{
     @Override
     public void show() {
@@ -170,7 +170,7 @@ public class DynamicAgent {
 
 测试类：
 
-```
+```java
 public class ReflectTest {
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
 		//注意一定要返回接口，不能返回实现类否则会报错
@@ -190,7 +190,7 @@ public class ReflectTest {
 
 [CGlib](https://github.com/cglib/cglib)是一个字节码增强库，为AOP等提供了底层支持。下面看看它是怎么实现动态代理的。
 
-```
+```java
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

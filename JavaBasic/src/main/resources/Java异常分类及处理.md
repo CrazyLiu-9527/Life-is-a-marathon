@@ -30,7 +30,7 @@ Error 用来指示运行时环境发生的错误 ; 例如 JVM 内存溢出 ; 一
 
 异常类有两个主要的子类 : **检查性异常类** 和 **运行时异常类 (RuntimeException)** ;
 
-![exception_type](https://tojohnonly.github.io/images/73-Java%E5%BC%82%E5%B8%B8%E8%AF%A6%E8%A7%A3/exception_type.png)
+ ![img](pic/1724e86245f88374) 
 
 ### 检查型异常 (CheckedException)
 
@@ -161,3 +161,38 @@ public class ExcepTest{
     }
 }
 ```
+
+
+
+## 一道题目
+
+一道非常经典的面试题，**NoClassDefFoundError 和 ClassNotFoundException 有什么区别**？
+
+在类的加载过程中， JVM 或者 ClassLoader 无法找到对应的类时，都可能会引起这两种异常/错误，由于不同的 ClassLoader 会从不同的地方加载类，有时是错误的 CLASSPATH 类路径导致的这类错误，有时是某个库的 jar 包缺失引发这类错误。NoClassDefFoundError 表示这个类在编译时期存在，但是在运行时却找不到此类，有时静态初始化块也会导致 NoClassDefFoundError 错误。
+
+> “
+>
+> ClassLoader 是类路径装载器，在Java 中，类路径装载器一共有三种两类
+>
+> 一种是虚拟机自带的 ClassLoader，分为三种
+>
+> - `启动类加载器(Bootstrap)` ，负责加载 $JAVAHOME/jre/lib/rt.jar
+> - `扩展类加载器(Extension)`，负责加载 $JAVAHOME/jre/lib/ext/*.jar
+> - `应用程序类加载器(AppClassLoader)`，加载当前应用的 classpath 的所有类
+>
+> 第二种是用户自定义类加载器
+>
+> - Java.lang.ClassLoader 的子类，用户可以定制类的加载方式。
+
+![img](pic/640-1592301063817.png)
+
+另一方面，ClassNotFoundException 与编译时期无关，当你尝试在运行时使用反射加载类时，ClassNotFoundException 就会出现。
+
+简而言之，ClassNotFoundException 和 NoClassDefFoundError 都是由 CLASSPATH 中缺少类引起的，通常是由于缺少 JAR 文件而引起的，但是如果 JVM 认为应用运行时找不到相应的引用，就会抛出 NoClassDefFoundError 错误；当你在代码中显示的加载类比如 `Class.forName()` 调用时却没有找到相应的类，就会抛出 `java.lang.ClassNotFoundException`。
+
+- NoClassDefFoundError 是 JVM 引起的错误，是 unchecked，未经检查的。因此不会使用 try-catch 或者 finally 语句块；另外，ClassNotFoundException 是受检异常，因此需要 try-catch 语句块或者 try-finally 语句块包围，否则会导致编译错误。
+- 调用 **Class.forName()、ClassLoader.findClass() 和 ClassLoader.loadClass()** 等方法时可能会引起 `java.lang.ClassNotFoundException`，如图所示
+
+![img](pic/640-1592301063799.png)
+
+- NoClassDefFoundError 是链接错误，发生在链接阶段，当解析引用找不到对应的类，就会触发；而 ClassNotFoundException 是发生在运行时的异常。

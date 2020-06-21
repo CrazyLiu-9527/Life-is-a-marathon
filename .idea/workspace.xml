@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="" />
+    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/AddElementsInBST03/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/BinarySearchTreeBasic02/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/ImprovedAddElementsInBST04/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/InOrderAndPostOrderTraverse07/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/InOrderAndPostOrderTraverse07/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/LevelTraverseInBST10/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/LevelTraverseInBST10/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/NonRecursionPreOrderTraverse09/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/NonRecursionPreOrderTraverse09/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/PreOrderTraverseInBST06/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/PreOrderTraverseInBST06/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/RemoveElementsInBST12/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/RemoveElementsInBST12/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/RemoveMinAndRemoveMaxInBST11/BST.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/RemoveMinAndRemoveMaxInBST11/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/SearchInBST05/BST.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/数组.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/时间复杂度和空间复杂度" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +36,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -37,7 +57,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="D:/Work/newTeam/application/sentiment/Weibo-DataCapture-Job" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/Recursion/LinkedListAndRecursion04" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -55,23 +75,28 @@
       <recent name="Midiator" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\Recursion\LinkedListAndRecursion04" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\java\Iterator\v4" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\java\Spring\v2" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\java\AbstractFactory" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Concurrency\src\main\resources\pic" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="BinarySearchTree.RemoveMinAndRemoveMaxInBST11" />
+      <recent name="BinarySearchTree.InOrderAndPostOrderTraverse07" />
+      <recent name="Recursion.LinkedListAndRecursion04" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Test (3)">
+  <component name="RunManager" selected="Application.Main (2)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Bridge.Main" />
-      <module name="DesignPatterns" />
+      <option name="MAIN_CLASS_NAME" value="BinarySearchTree.InOrderAndPostOrderTraverse07.Main" />
+      <module name="DataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Bridge.*" />
+          <option name="PATTERN" value="BinarySearchTree.InOrderAndPostOrderTraverse07.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -79,12 +104,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Prototype.v2.Test" />
-      <module name="DesignPatterns" />
+    <configuration name="Main (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BinarySearchTree.NonRecursionPreOrderTraverse09.Main" />
+      <module name="DataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Prototype.v2.*" />
+          <option name="PATTERN" value="BinarySearchTree.NonRecursionPreOrderTraverse09.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -92,12 +117,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (2)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Prototype.v3.Test" />
-      <module name="DesignPatterns" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BinarySearchTree.PreOrderTraverseInBST06.Main" />
+      <module name="DataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Prototype.v3.*" />
+          <option name="PATTERN" value="BinarySearchTree.PreOrderTraverseInBST06.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -105,12 +130,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test (3)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Prototype.v4.Test" />
-      <module name="DesignPatterns" />
+    <configuration name="Solution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Recursion.DebugRecursiveSolution06.Solution" />
+      <module name="DataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Prototype.v4.*" />
+          <option name="PATTERN" value="Recursion.DebugRecursiveSolution06.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -118,12 +143,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Prototype.v1.Test" />
-      <module name="DesignPatterns" />
+    <configuration name="Solution4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Recursion.LinkedListAndRecursion04.Solution4" />
+      <module name="DataStructure" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Prototype.v1.*" />
+          <option name="PATTERN" value="Recursion.LinkedListAndRecursion04.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -133,11 +158,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Test (3)" />
-        <item itemvalue="Application.Test (2)" />
-        <item itemvalue="Application.Test (1)" />
-        <item itemvalue="Application.Test" />
+        <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Main (1)" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Solution" />
+        <item itemvalue="Application.Solution4" />
       </list>
     </recent_temporary>
   </component>
@@ -175,6 +200,8 @@
       <workItem from="1591758445578" duration="586000" />
       <workItem from="1591774830891" duration="1200000" />
       <workItem from="1591843081806" duration="1440000" />
+      <workItem from="1592386127389" duration="4982000" />
+      <workItem from="1592633155693" duration="9396000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -208,22 +235,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add module concurrency" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Project_Structure" timestamp="1591012710039">
+    <state x="552" y="178" key="#Project_Structure" timestamp="1592386471085">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1591012710039" />
+    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592386471085" />
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590491041789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491041789" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1590483825315">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592635956602">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590483825315" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592635956602" />
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589890698689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589890698689" />
+    <state x="679" y="378" width="561" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592387130782">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="679" y="378" width="561" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592387130782" />
     <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1590134351188">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -240,30 +271,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1591844947675" />
-    <state width="1877" height="319" key="GridCell.Tab.0.bottom" timestamp="1590491392384">
+    <state width="1877" height="292" key="GridCell.Tab.0.bottom" timestamp="1592640640925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="319" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491392384" />
-    <state width="1877" height="319" key="GridCell.Tab.0.center" timestamp="1590491392384">
+    <state width="1877" height="292" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640925" />
+    <state width="1877" height="292" key="GridCell.Tab.0.center" timestamp="1592640640925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="319" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491392384" />
-    <state width="1877" height="319" key="GridCell.Tab.0.left" timestamp="1590491392384">
+    <state width="1877" height="292" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640925" />
+    <state width="1877" height="292" key="GridCell.Tab.0.left" timestamp="1592640640925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="319" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491392384" />
-    <state width="1877" height="319" key="GridCell.Tab.0.right" timestamp="1590491392384">
+    <state width="1877" height="292" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640925" />
+    <state width="1877" height="292" key="GridCell.Tab.0.right" timestamp="1592640640925">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="319" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491392384" />
+    <state width="1877" height="292" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640925" />
+    <state width="1877" height="338" key="GridCell.Tab.1.bottom" timestamp="1592640640906">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="338" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640906" />
+    <state width="1877" height="338" key="GridCell.Tab.1.center" timestamp="1592640640906">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="338" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640906" />
+    <state width="1877" height="338" key="GridCell.Tab.1.left" timestamp="1592640640906">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="338" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640906" />
+    <state width="1877" height="338" key="GridCell.Tab.1.right" timestamp="1592640640906">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="338" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592640640906" />
     <state x="603" y="230" key="RollbackChangesDialog" timestamp="1589940554717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="603" y="230" key="RollbackChangesDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589940554717" />
-    <state x="461" y="161" key="SettingsEditor" timestamp="1590484413040">
+    <state x="461" y="161" key="SettingsEditor" timestamp="1592386498218">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="161" key="SettingsEditor/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590484413040" />
+    <state x="461" y="161" key="SettingsEditor/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592386498218" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589875356583">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -272,6 +319,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="432" y="122" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589942175522" />
+    <state x="752" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592386182743">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="752" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592386182743" />
     <state x="334" y="214" key="new project wizard" timestamp="1591843092705">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -280,10 +331,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="702" y="147" key="refactoring.ChangeSignatureDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589979130416" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590483007434">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1592644737040">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590483007434" />
+    <state x="616" y="240" key="run.anything.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592644737040" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592638477495">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592638477495" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -297,6 +352,16 @@
           <url>file://$PROJECT_DIR$/DesignPatterns/src/main/java/Builder/User.java</url>
           <line>6</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/Recursion/LinkedListAndRecursion04/Solution4.java</url>
+          <line>8</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/BinarySearchTree/PreOrderTraverseInBST06/Main.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
