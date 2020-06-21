@@ -6,7 +6,6 @@
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
-        <option value="$PROJECT_DIR$/DesignPatterns/pom.xml" />
         <option value="$PROJECT_DIR$/Concurrency/pom.xml" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/MySQL/pom.xml" />
@@ -14,9 +13,8 @@
         <option value="$PROJECT_DIR$/DataStructure&amp;Algorithms/pom.xml" />
         <option value="$PROJECT_DIR$/JavaBasic/pom.xml" />
         <option value="$PROJECT_DIR$/Others/pom.xml" />
-        <option value="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="11.0.5" project-jdk-type="JavaSDK" />
 </project>
