@@ -1,4 +1,4 @@
-### 引导语
+引导语
 
 在熟悉 HashMap 之后，本小节我们来看下 TreeMap 和 LinkedHashMap，看看 TreeMap 是如何根据 key 进行排序的，LinkedHashMap 是如何用两种策略进行访问的。
 
@@ -8,151 +8,43 @@
 
 在了解 TreeMap 之前，我们来看下日常工作中排序的两种方式，作为我们学习的基础储备，两种方式的代码如下：
 
-```
+```java
 public class TreeMapDemo {
 
+    @Data
+    // DTO 为我们排序的对象
+    class DTO implements Comparable<DTO> {
+        private Integer id;
+        public DTO(Integer id) {
+            this.id = id;
+        }
 
-
- 
-
-
-
-  @Data
-
-
-
-  // DTO 为我们排序的对象
-
-
-
-  class DTO implements Comparable<DTO> {
-
-
-
-    private Integer id;
-
-
-
-    public DTO(Integer id) {
-
-
-
-      this.id = id;
-
-
-
+        @Override
+        public int compareTo(DTO o) {
+            //默认从小到大排序
+            return id - o.getId();
+        }
     }
 
+    @Test
+    public void testTwoComparable() {
+        // 第一种排序，从小到大排序，实现 Comparable 的 compareTo 方法进行排序
+        List<DTO> list = new ArrayList<>();
+        for (int i = 5; i > 0; i--) {
+            list.add(new DTO(i));
+        }
+        Collections.sort(list);
+        log.info(JSON.toJSONString(list));
 
-
- 
-
-
-
-    @Override
-
-
-
-    public int compareTo(DTO o) {
-
-
-
-      //默认从小到大排序
-
-
-
-      return id - o.getId();
-
-
-
+        // 第二种排序，从大到小排序，利用外部排序器 Comparator 进行排序
+        Comparator comparator = (Comparator<DTO>) (o1, o2) -> o2.getId() - o1.getId();
+        List<DTO> list2 = new ArrayList<>();
+        for (int i = 5; i > 0; i--) {
+            list2.add(new DTO(i));
+        }
+        Collections.sort(list,comparator);
+        log.info(JSON.toJSONString(list2));
     }
-
-
-
-  }
-
-
-
- 
-
-
-
-  @Test
-
-
-
-  public void testTwoComparable() {
-
-
-
-    // 第一种排序，从小到大排序，实现 Comparable 的 compareTo 方法进行排序
-
-
-
-    List<DTO> list = new ArrayList<>();
-
-
-
-    for (int i = 5; i > 0; i--) {
-
-
-
-      list.add(new DTO(i));
-
-
-
-    }
-
-
-
-    Collections.sort(list);
-
-
-
-    log.info(JSON.toJSONString(list));
-
-
-
- 
-
-
-
-    // 第二种排序，从大到小排序，利用外部排序器 Comparator 进行排序
-
-
-
-    Comparator comparator = (Comparator<DTO>) (o1, o2) -> o2.getId() - o1.getId();
-
-
-
-    List<DTO> list2 = new ArrayList<>();
-
-
-
-    for (int i = 5; i > 0; i--) {
-
-
-
-      list2.add(new DTO(i));
-
-
-
-    }
-
-
-
-    Collections.sort(list,comparator);
-
-
-
-    log.info(JSON.toJSONString(list2));
-
-
-
-  }
-
-
-
 }
 ```
 
@@ -176,67 +68,22 @@ TreeMap 底层的数据结构就是红黑树，和 HashMap 的红黑树结构一
 
 TreeMap 常见的属性有：
 
-```
+```java
 //比较器，如果外部有传进来 Comparator 比较器，首先用外部的
-
-
-
 //如果外部比较器为空，则使用 key 自己实现的 Comparable#compareTo 方法
-
-
-
 //比较手段和上面日常工作中的比较 demo 是一致的
-
-
-
 private final Comparator<? super K> comparator;
-
-
-
  
-
-
-
 //红黑树的根节点
-
-
-
 private transient Entry<K,V> root;
 
-
-
- 
-
-
-
 //红黑树的已有元素大小
-
-
-
 private transient int size = 0;
-
-
-
  
-
-
-
 //树结构变化的版本号，用于迭代过程中的快速失败场景
-
-
-
 private transient int modCount = 0;
-
-
-
  
-
-
-
 //红黑树的节点
-
-
-
 static final class Entry<K,V> implements Map.Entry<K,V> {}
 ```
 
@@ -246,158 +93,56 @@ static final class Entry<K,V> implements Map.Entry<K,V> {}
 
 1. 判断红黑树的节点是否为空，为空的话，新增的节点直接作为根节点，代码如下：
 
-   ```
+   ```java
    Entry<K,V> t = root;
-   
-   
-   
    //红黑树根节点为空，直接新建
-   
-   
-   
    if (t == null) {
-   
-   
-   
        // compare 方法限制了 key 不能为 null
-   
-   
-   
        compare(key, key); // type (and possibly null) check
-   
-   
-   
        // 成为根节点
-   
-   
-   
        root = new Entry<>(key, value, null);
-   
-   
-   
        size = 1;
-   
-   
-   
        modCount++;
-   
-   
-   
        return null;
-   
-   
-   
    }
    ```
-
+   
 2. 根据红黑树左小右大的特性，进行判断，找到应该新增节点的父节点，代码如下：
 
-   ```
+   ```java
    Comparator<? super K> cpr = comparator;
-   
-   
-   
    if (cpr != null) {
-   
-   
-   
        //自旋找到 key 应该新增的位置，就是应该挂载那个节点的头上
-   
-   
-   
        do {
-   
-   
-   
            //一次循环结束时，parent 就是上次比过的对象
-   
-   
-   
            parent = t;
-   
-   
-   
            // 通过 compare 来比较 key 的大小
-   
-   
-   
            cmp = cpr.compare(key, t.key);
-   
-   
-   
            //key 小于 t，把 t 左边的值赋予 t，因为红黑树左边的值比较小，循环再比
-   
-   
-   
            if (cmp < 0)
-   
-   
-   
                t = t.left;
-   
-   
-   
            //key 大于 t，把 t 右边的值赋予 t，因为红黑树右边的值比较大，循环再比
-   
-   
-   
            else if (cmp > 0)
-   
-   
-   
                t = t.right;
-   
-   
-   
            //如果相等的话，直接覆盖原值
-   
-   
-   
            else
-   
-   
-   
                return t.setValue(value);
-   
-   
-   
            // t 为空，说明已经到叶子节点了
-   
-   
-   
        } while (t != null);
-   
-   
-   
    }
    ```
-
+   
 3. 在父节点的左边或右边插入新增节点，代码如下：
 
-   ```
+   ```java
    //cmp 代表最后一次对比的大小，小于 0 ，代表 e 在上一节点的左边
-   
-   
-   
    if (cmp < 0)
-   
-   
-   
        parent.left = e;
-   
-   
-   
    //cmp 代表最后一次对比的大小，大于 0 ，代表 e 在上一节点的右边，相等的情况第二步已经处理了。
-   
-   
-   
    else
-   
-   
-   
        parent.right = e;
    ```
-
+   
 4. 着色旋转，达到平衡，结束。
 
 从源码中，我们可以看到：
@@ -431,75 +176,24 @@ LinkedHashMap 本身是继承 HashMap 的，所以它拥有 HashMap 的所有特
 
 我们看下 LinkedHashMap 新增了哪些属性，以达到了链表结构的：
 
-```
+```java
 // 链表头
-
-
-
 transient LinkedHashMap.Entry<K,V> head;
-
-
-
  
-
-
-
 // 链表尾
-
-
-
 transient LinkedHashMap.Entry<K,V> tail;
-
-
-
  
-
-
-
 // 继承 Node，为数组的每个元素增加了 before 和 after 属性
-
-
-
 static class Entry<K,V> extends HashMap.Node<K,V> {
-
-
-
     Entry<K,V> before, after;
-
-
-
     Entry(int hash, K key, V value, Node<K,V> next) {
-
-
-
         super(hash, key, value, next);
-
-
-
     }
-
-
-
 }
-
-
-
  
-
-
-
 // 控制两种访问模式的字段，默认 false
-
-
-
 // true 按照访问顺序，会把经常访问的 key 放到队尾
-
-
-
 // false 按照插入顺序提供访问
-
-
-
 final boolean accessOrder;
 ```
 
@@ -511,95 +205,29 @@ LinkedHashMap 初始化时，默认 accessOrder 为 false，就是会按照插�
 
 newNode/newTreeNode 方法，控制新增节点追加到链表的尾部，这样每次新节点都追加到尾部，即可保证插入顺序了，我们以 newNode 源码为例：
 
-```
+```java
 // 新增节点，并追加到链表的尾部
-
-
-
 Node<K,V> newNode(int hash, K key, V value, Node<K,V> e) {
-
-
-
     // 新增节点
-
-
-
     LinkedHashMap.Entry<K,V> p =
-
-
-
         new LinkedHashMap.Entry<K,V>(hash, key, value, e);
-
-
-
     // 追加到链表的尾部
-
-
-
     linkNodeLast(p);
-
-
-
     return p;
-
-
-
 }
-
-
-
 // link at the end of list
-
-
-
 private void linkNodeLast(LinkedHashMap.Entry<K,V> p) {
-
-
-
     LinkedHashMap.Entry<K,V> last = tail;
-
-
-
     // 新增节点等于位节点
-
-
-
     tail = p;
-
-
-
     // last 为空，说明链表为空，首尾节点相等
-
-
-
     if (last == null)
-
-
-
         head = p;
-
-
-
     // 链表有数据，直接建立新增节点和上个尾节点之间的前后关系即可
-
-
-
     else {
-
-
-
         p.before = last;
-
-
-
         last.after = p;
-
-
-
     }
-
-
-
 }
 ```
 
@@ -613,75 +241,24 @@ LinkedHashMap 只提供了单向访问，即按照插入的顺序从头到尾进
 
 Map 对 key、value 和 entity（节点） 都提供出了迭代的方法，假设我们需要迭代 entity，就可使用 `LinkedHashMap.entrySet().iterator()` 这种写法直接返回 LinkedHashIterator ，LinkedHashIterator 是迭代器，我们调用迭代器的 nextNode 方法就可以得到下一个节点，迭代器的源码如下：
 
-```
+```java
 // 初始化时，默认从头节点开始访问
-
-
-
 LinkedHashIterator() {
-
-
-
     // 头节点作为第一个访问的节点
-
-
-
     next = head;
-
-
-
     expectedModCount = modCount;
-
-
-
     current = null;
-
-
-
 }
-
-
-
  
-
-
-
 final LinkedHashMap.Entry<K,V> nextNode() {
-
-
-
     LinkedHashMap.Entry<K,V> e = next;
-
-
-
     if (modCount != expectedModCount)// 校验
-
-
-
         throw new ConcurrentModificationException();
-
-
-
     if (e == null)
-
-
-
         throw new NoSuchElementException();
-
-
-
     current = e;
-
-
-
     next = e.after; // 通过链表的 after 结构，找到下一个迭代的节点
-
-
-
     return e;
-
-
-
 }
 ```
 
@@ -693,113 +270,38 @@ final LinkedHashMap.Entry<K,V> nextNode() {
 
 这种策略也叫做 LRU（Least recently used,最近最少使用），大概的意思就是经常访问的元素会被追加到队尾，这样不经常访问的数据自然就靠近队头，然后我们可以通过设置删除策略，比如当 Map 元素个数大于多少时，把头节点删除，我们写个 demo 方便大家理解。demo 如下，完整代码可到 github 上查看：
 
-```
-public void testAccessOrder() {
-
-
-
-  // 新建 LinkedHashMap
-
-
-
-  LinkedHashMap<Integer, Integer> map = new LinkedHashMap<Integer, Integer>(4,0.75f,true) {
-
-
-
-    {
-
-
-
-      put(10, 10);
-
-
-
-      put(9, 9);
-
-
-
-      put(20, 20);
-
-
-
-      put(1, 1);
-
-
-
-    }
-
-
-
- 
-
-
-
-    @Override
-
-
-
-    // 覆写了删除策略的方法，我们设定当节点个数大于 3 时，就开始删除头节点
-
-
-
-    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
-
-
-
-      return size() > 3;
-
-
-
-    }
-
-
-
-  };
-
-
-
- 
-
-
-
-  log.info("初始化：{}",JSON.toJSONString(map));
-
-
-
-  Assert.assertNotNull(map.get(9));
-
-
-
-  log.info("map.get(9)：{}",JSON.toJSONString(map));
-
-
-
-  Assert.assertNotNull(map.get(20));
-
-
-
-  log.info("map.get(20)：{}",JSON.toJSONString(map));
-
-
-
- 
-
-
-
-}
+```java
+ public void testAccessOrder() {
+     // 新建 LinkedHashMap
+     LinkedHashMap<Integer, Integer> map = new LinkedHashMap<Integer, Integer>(4,0.75f,true) {
+         {
+             put(10, 10);
+             put(9, 9);
+             put(20, 20);
+             put(1, 1);
+         }
+
+         @Override
+         // 覆写了删除策略的方法，我们设定当节点个数大于 3 时，就开始删除头节点
+         protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+             return size() > 3;
+         }
+     };
+
+     log.info("初始化：{}", JSON.toJSONString(map));
+     Assert.assertNotNull(map.get(9));
+     log.info("map.get(9)：{}",JSON.toJSONString(map));
+     Assert.assertNotNull(map.get(20));
+     log.info("map.get(20)：{}",JSON.toJSONString(map));
+
+ }
 ```
 
 打印出来的结果如下：
 
-```
+```java
 初始化：{9:9,20:20,1:1}
-
-
-
 map.get(9)：{20:20,1:1,9:9}
-
-
-
 map.get(20)：{1:1,9:9,20:20}
 ```
 
@@ -813,47 +315,17 @@ map.get(20)：{1:1,9:9,20:20}
 
 我们先来看下为什么 get 时，元素会被移动到队尾：
 
-```
+```java
 public V get(Object key) {
-
-
-
     Node<K,V> e;
-
-
-
     // 调用 HashMap  get 方法
-
-
-
     if ((e = getNode(hash(key), key)) == null)
-
-
-
         return null;
-
-
-
     // 如果设置了 LRU 策略
-
-
-
     if (accessOrder)
-
-
-
     // 这个方法把当前 key 移动到队尾
-
-
-
         afterNodeAccess(e);
-
-
-
     return e.value;
-
-
-
 }
 ```
 
@@ -863,47 +335,17 @@ public V get(Object key) {
 
 上述 demo 我们在执行 put 方法时，发现队头元素被删除了，LinkedHashMap 本身是没有 put 方法实现的，调用的是 HashMap 的 put 方法，但 LinkedHashMap 实现了 put 方法中的调用 afterNodeInsertion 方法，这个方式实现了删除，我们看下源码：
 
-```
+```java
 // 删除很少被访问的元素，被 HashMap 的 put 方法所调用
-
-
-
 void afterNodeInsertion(boolean evict) { 
-
-
-
     // 得到元素头节点
-
-
-
     LinkedHashMap.Entry<K,V> first;
-
-
-
     // removeEldestEntry 来控制删除策略，如果队列不为空，并且删除策略允许删除的情况下，删除头节点
-
-
-
     if (evict && (first = head) != null && removeEldestEntry(first)) {
-
-
-
         K key = first.key;
-
-
-
         // removeNode 删除头节点
-
-
-
         removeNode(hash(key), key, null, false, true);
-
-
-
     }
-
-
-
 }
 ```
 

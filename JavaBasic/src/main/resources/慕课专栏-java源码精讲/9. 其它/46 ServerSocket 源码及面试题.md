@@ -10,23 +10,11 @@
 
 ServerSocket 的主要作用，是作为服务端的套接字，接受客户端套接字传递过来的信息，并把响应回传给客户端，其属性非常简单，如下：
 
-```
+```java
 private boolean created = false;// 已创建
-
-
-
 private boolean bound = false;// 绑定
-
-
-
 private boolean closed = false;// 已关闭
-
-
-
 // 底层的功能都依靠 SocketImpl 来实现
-
-
-
 private SocketImpl impl;
 ```
 
@@ -43,87 +31,27 @@ ServerSocket 和 Socket 一样，底层都是依靠 SocketImpl 的能力，而 S
 1. 无参构造器做的事情比较简单，只指定了 SocketImpl 为 SocksSocketImpl 类；
 2. 有参构造器有几种初始化的形式，我们一起来看一下参数最多的构造器的源码。
 
-```
+```java
 public ServerSocket(int port, int backlog, InetAddress bindAddr) throws IOException {
-
-
-
     // 默认是 SocksSocketImpl 实现
-
-
-
     setImpl();
-
-
-
     // 端口必须大于 0，小于 65535
-
-
-
     if (port < 0 || port > 0xFFFF)
-
-
-
         throw new IllegalArgumentException(
-
-
-
                    "Port value out of range: " + port);
-
-
-
     // 最大可连接数如果小于1，那么采取默认的 50
-
-
-
     if (backlog < 1)
-
-
-
       backlog = 50;
-
-
-
     try {
-
-
-
         // 底层 navtive 方法
-
-
-
         bind(new InetSocketAddress(bindAddr, port), backlog);
-
-
-
     } catch(SecurityException e) {
-
-
-
         close();
-
-
-
         throw e;
-
-
-
     } catch(IOException e) {
-
-
-
         close();
-
-
-
         throw e;
-
-
-
     }
-
-
-
 }
 ```
 
@@ -145,19 +73,10 @@ bind 方法主要作用是把 ServerSocket 绑定到本地的端口上，只有�
 
 配合无参构造器，一般我们这么用：
 
-```
+```java
 // 进行初始化
-
-
-
 ServerSocket serverSocket = new ServerSocket();
-
-
-
 // 进行绑定
-
-
-
 serverSocket.bind(new InetSocketAddress("localhost", 7007));
 ```
 

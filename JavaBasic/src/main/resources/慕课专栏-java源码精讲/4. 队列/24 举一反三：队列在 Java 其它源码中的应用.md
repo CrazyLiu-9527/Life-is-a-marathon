@@ -14,27 +14,12 @@
 
 线程池大家应该都使用过，比如我们想新建一个固定大小的线程池，并让运行的线程打印一句话出来，我们会这么写代码：
 
-```
+```java
 ExecutorService executorService = Executors.newFixedThreadPool(10);
-
-
-
 // submit 是提交任务的意思
-
-
-
 // Thread.currentThread() 得到当前线程
-
-
-
 executorService.submit(() -> System.out.println(Thread.currentThread().getName() + " is run"));
-
-
-
 // 打印结果(我们打印出了当前线程的名字)：
-
-
-
 pool-1-thread-1 is run
 ```
 
@@ -46,7 +31,7 @@ pool-1-thread-1 is run
 
 我们画一个图释义一下：
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjExZmYzMDAwMWNmMzUxMTQ2MDQ4Ni5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjExZmYzMDAwMWNmMzUxMTQ2MDQ4Ni5wbmc)
 上图右边表示 10 个线程正在全力消费请求，左边表示剩余请求正在队列中排队，等待消费。
 
 由此可见，队列在线程池中占有很重要的地位，当线程池中的线程忙不过来的时候，请求都可以在队列中等待，从而慢慢地消费。
@@ -63,31 +48,13 @@ pool-1-thread-1 is run
 
 刚刚我们说的 newFixedThreadPool 是一种固定大小的线程池，意思是当线程池初始化好后，线程池里面的线程大小是不会变的了（线程池默认设置是不会回收核心线程数的），我们来看下 newFixedThreadPool 的源码：
 
-```
+```java
 // ThreadPoolExecutor 初始化时，第一个参数表示 coreSize，第二个参数是 maxSize，coreSize == maxSize,
-
-
-
 // 表示线程池初始化时，线程大小已固定，所以叫做固定(Fixed)线程池。 
-
-
-
 public static ExecutorService newFixedThreadPool(int nThreads) {
-
-
-
     return new ThreadPoolExecutor(nThreads, nThreads,
-
-
-
                                   0L, TimeUnit.MILLISECONDS,
-
-
-
                                   new LinkedBlockingQueue<Runnable>());
-
-
-
 }
 ```
 
@@ -104,41 +71,20 @@ public static ExecutorService newFixedThreadPool(int nThreads) {
 所以我们希望队列的大小不要设置成那么大，可以根据实际的消费情况来设置队列的大小，这样就可以保证在接口超时前，队列中排队的请求可以执行完。
 
 场景比较复杂，为了方便理解，我们画了一个图，把整个流程释义一下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjEyMDAyMDAwMWU3NGYxNTI2MDUxOC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjEyMDAyMDAwMWU3NGYxNTI2MDUxOC5wbmc)
 
 这种问题，在实际工作中已经属于非常严重的生产事故了，我们使用时一定要小心。
 
 和 newFixedThreadPool 相同的是，newSingleThreadExecutor 方法底层使用的也是 LinkedBlockingQueue，newSingleThreadExecutor 线程池底层线程只会有一个，这代表着这个线程池一次只能处理一个请求，其余的请求都会在队列中排队等待执行，我们看下 newSingleThreadExecutor 的源码实现：
 
-```
+```java
 public static ExecutorService newSingleThreadExecutor() {
-
-
-
     return new FinalizableDelegatedExecutorService
-
-
-
         // 前两个参数规定了这个线程池一次只能消费一个线程
-
-
-
         // 第五个参数使用的是 LinkedBlockingQueue,说明当请求超过单线程消费能力时，就会排队
-
-
-
         (new ThreadPoolExecutor(1, 1,
-
-
-
                                 0L, TimeUnit.MILLISECONDS,
-
-
-
                                 new LinkedBlockingQueue<Runnable>()));
-
-
-
 }
 ```
 
@@ -148,27 +94,12 @@ public static ExecutorService newSingleThreadExecutor() {
 
 除了 newFixedThreadPool 方法，在线程池新建时，还有其他的几个方法也对应着不同的队列，我们一起来看下 newCachedThreadPool，newCachedThreadPool 底层对应的是 SynchronousQueue 队列，源码如下：
 
-```
+```java
 public static ExecutorService newCachedThreadPool() {
-
-
-
     // 第五个参数是 SynchronousQueue
-
-
-
     return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-
-
-
                                   60L, TimeUnit.SECONDS,
-
-
-
                                   new SynchronousQueue<Runnable>());
-
-
-
 }
 ```
 
@@ -177,7 +108,7 @@ SynchronousQueue 队列是没有大小限制的，请求多少队列都能承受
 1.1.3 DelayedWorkQueue
 
 newScheduledThreadPool 代表定时任务线程池，底层源码如下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjEyMDE1MDAwMTI1ZTIyMjI0MDc2MC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjEyMDE1MDAwMTI1ZTIyMjI0MDc2MC5wbmc)
 
 截图从左往右我们可以看到，底层队列使用的是 DelayedWorkQueue 延迟队列，说明线程池底层延时的功能就是 DelayedWorkQueue 队列提供的，新的延迟请求都先到队列中去，延迟时间到了，线程池自然就能从队列中拿出线程进行执行了。
 
@@ -202,39 +133,15 @@ newSingleThreadScheduledExecutor 方法也是和 newScheduledThreadPool 一样�
 
 我们平时写锁代码的时候都这么写：
 
-```
+```java
 ReentrantLock lock = new ReentrantLock();
-
-
-
 try{
-
-
-
     lock.lock();
-
-
-
     // do something
-
-
-
 }catch(Exception e){
-
-
-
   //throw Exception;
-
-
-
 }finally {
-
-
-
     lock.unlock();
-
-
-
 }
 ```
 
@@ -242,7 +149,7 @@ try{
 
 等待，其他获取不到锁的线程，都会到一个等待队列中去等待，等待锁被释放掉时，再去竞争锁，我们画一个示意图。
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjEyMDI0MDAwMTIyNTMwNTQ4MDgyMC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjEyMDI0MDAwMTIyNTMwNTQ4MDgyMC5wbmc)
 
 图中红色标识的就是同步队列，获取不到锁的线程都会到同步队列中去排队，当锁被释放后，同步队列中的线程就又开始去竞争锁。
 

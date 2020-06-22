@@ -29,630 +29,160 @@ Socket 面试最终题一般都是让你写一个简单的客户端和服务端�
 
 客户端的代码比较简单，直接向服务器请求数据即可，代码如下：
 
-```
+```java
 public class SocketClient {
+    private static final Integer SIZE = 1024;
+    private static final ThreadPoolExecutor socketPoll =
+        new ThreadPoolExecutor(50, 50, 365L, TimeUnit.DAYS, new LinkedBlockingQueue<>(400));
 
+    @Test
+    public void test() throws InterruptedException {
+        // 模拟客户端同时向服务端发送 6 条消息
+        for (int i = 0; i < 6; i++) {
+            socketPoll.submit(() -> {
+                send("localhost", 7007, "nihao");
+            });
+        }
+        Thread.sleep(1000000000);
+    }
+    /**
+     * 发送tcp
+     *
+     * @param domainName 域名
+     * @param port       端口
+     * @param content    发送内容
+     */
+    public static String send(String domainName, int port, String content) {
+        log.info("客户端开始运行");
+        Socket socket = null;
+        OutputStream outputStream = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        InputStream is = null;
+        StringBuffer response = null;
+        try {
+            if (StringUtils.isBlank(domainName)) {
+                return null;
+            }
+            // 无参构造器初始化 Socket，默认底层协议是 TCP
+            socket = new Socket();
+            socket.setReuseAddress(true);
+            // 客户端准备连接服务端，设置超时时间 10 秒
+            socket.connect(new InetSocketAddress(domainName, port), 10000);
+            log.info("TCPClient 成功和服务端建立连接");
+            // 准备发送消息给服务端
+            outputStream = socket.getOutputStream();
+            // 设置 UTF 编码，防止乱码
+            byte[] bytes = content.getBytes(Charset.forName("UTF-8"));
+            // 输出字节码
+            segmentWrite(bytes, outputStream);
+            // 关闭输出
+            socket.shutdownOutput();
+            log.info("TCPClient 发送内容为 {}",content);
 
+            // 等待服务端的返回
+            socket.setSoTimeout(50000);//50秒还没有得到数据，直接断开连接
+            // 得到服务端的返回流
+            is = socket.getInputStream();
+            isr = new InputStreamReader(is);
+            br = new BufferedReader(isr);
+            // 从流中读取返回值
+            response = segmentRead(br);
+            // 关闭输入流
+            socket.shutdownInput();
 
-  private static final Integer SIZE = 1024;
-
-
-
-  private static final ThreadPoolExecutor socketPoll = new ThreadPoolExecutor(50, 50,
-
-
-
-                                                                               365L,
-
-
-
-                                                                               TimeUnit.DAYS,
-
-
-
-                                                                               new LinkedBlockingQueue<>(400));
-
-
-
- 
-
-
-
-  @Test
-
-
-
-  public void test() throws InterruptedException {
-
-
-
-    // 模拟客户端同时向服务端发送 6 条消息
-
-
-
-    for (int i = 0; i < 6; i++) {
-
-
-
-      socketPoll.submit(() -> {
-
-
-
-        send("localhost", 7007, "nihao");
-
-
-
-      });
-
-
-
+            //关闭各种流和套接字
+            close(socket, outputStream, isr, br, is);
+            log.info("TCPClient 接受到服务端返回的内容为 {}",response);
+            return response.toString();
+        } catch (ConnectException e) {
+            log.error("TCPClient-send socket连接失败", e);
+            throw new RuntimeException("socket连接失败");
+        } catch (Exception e) {
+            log.error("TCPClient-send unkown errror", e);
+            throw new RuntimeException("socket连接失败");
+        } finally {
+            try {
+                close(socket, outputStream, isr, br, is);
+            } catch (Exception e) {
+                // do nothing
+            }
+        }
     }
 
-
-
-    Thread.sleep(1000000000);
-
-
-
-  }
-
-
-
-  /**
-
-
-
-   * 发送tcp
-
-
-
-   *
-
-
-
-   * @param domainName 域名
-
-
-
-   * @param port       端口
-
-
-
-   * @param content    发送内容
-
-
-
-   */
-
-
-
-  public static String send(String domainName, int port, String content) {
-
-
-
-    log.info("客户端开始运行");
-
-
-
-    Socket socket = null;
-
-
-
-    OutputStream outputStream = null;
-
-
-
-    InputStreamReader isr = null;
-
-
-
-    BufferedReader br = null;
-
-
-
-    InputStream is = null;
-
-
-
-    StringBuffer response = null;
-
-
-
-    try {
-
-
-
-      if (StringUtils.isBlank(domainName)) {
-
-
-
-        return null;
-
-
-
-      }
-
-
-
-      // 无参构造器初始化 Socket，默认底层协议是 TCP
-
-
-
-      socket = new Socket();
-
-
-
-      socket.setReuseAddress(true);
-
-
-
-      // 客户端准备连接服务端，设置超时时间 10 秒
-
-
-
-      socket.connect(new InetSocketAddress(domainName, port), 10000);
-
-
-
-      log.info("TCPClient 成功和服务端建立连接");
-
-
-
-      // 准备发送消息给服务端
-
-
-
-      outputStream = socket.getOutputStream();
-
-
-
-      // 设置 UTF 编码，防止乱码
-
-
-
-      byte[] bytes = content.getBytes(Charset.forName("UTF-8"));
-
-
-
-      // 输出字节码
-
-
-
-      segmentWrite(bytes, outputStream);
-
-
-
-      // 关闭输出
-
-
-
-      socket.shutdownOutput();
-
-
-
-      log.info("TCPClient 发送内容为 {}",content);
-
-
-
- 
-
-
-
-      // 等待服务端的返回
-
-
-
-      socket.setSoTimeout(50000);//50秒还没有得到数据，直接断开连接
-
-
-
-      // 得到服务端的返回流
-
-
-
-      is = socket.getInputStream();
-
-
-
-      isr = new InputStreamReader(is);
-
-
-
-      br = new BufferedReader(isr);
-
-
-
-      // 从流中读取返回值
-
-
-
-      response = segmentRead(br);
-
-
-
-      // 关闭输入流
-
-
-
-      socket.shutdownInput();
-
-
-
- 
-
-
-
-      //关闭各种流和套接字
-
-
-
-      close(socket, outputStream, isr, br, is);
-
-
-
-      log.info("TCPClient 接受到服务端返回的内容为 {}",response);
-
-
-
-      return response.toString();
-
-
-
-    } catch (ConnectException e) {
-
-
-
-      log.error("TCPClient-send socket连接失败", e);
-
-
-
-      throw new RuntimeException("socket连接失败");
-
-
-
-    } catch (Exception e) {
-
-
-
-      log.error("TCPClient-send unkown errror", e);
-
-
-
-      throw new RuntimeException("socket连接失败");
-
-
-
-    } finally {
-
-
-
-      try {
-
-
-
-        close(socket, outputStream, isr, br, is);
-
-
-
-      } catch (Exception e) {
-
-
-
-        // do nothing
-
-
-
-      }
-
-
-
+    /**
+     * 关闭各种流
+     *
+     * @param socket
+     * @param outputStream
+     * @param isr
+     * @param br
+     * @param is
+     * @throws IOException
+     */
+    public static void close(Socket socket, OutputStream outputStream, InputStreamReader isr, BufferedReader br, InputStream is) throws IOException {
+        if (null != socket && !socket.isClosed()) {
+            try {
+                socket.shutdownOutput();
+            } catch (Exception e) {
+            }
+            try {
+                socket.shutdownInput();
+            } catch (Exception e) {
+            }
+            try {
+                socket.close();
+            } catch (Exception e) {
+            }
+        }
+        if (null != outputStream) {
+            outputStream.close();
+        }
+        if (null != br) {
+            br.close();
+        }
+        if (null != isr) {
+            isr.close();
+        }
+        if (null != is) {
+            is.close();
+        }
     }
 
-
-
-  }
-
-
-
- 
-
-
-
-  /**
-
-
-
-   * 关闭各种流
-
-
-
-   *
-
-
-
-   * @param socket
-
-
-
-   * @param outputStream
-
-
-
-   * @param isr
-
-
-
-   * @param br
-
-
-
-   * @param is
-
-
-
-   * @throws IOException
-
-
-
-   */
-
-
-
-  public static void close(Socket socket, OutputStream outputStream, InputStreamReader isr,
-
-
-
-                           BufferedReader br, InputStream is) throws IOException {
-
-
-
-    if (null != socket && !socket.isClosed()) {
-
-
-
-      try {
-
-
-
-        socket.shutdownOutput();
-
-
-
-      } catch (Exception e) {
-
-
-
-      }
-
-
-
-      try {
-
-
-
-        socket.shutdownInput();
-
-
-
-      } catch (Exception e) {
-
-
-
-      }
-
-
-
-      try {
-
-
-
-        socket.close();
-
-
-
-      } catch (Exception e) {
-
-
-
-      }
-
-
-
+    /**
+     * 分段读
+     *
+     * @param br
+     * @throws IOException
+     */
+    public static StringBuffer segmentRead(BufferedReader br) throws IOException {
+        StringBuffer sb = new StringBuffer();
+        String line;
+        while ((line = br.readLine()) != null) {
+            sb.append(line);
+        }
+        return sb;
     }
 
+    /**
+     * 分段写
+     *
+     * @param bytes
+     * @param outputStream
+     * @throws IOException
+     */
+    public static void segmentWrite(byte[] bytes, OutputStream outputStream) throws IOException {
 
-
-    if (null != outputStream) {
-
-
-
-      outputStream.close();
-
-
-
+        int length = bytes.length;
+        int start, end = 0;
+        for (int i = 0; end != bytes.length; i++) {
+            start = i == 0 ? 0 : i * SIZE;
+            end = length > SIZE ? start + SIZE : bytes.length;
+            length -= SIZE;
+            outputStream.write(bytes, start, end - start);
+            outputStream.flush();
+        }
     }
-
-
-
-    if (null != br) {
-
-
-
-      br.close();
-
-
-
-    }
-
-
-
-    if (null != isr) {
-
-
-
-      isr.close();
-
-
-
-    }
-
-
-
-    if (null != is) {
-
-
-
-      is.close();
-
-
-
-    }
-
-
-
-  }
-
-
-
- 
-
-
-
-  /**
-
-
-
-   * 分段读
-
-
-
-   *
-
-
-
-   * @param br
-
-
-
-   * @throws IOException
-
-
-
-   */
-
-
-
-  public static StringBuffer segmentRead(BufferedReader br) throws IOException {
-
-
-
-    StringBuffer sb = new StringBuffer();
-
-
-
-    String line;
-
-
-
-    while ((line = br.readLine()) != null) {
-
-
-
-      sb.append(line);
-
-
-
-    }
-
-
-
-    return sb;
-
-
-
-  }
-
-
-
- 
-
-
-
-  /**
-
-
-
-   * 分段写
-
-
-
-   *
-
-
-
-   * @param bytes
-
-
-
-   * @param outputStream
-
-
-
-   * @throws IOException
-
-
-
-   */
-
-
-
-  public static void segmentWrite(byte[] bytes, OutputStream outputStream) throws IOException {
-
-
-
-    int length = bytes.length;
-
-
-
-    int start, end = 0;
-
-
-
-    for (int i = 0; end != bytes.length; i++) {
-
-
-
-      start = i == 0 ? 0 : i * SIZE;
-
-
-
-      end = length > SIZE ? start + SIZE : bytes.length;
-
-
-
-      length -= SIZE;
-
-
-
-      outputStream.write(bytes, start, end - start);
-
-
-
-      outputStream.flush();
-
-
-
-    }
-
-
-
-  }
-
-
-
- 
-
-
 
 }
 ```
@@ -673,307 +203,78 @@ public class SocketClient {
 
 ### 3.1 对客户端请求进行控制
 
-```
+```java
 public class SocketServiceStart {
 
-
-
- 
-
-
-
-  /**
-
-
-
-   * 服务端的线程池，两个作用
-
-
-
-   * 1：让服务端的任务可以异步执行
-
-
-
-   * 2：管理可同时处理的服务端的请求数
-
-
-
-   */
-
-
-
-  private static final ThreadPoolExecutor collectPoll = new ThreadPoolExecutor(4, 4,
-
-
-
-                                                                               365L,
-
-
-
-                                                                               TimeUnit.DAYS,
-
-
-
-                                                                               new LinkedBlockingQueue<>(
-
-
-
-                                                                                   1));
-
-
-
- 
-
-
-
-  @Test
-
-
-
-  public void test(){
-
-
-
-    start();
-
-
-
-  }
-
-
-
- 
-
-
-
-  /**
-
-
-
-   * 启动服务端
-
-
-
-   */
-
-
-
-  public static final void start() {
-
-
-
-    log.info("SocketServiceStart 服务端开始启动");
-
-
-
-    try {
-
-
-
-      // backlog  serviceSocket处理阻塞时，客户端最大的可创建连接数，超过客户端连接不上
-
-
-
-      // 当线程池能力处理满了之后，我们希望尽量阻塞客户端的连接
-
-
-
-//      ServerSocket serverSocket = new ServerSocket(7007,1,null);
-
-
-
-      // 初始化服务端
-
-
-
-      ServerSocket serverSocket = new ServerSocket();
-
-
-
-      serverSocket.setReuseAddress(true);
-
-
-
-//      serverSocket.bind(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), 80));
-
-
-
-      serverSocket.bind(new InetSocketAddress("localhost", 7007));
-
-
-
-      log.info("SocketServiceStart 服务端启动成功");
-
-
-
-      // 自旋，让客户端一直在取客户端的请求，如果客户端暂时没有请求，会一直阻塞
-
-
-
-      while (true) {
-
-
-
-        // 接受客户端的请求
-
-
-
-        Socket socket = serverSocket.accept();
-
-
-
- 
-
-
-
-        // 如果队列中有数据了，说明服务端已经到了并发处理的极限了，此时需要返回客户端有意义的信息
-
-
-
-        if (collectPoll.getQueue().size() >= 1) {
-
-
-
-          log.info("SocketServiceStart 服务端处理能力到顶，需要控制客户端的请求");
-
-
-
-          //返回处理结果给客户端
-
-
-
-          rejectRequest(socket);
-
-
-
-          continue;
-
-
-
-        }
-
-
-
+    /**
+     * 服务端的线程池，两个作用
+     * 1：让服务端的任务可以异步执行
+     * 2：管理可同时处理的服务端的请求数
+     */
+    private static final ThreadPoolExecutor collectPoll =
+        new ThreadPoolExecutor(4, 4, 365L, TimeUnit.DAYS, new LinkedBlockingQueue<>(1));
+
+    @Test
+    public void test(){
+        start();
+    }
+
+    /**
+     * 启动服务端
+     */
+    public static final void start() {
+        log.info("SocketServiceStart 服务端开始启动");
         try {
+            // backlog  serviceSocket处理阻塞时，客户端最大的可创建连接数，超过客户端连接不上
+            // 当线程池能力处理满了之后，我们希望尽量阻塞客户端的连接
+            // ServerSocket serverSocket = new ServerSocket(7007,1,null);
+            // 初始化服务端
 
+            ServerSocket serverSocket = new ServerSocket();
+            serverSocket.setReuseAddress(true);
+            //      serverSocket.bind(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), 80));
+            serverSocket.bind(new InetSocketAddress("localhost", 7007));
+            log.info("SocketServiceStart 服务端启动成功");
+            // 自旋，让客户端一直在取客户端的请求，如果客户端暂时没有请求，会一直阻塞
+            while (true) {
+                // 接受客户端的请求
+                Socket socket = serverSocket.accept();
 
-
-          // 异步处理客户端提交上来的任务
-
-
-
-          collectPoll.submit(new SocketService(socket));
-
-
-
+                // 如果队列中有数据了，说明服务端已经到了并发处理的极限了，此时需要返回客户端有意义的信息
+                if (collectPoll.getQueue().size() >= 1) {
+                    log.info("SocketServiceStart 服务端处理能力到顶，需要控制客户端的请求");
+                    //返回处理结果给客户端
+                    rejectRequest(socket);
+                    continue;
+                }
+                try {
+                    // 异步处理客户端提交上来的任务
+                    collectPoll.submit(new SocketService(socket));
+                } catch (Exception e) {
+                    socket.close();
+                }
+            }
         } catch (Exception e) {
-
-
-
-          socket.close();
-
-
-
+            log.error("SocketServiceStart - start error", e);
+            throw new RuntimeException(e);
+        } catch (Throwable e) {
+            log.error("SocketServiceStart - start error", e);
+            throw new RuntimeException(e);
         }
-
-
-
-      }
-
-
-
-    } catch (Exception e) {
-
-
-
-      log.error("SocketServiceStart - start error", e);
-
-
-
-      throw new RuntimeException(e);
-
-
-
-    } catch (Throwable e) {
-
-
-
-      log.error("SocketServiceStart - start error", e);
-
-
-
-      throw new RuntimeException(e);
-
-
-
     }
-
-
-
-  }
-
-
-
-	// 返回特定的错误码给客户端
-
-
-
-  public static void rejectRequest(Socket socket) throws IOException {
-
-
-
-    OutputStream outputStream = null;
-
-
-
-    try{
-
-
-
-      outputStream = socket.getOutputStream();
-
-
-
-      byte[] bytes = "服务器太忙了，请稍后重试~".getBytes(Charset.forName("UTF-8"));
-
-
-
-      SocketClient.segmentWrite(bytes, outputStream);
-
-
-
-      socket.shutdownOutput();
-
-
-
-    }finally {
-
-
-
-      //关闭流
-
-
-
-      SocketClient.close(socket,outputStream,null,null,null);
-
-
-
+    // 返回特定的错误码给客户端
+    public static void rejectRequest(Socket socket) throws IOException {
+        OutputStream outputStream = null;
+        try{
+            outputStream = socket.getOutputStream();
+            byte[] bytes = "服务器太忙了，请稍后重试~".getBytes(Charset.forName("UTF-8"));
+            SocketClient.segmentWrite(bytes, outputStream);
+            socket.shutdownOutput();
+        }finally {
+            //关闭流
+            SocketClient.close(socket,outputStream,null,null,null);
+        }
     }
-
-
-
-  }
-
-
-
- 
-
-
-
- 
-
-
-
 }
 ```
 
@@ -989,219 +290,61 @@ public class SocketServiceStart {
 
 我们使用线程沉睡 2 秒来模拟服务端的处理逻辑，代码如下：
 
-```
+```java
 public class SocketService implements Runnable {
+        
+    private Socket socket;
 
-
-
- 
-
-
-
-  private Socket socket;
-
-
-
- 
-
-
-
-  public SocketService() {
-
-
-
-  }
-
-
-
- 
-
-
-
-  public SocketService(Socket socket) {
-
-
-
-    this.socket = socket;
-
-
-
-  }
-
-
-
- 
-
-
-
-  @Override
-
-
-
-  public void run() {
-
-
-
-    log.info("SocketService 服务端任务开始执行");
-
-
-
-    OutputStream outputStream = null;
-
-
-
-    InputStream is = null;
-
-
-
-    InputStreamReader isr = null;
-
-
-
-    BufferedReader br = null;
-
-
-
-    try {
-
-
-
-      //接受消息
-
-
-
-      socket.setSoTimeout(10000);// 10秒还没有得到数据，直接断开连接
-
-
-
-      is = socket.getInputStream();
-
-
-
-      isr = new InputStreamReader(is,"UTF-8");
-
-
-
-      br = new BufferedReader(isr);
-
-
-
-      StringBuffer sb = SocketClient.segmentRead(br);
-
-
-
-      socket.shutdownInput();
-
-
-
-      log.info("SocketService accept info is {}", sb.toString());
-
-
-
- 
-
-
-
-      //服务端处理 模拟服务端处理耗时
-
-
-
-      Thread.sleep(2000);
-
-
-
-      String response  = sb.toString();
-
-
-
- 
-
-
-
-      //返回处理结果给客户端
-
-
-
-      outputStream = socket.getOutputStream();
-
-
-
-      byte[] bytes = response.getBytes(Charset.forName("UTF-8"));
-
-
-
-      SocketClient.segmentWrite(bytes, outputStream);
-
-
-
-      socket.shutdownOutput();
-
-
-
- 
-
-
-
-      //关闭流
-
-
-
-      SocketClient.close(socket,outputStream,isr,br,is);
-
-
-
-      log.info("SocketService 服务端任务执行完成");
-
-
-
-    } catch (IOException e) {
-
-
-
-      log.error("SocketService IOException", e);
-
-
-
-    } catch (Exception e) {
-
-
-
-      log.error("SocketService Exception", e);
-
-
-
-    } finally {
-
-
-
-      try {
-
-
-
-        SocketClient.close(socket,outputStream,isr,br,is);
-
-
-
-      } catch (IOException e) {
-
-
-
-        log.error("SocketService IOException", e);
-
-
-
-      }
-
-
+    public SocketService() {
 
     }
 
+    public SocketService(Socket socket) {
+        this.socket = socket;
+    }
 
+    @Override
+    public void run() {
+        log.info("SocketService 服务端任务开始执行");
+        OutputStream outputStream = null;
+        InputStream is = null;
+        InputStreamReader isr = null;
+        BufferedReader br = null;
+        try {
+            //接受消息
+            socket.setSoTimeout(10000);// 10秒还没有得到数据，直接断开连接
+            is = socket.getInputStream();
+            isr = new InputStreamReader(is, "UTF-8");
+            br = new BufferedReader(isr);
+            StringBuffer sb = SocketClient.segmentRead(br);
+            socket.shutdownInput();
+            log.info("SocketService accept info is {}", sb.toString());
 
-  }
+            //服务端处理 模拟服务端处理耗时
+            Thread.sleep(2000);
+            String response = sb.toString();
 
+            //返回处理结果给客户端
+            outputStream = socket.getOutputStream();
+            byte[] bytes = response.getBytes(Charset.forName("UTF-8"));
+            SocketClient.segmentWrite(bytes, outputStream);
+            socket.shutdownOutput();
 
-
+            //关闭流
+            SocketClient.close(socket, outputStream, isr, br, is);
+            log.info("SocketService 服务端任务执行完成");
+        } catch (IOException e) {
+            log.error("SocketService IOException", e);
+        } catch (Exception e) {
+            log.error("SocketService Exception", e);
+        } finally {
+            try {
+                SocketClient.close(socket, outputStream, isr, br, is);
+            } catch (IOException e) {
+                log.error("SocketService IOException", e);
+            }
+        }
+    }
 }
 ```
 
@@ -1212,13 +355,13 @@ public class SocketService implements Runnable {
 ## 4 测试
 
 测试的时候，我们必须先启动服务端，然后再启动客户端，首先我们启动服务端，打印日志如下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNGY0MDAwMWIzMzAyMjcyMDI0NC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNGY0MDAwMWIzMzAyMjcyMDI0NC5wbmc)
 
 接着我们启动客户端，打印日志如下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNGU1MDAwMWRjOTQyMzE2MTI5Mi5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNGU1MDAwMWRjOTQyMzE2MTI5Mi5wbmc)
 
 我们最后看一下服务端的运行日志：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNGQ0MDAwMTA0MGUyMjkwMTA1NC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNGQ0MDAwMTA0MGUyMjkwMTA1NC5wbmc)
 
 从以上运行结果中，我们可以看出得出的结果是符合我们预期的，服务端在请求高峰时，能够并发处理5个请求，其余请求可以用正确的提示进行拒绝。
 

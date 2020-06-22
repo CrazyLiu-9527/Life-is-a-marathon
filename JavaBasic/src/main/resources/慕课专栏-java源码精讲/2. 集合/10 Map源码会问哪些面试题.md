@@ -32,23 +32,11 @@ Map 在面试中，占据了很大一部分的面试题目，其中以 HashMap �
 
 ### 1.3 说一下 Map 的 hash 算法
 
-```
+```java
 static final int hash(Object key) {
-
-
-
     int h;
-
-
-
     return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
-
-
-
 }
-
-
-
 key 在数组中的位置公式：tab[(n - 1) & hash]
 ```
 
@@ -146,25 +134,16 @@ key 在数组中的位置公式：tab[(n - 1) & hash]
 
 ### 2.5 通过以下代码进行删除，是否可行？
 
-```
+```java
 HashMap<String,String > map = Maps.newHashMap();
-
-
-
 map.put("1","1");
-
-
-
 map.put("2","2");
-
-
-
 map.forEach((s, s2) -> map.remove("1"));
 ```
 
 答：不行，会报错误 ConcurrentModificationException，原因如下图：
 
-![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ3NjNlMzMwMDAxZTY0NzEwMzgwNTYwLnBuZw)
+![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ3NjNlMzMwMDAxZTY0NzEwMzgwNTYwLnBuZw)
 建议使用迭代器的方式进行删除，原理同 ArrayList 迭代器原理，我们在《List 源码会问那些面试题》中有说到。
 
 

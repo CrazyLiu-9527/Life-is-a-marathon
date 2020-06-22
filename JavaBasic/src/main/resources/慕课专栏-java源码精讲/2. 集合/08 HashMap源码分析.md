@@ -7,7 +7,7 @@ HashMap 源码很长，面试的问题也非常多，但这些面试问题，基
 ## 1 整体架构
 
 HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当链表的长度大于等于 8 时，链表会转化成红黑树，当红黑树的大小小于等于 6 时，红黑树会转化成链表，整体的数据结构如下：
-![图片描述](aHR0cDovL2ltZzEuc3ljZG4uaW1vb2MuY29tLzVkNWZjN2NjMDAwMWVjMzIxMTA0MDkyOC5wbmc)图中左边竖着的是 HashMap 的数组结构，数组的元素可能是单个 Node，也可能是个链表，也可能是个红黑树，比如数组下标索引为 2 的位置就是一个链表，下标索引为 9 的位置对应的就是红黑树，具体细节我们下文再说。
+![图片描述](pic/aHR0cDovL2ltZzEuc3ljZG4uaW1vb2MuY29tLzVkNWZjN2NjMDAwMWVjMzIxMTA0MDkyOC5wbmc)图中左边竖着的是 HashMap 的数组结构，数组的元素可能是单个 Node，也可能是个链表，也可能是个红黑树，比如数组下标索引为 2 的位置就是一个链表，下标索引为 9 的位置对应的就是红黑树，具体细节我们下文再说。
 
 
 
@@ -25,152 +25,57 @@ HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当
 
 ### 1.2 常见属性
 
-```
+```java
  //初始容量为 16
-
-
-
  static final int DEFAULT_INITIAL_CAPACITY = 1 << 4;
 
-
-
- 
-
-
-
  //最大容量
-
-
-
  static final int MAXIMUM_CAPACITY = 1 << 30;
 
-
-
- 
-
-
-
  //负载因子默认值
-
-
-
  static final float DEFAULT_LOAD_FACTOR = 0.75f;
 
 
-
- 
-
-
-
  //桶上的链表长度大于等于8时，链表转化成红黑树
-
-
-
  static final int TREEIFY_THRESHOLD = 8;
 
-
-
- 
-
-
-
  //桶上的红黑树大小小于等于6时，红黑树转化成链表
-
-
-
  static final int UNTREEIFY_THRESHOLD = 6;
 
-
-
- 
-
-
-
  //当数组容量大于 64 时，链表才会转化成红黑树
-
-
-
  static final int MIN_TREEIFY_CAPACITY = 64;
 
-
-
- 
-
-
-
  //记录迭代过程中 HashMap 结构是否发生变化，如果有变化，迭代时会 fail-fast
-
-
-
  transient int modCount;
 
-
-
- 
-
-
-
  //HashMap 的实际大小，可能不准(因为当你拿到这个值的时候，可能又发生了变化)
-
-
-
  transient int size;
 
-
-
- 
-
-
-
  //存放数据的数组
-
-
-
  transient Node<K,V>[] table;
 
-
-
- 
-
-
-
  // 扩容的门槛，有两种情况
-
-
-
  // 如果初始化时，给定数组大小的话，通过 tableSizeFor 方法计算，数组大小永远接近于 2 的幂次方，比如你给定初始化大小 19，实际上初始化大小为 32，为 2 的 5 次方。
-
-
-
  // 如果是通过 resize 方法进行扩容，大小 = 数组容量 * 0.75
-
-
-
  int threshold;
 
 
-
- 
-
-
-
  //链表的节点
-
-
-
  static class Node<K,V> implements Map.Entry<K,V> {
-
-
-
- 
-
-
+ 	final int hash;
+	final K key;
+    V value;
+    Node<K,V> next;
+ }
 
  //红黑树的节点
-
-
-
  static final class TreeNode<K,V> extends LinkedHashMap.Entry<K,V> {
+ 	TreeNode<K,V> parent;  // red-black tree links
+    TreeNode<K,V> left;
+	TreeNode<K,V> right;
+    TreeNode<K,V> prev;    // needed to unlink next upon deletion
+	boolean red;
+}
 ```
 
 
@@ -188,261 +93,72 @@ HashMap 底层的数据结构主要是：数组 + 链表 + 红黑树。其中当
 7. 判断是否需要扩容，需要扩容进行扩容，结束。
 
 我们来画一张示意图来描述下：
-![图片描述](aHR0cDovL2ltZzEuc3ljZG4uaW1vb2MuY29tLzVkNWZjN2UyMDAwMTZhZjgwOTEyMTE4OC5qcGc)代码细节如下：
+![图片描述](pic/aHR0cDovL2ltZzEuc3ljZG4uaW1vb2MuY29tLzVkNWZjN2UyMDAwMTZhZjgwOTEyMTE4OC5qcGc)代码细节如下：
 
-```
+```java
 // 入参 hash：通过 hash 算法计算出来的值。
-
-
-
 // 入参 onlyIfAbsent：false 表示即使 key 已经存在了，仍然会用新值覆盖原来的值，默认为 false
-
-
-
 final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
-
-
-
-               boolean evict) {
-
-
-
-    // n 表示数组的长度，i 为数组索引下标，p 为 i 下标位置的 Node 值
-
-
-
+			boolean evict) {
+	// n 表示数组的长度，i 为数组索引下标，p 为 i 下标位置的 Node 值
     Node<K,V>[] tab; Node<K,V> p; int n, i;
-
-
-
     //如果数组为空，使用 resize 方法初始化
-
-
-
     if ((tab = table) == null || (n = tab.length) == 0)
-
-
-
         n = (tab = resize()).length;
-
-
-
     // 如果当前索引位置是空的，直接生成新的节点在当前索引位置上
-
-
-
     if ((p = tab[i = (n - 1) & hash]) == null)
-
-
-
         tab[i] = newNode(hash, key, value, null);
-
-
-
     // 如果当前索引位置有值的处理方法，即我们常说的如何解决 hash 冲突
-
-
-
-    else {
-
-
-
+    else 
         // e 当前节点的临时变量
-
-
-
         Node<K,V> e; K k;
-
-
-
         // 如果 key 的 hash 和值都相等，直接把当前下标位置的 Node 值赋值给临时变量
-
-
-
         if (p.hash == hash &&
-
-
-
             ((k = p.key) == key || (key != null && key.equals(k))))
-
-
-
             e = p;
-
-
-
         // 如果是红黑树，使用红黑树的方式新增
-
-
-
         else if (p instanceof TreeNode)
-
-
-
             e = ((TreeNode<K,V>)p).putTreeVal(this, tab, hash, key, value);
-
-
-
         // 是个链表，把新节点放到链表的尾端
-
-
-
         else {
-
-
-
             // 自旋
-
-
-
             for (int binCount = 0; ; ++binCount) {
-
-
-
                 // e = p.next 表示从头开始，遍历链表
-
-
-
                 // p.next == null 表明 p 是链表的尾节点
-
-
-
                 if ((e = p.next) == null) {
-
-
-
                     // 把新节点放到链表的尾部 
-
-
-
                     p.next = newNode(hash, key, value, null);
-
-
-
                     // 当链表的长度大于等于 8 时，链表转红黑树
-
-
-
                     if (binCount >= TREEIFY_THRESHOLD - 1)
-
-
-
                         treeifyBin(tab, hash);
-
-
-
                     break;
-
-
-
                 }
-
-
-
                 // 链表遍历过程中，发现有元素和新增的元素相等，结束循环
-
-
-
                 if (e.hash == hash &&
-
-
-
                     ((k = e.key) == key || (key != null && key.equals(k))))
-
-
-
                     break;
-
-
-
                 //更改循环的当前元素，使 p 在遍历过程中，一直往后移动。
-
-
-
                 p = e;
-
-
-
             }
-
-
-
         }
-
-
-
         // 说明新节点的新增位置已经找到了
-
-
-
         if (e != null) {
-
-
-
             V oldValue = e.value;
-
-
-
             // 当 onlyIfAbsent 为 false 时，才会覆盖值 
-
-
-
             if (!onlyIfAbsent || oldValue == null)
-
-
-
                 e.value = value;
-
-
-
             afterNodeAccess(e);
-
-
-
             // 返回老值
-
-
-
             return oldValue;
-
-
-
         }
-
-
-
     }
-
-
-
     // 记录 HashMap 的数据结构发生了变化
-
-
-
     ++modCount;
-
-
-
     //如果 HashMap 的实际大小大于扩容的门槛，开始扩容
-
-
-
     if (++size > threshold)
-
-
-
         resize();
-
-
-
     afterNodeInsertion(evict);
-
-
-
     return null;
-
-
-
 }
 ```
 
@@ -464,37 +180,13 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 ```
 * 0:    0.60653066
-
-
-
 * 1:    0.30326533
-
-
-
 * 2:    0.07581633
-
-
-
 * 3:    0.01263606
-
-
-
 * 4:    0.00157952
-
-
-
 * 5:    0.00015795
-
-
-
 * 6:    0.00001316
-
-
-
 * 7:    0.00000094
-
-
-
 * 8:    0.00000006
 ```
 
@@ -520,263 +212,71 @@ final V putVal(int hash, K key, V value, boolean onlyIfAbsent,
 
 具体源码如下：
 
-```
+```java
 //入参 h：key 的hash值
-
-
-
 final TreeNode<K,V> putTreeVal(HashMap<K,V> map, Node<K,V>[] tab,
-
-
-
                                int h, K k, V v) {
-
-
-
     Class<?> kc = null;
-
-
-
     boolean searched = false;
-
-
-
     //找到根节点
-
-
-
     TreeNode<K,V> root = (parent != null) ? root() : this;
-
-
-
     //自旋
-
-
-
     for (TreeNode<K,V> p = root;;) {
-
-
-
         int dir, ph; K pk;
-
-
-
         // p hash 值大于 h，说明 p 在 h 的右边
-
-
-
         if ((ph = p.hash) > h)
-
-
-
             dir = -1;
-
-
-
         // p hash 值小于 h，说明 p 在 h 的左边
-
-
-
         else if (ph < h)
-
-
-
             dir = 1;
-
-
-
         //要放进去key在当前树中已经存在了(equals来判断)
-
-
-
         else if ((pk = p.key) == k || (k != null && k.equals(pk)))
-
-
-
             return p;
-
-
-
         //自己实现的Comparable的话，不能用hashcode比较了，需要用compareTo
-
-
-
         else if ((kc == null &&
-
-
-
                   //得到key的Class类型，如果key没有实现Comparable就是null
-
-
-
                   (kc = comparableClassFor(k)) == null) ||
-
-
-
                   //当前节点pk和入参k不等
-
-
-
                  (dir = compareComparables(kc, k, pk)) == 0) {
-
-
-
             if (!searched) {
-
-
-
                 TreeNode<K,V> q, ch;
-
-
-
                 searched = true;
-
-
-
                 if (((ch = p.left) != null &&
-
-
-
                      (q = ch.find(h, k, kc)) != null) ||
-
-
-
                     ((ch = p.right) != null &&
-
-
-
                      (q = ch.find(h, k, kc)) != null))
-
-
-
                     return q;
-
-
-
             }
-
-
-
             dir = tieBreakOrder(k, pk);
-
-
-
         }
-
-
-
  
-
-
-
         TreeNode<K,V> xp = p;
-
-
-
         //找到和当前hashcode值相近的节点(当前节点的左右子节点其中一个为空即可)
-
-
-
         if ((p = (dir <= 0) ? p.left : p.right) == null) {
-
-
-
             Node<K,V> xpn = xp.next;
-
-
-
             //生成新的节点
-
-
-
             TreeNode<K,V> x = map.newTreeNode(h, k, v, xpn);
-
-
-
             //把新节点放在当前子节点为空的位置上
-
-
-
             if (dir <= 0)
-
-
-
                 xp.left = x;
-
-
-
             else
-
-
-
                 xp.right = x;
-
-
-
             //当前节点和新节点建立父子，前后关系
-
-
-
             xp.next = x;
-
-
-
             x.parent = x.prev = xp;
-
-
-
             if (xpn != null)
-
-
-
                 ((TreeNode<K,V>)xpn).prev = x;
-
-
-
             //balanceInsertion 对红黑树进行着色或旋转，以达到更多的查找效率，着色或旋转的几种场景如下
-
-
-
             //着色：新节点总是为红色；如果新节点的父亲是黑色，则不需要重新着色；如果父亲是红色，那么必须通过重新着色或者旋转的方法，再次达到红黑树的5个约束条件
-
-
-
             //旋转： 父亲是红色，叔叔是黑色时，进行旋转
-
-
-
             //如果当前节点是父亲的右节点，则进行左旋
-
-
-
             //如果当前节点是父亲的左节点，则进行右旋
 
-
-
-          
-
-
-
             //moveRootToFront 方法是把算出来的root放到根节点上
-
-
-
             moveRootToFront(tab, balanceInsertion(root, x));
-
-
-
             return null;
-
-
-
         }
-
-
-
     }
-
-
-
 }
 ```
 
@@ -800,39 +300,15 @@ HashMap 的查找主要分为以下三步：
 
 链表查找的关键代码是：
 
-```
+```java
 // 采用自旋方式从链表中查找 key，e 初始为为链表的头节点
-
-
-
 do {
-
-
-
     // 如果当前节点 hash 等于 key 的 hash，并且 equals 相等，当前节点就是我们要找的节点
-
-
-
     // 当 hash 冲突时，同一个 hash 值上是一个链表的时候，我们是通过 equals 方法来比较 key 是否相等的
-
-
-
     if (e.hash == hash &&
-
-
-
         ((k = e.key) == key || (key != null && key.equals(k))))
-
-
-
         return e;
-
-
-
     // 否则，把当前节点的下一个节点拿出来继续寻找
-
-
-
 } while ((e = e.next) != null);
 ```
 

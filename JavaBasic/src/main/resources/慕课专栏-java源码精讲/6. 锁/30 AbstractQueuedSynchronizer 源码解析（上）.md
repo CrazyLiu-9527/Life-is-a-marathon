@@ -18,12 +18,12 @@ ps：本章内容需要大量队列基础知识，没有看过第四章节队列
 
 
 
-#  
+#
 
 # 1 整体架构
 
 首先我们来看一下 AQS 的整体架构图，如下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYzM3ZDQwMDAwMWNiNmYyMTEyMDg0Ni5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYzM3ZDQwMDAwMWNiNmYyMTEyMDg0Ni5wbmc)
 
 这个图总结了 AQS 整体架构的组成，和部分场景的动态流向，图中两个点说明一下，方便大家观看。
 
@@ -62,15 +62,9 @@ AQS 的注释还有很多很多，以上 9 点是挑选出来稍微比较重要�
 
 AQS 类定义代码如下：
 
-```
+```java
 public abstract class AbstractQueuedSynchronizer
-
-
-
     extends AbstractOwnableSynchronizer
-
-
-
     implements java.io.Serializable {
 ```
 
@@ -78,7 +72,7 @@ public abstract class AbstractQueuedSynchronizer
 
 1. AQS 是个抽象类，就是给各种锁子类继承用的，AQS 定义了很多如何获得锁，如何释放锁的抽象方法，目的就是为了让子类去实现；
 2. 继承了 AbstractOwnableSynchronizer，AbstractOwnableSynchronizer 的作用就是为了知道当前是那个线程获得了锁，方便监控用的，代码如下：
-   ![5dc37d20000197d121001410.png](5dc37d20000197d121001410.png)![uploading.4e448015.gif](uploading.4e448015.gif)正在上传…重新上传取消![图片描述](https://img.mukewang.com/5dc37d20000197d121001410.png)
+   ![5dc37d20000197d121001410.png](pic/5dc37d20000197d121001410.png)
 
 
 
@@ -96,35 +90,14 @@ AQS 的属性可简单分为四类：同步器简单属性、同步队列属性�
 
 首先我们来看一下简单属性有哪些：
 
-```
+```java
 // 同步器的状态，子类会根据状态字段进行判断是否可以获得锁
-
-
-
 // 比如 CAS 成功给 state 赋值 1 算得到锁，赋值失败为得不到锁， CAS 成功给 state 赋值 0 算释放锁，赋值失败为释放失败
-
-
-
 // 可重入锁，每次获得锁 +1，每次释放锁 -1
-
-
-
 private volatile int state;
 
-
-
- 
-
-
-
 // 自旋超时阀值，单位纳秒
-
-
-
 // 当设置等待时间时才会用到这个属性
-
-
-
 static final long spinForTimeoutThreshold = 1000L;
 ```
 
@@ -142,23 +115,11 @@ static final long spinForTimeoutThreshold = 1000L;
 
 同步队列底层数据结构是个双向链表，我们从源码中可以看到链表的头尾，如下：
 
-```
+```java
 // 同步队列的头。
-
-
-
 private transient volatile Node head;
 
-
-
- 
-
-
-
 // 同步队列的尾
-
-
-
 private transient volatile Node tail;
 ```
 
@@ -174,35 +135,14 @@ private transient volatile Node tail;
 
 条件队列的属性如下：
 
-```
+```java
 // 条件队列，从属性上可以看出是链表结构
-
-
-
 public class ConditionObject implements Condition, java.io.Serializable {
-
-
-
     private static final long serialVersionUID = 1173984872572414699L;
-
-
-
     // 条件队列中第一个 node
-
-
-
     private transient Node firstWaiter;
-
-
-
     // 条件队列中最后一个 node
-
-
-
     private transient Node lastWaiter;
-
-
-
 }  
 ```
 
@@ -218,183 +158,51 @@ ConditionObject 是实现 Condition 接口的，Condition 接口相当于 Object
 
 Node 非常重要，即是同步队列的节点，又是条件队列的节点，在入队的时候，我们用 Node 把线程包装一下，然后把 Node 放入两个队列中，我们看下 Node 的数据结构，如下：
 
-```
+```java
 static final class Node {
-
-
-
     /**
-
-
-
      * 同步队列单独的属性
-
-
-
      */
-
-
-
     //node 是共享模式
-
-
-
     static final Node SHARED = new Node();
 
-
-
- 
-
-
-
     //node 是排它模式
-
-
-
     static final Node EXCLUSIVE = null;
 
-
-
- 
-
-
-
     // 当前节点的前节点
-
-
-
     // 节点 acquire 成功后就会变成head
-
-
-
     // head 节点不能被 cancelled
-
-
-
     volatile Node prev;
 
-
-
- 
-
-
-
     // 当前节点的下一个节点
-
-
-
     volatile Node next;
 
-
-
- 
-
-
-
     /**
-
-
-
      * 两个队列共享的属性
-
-
-
      */
-
-
-
     // 表示当前节点的状态，通过节点的状态来控制节点的行为
-
-
-
     // 普通同步节点，就是 0 ，条件节点是 CONDITION -2
-
-
-
     volatile int waitStatus;
 
-
-
- 
-
-
-
     // waitStatus 的状态有以下几种
-
-
-
     // 被取消
-
-
-
     static final int CANCELLED =  1;
 
-
-
- 
-
-
-
     // SIGNAL 状态的意义：同步队列中的节点在自旋获取锁的时候，如果前一个节点的状态是 SIGNAL，那么自己就可以阻塞休息了，否则自己一直自旋尝试获得锁
-
-
-
     static final int SIGNAL    = -1;
 
-
-
- 
-
-
-
     // 表示当前 node 正在条件队列中，当有节点从同步队列转移到条件队列时，状态就会被更改成 CONDITION
-
-
-
     static final int CONDITION = -2;
 
-
-
- 
-
-
-
     // 无条件传播,共享模式下，该状态的进程处于可运行状态
-
-
-
     static final int PROPAGATE = -3;
 
-
-
- 
-
-
-
     // 当前节点的线程
-
-
-
     volatile Thread thread;
 
-
-
- 
-
-
-
     // 在同步队列中，nextWaiter 并不真的是指向其下一个节点，我们用 next 表示同步队列的下一个节点，nextWaiter 只是表示当前 Node 是排它模式还是共享模式
-
-
-
     // 但在条件队列中，nextWaiter 就是表示下一个节点元素
-
-
-
     Node nextWaiter;
-
-
-
 }
 ```
 
@@ -438,7 +246,7 @@ take 和 put 两种操作如果依靠一个条件队列，那么每次只能执�
 
 除了类注释，Condition 还定义出一些方法，这些方法奠定了条件队列的基础，方法主要有：
 
-```
+```java
 void await() throws InterruptedException;
 ```
 
@@ -455,49 +263,22 @@ void await() throws InterruptedException;
 
 await 方法还有带等待超时时间的，如下：
 
-```
+```java
 // 返回的 long 值表示剩余的给定等待时间，如果返回的时间小于等于 0 ，说明等待时间过了
-
-
-
 // 选择纳秒是为了避免计算剩余等待时间时的截断误差
-
-
-
 long awaitNanos(long nanosTimeout) throws InterruptedException;
 
-
-
- 
-
-
-
 // 虽然入参可以是任意单位的时间，但底层仍然转化成纳秒
-
-
-
 boolean await(long time, TimeUnit unit) throws InterruptedException;
 ```
 
 除了等待方法，还是唤醒线程的两个方法，如下：
 
-```
+```java
 // 唤醒条件队列中的一个线程，在被唤醒前必须先获得锁
-
-
-
 void signal();
 
-
-
- 
-
-
-
 // 唤醒条件队列中的所有线程
-
-
-
 void signalAll();
 ```
 
@@ -536,35 +317,14 @@ acquire 也分两种，一种是排它锁，一种是共享锁，我们一一来
 
 ## 3.1 acquire 排它锁
 
-```
+```java
 // 排它模式下，尝试获得锁
-
-
-
 public final void acquire(int arg) {
-
-
-
     // tryAcquire 方法是需要实现类去实现的，实现思路一般都是 cas 给 state 赋值来决定是否能获得锁
-
-
-
     if (!tryAcquire(arg) &&
-
-
-
         // addWaiter 入参代表是排他模式
-
-
-
         acquireQueued(addWaiter(Node.EXCLUSIVE), arg))
-
-
-
         selfInterrupt();
-
-
-
 }
 ```
 
@@ -583,191 +343,53 @@ public final void acquire(int arg) {
 
 代码很少，每个方法都是关键，接下来我们先来看下 addWaiter 的源码实现：
 
-```
+```java
 // 方法主要目的：node 追加到同步队列的队尾
-
-
-
 // 入参 mode 表示 Node 的模式（排它模式还是共享模式）
-
-
-
 // 出参是新增的 node
-
-
-
 // 主要思路：
-
-
-
 // 新 node.pre = 队尾
-
-
-
 // 队尾.next = 新 node
-
-
-
 private Node addWaiter(Node mode) {
-
-
-
     // 初始化 Node
-
-
-
     Node node = new Node(Thread.currentThread(), mode);
-
-
-
     // 这里的逻辑和 enq 一致，enq 的逻辑仅仅多了队尾是空，初始化的逻辑
-
-
-
     // 这个思路在 java 源码中很常见，先简单的尝试放一下，成功立马返回，如果不行，再 while 循环
-
-
-
     // 很多时候，这种算法可以帮忙解决大部分的问题，大部分的入队可能一次都能成功，无需自旋
-
-
-
     Node pred = tail;
-
-
-
     if (pred != null) {
-
-
-
         node.prev = pred;
-
-
-
         if (compareAndSetTail(pred, node)) {
-
-
-
             pred.next = node;
-
-
-
             return node;
-
-
-
         }
-
-
-
     }
-
-
-
     //自旋保证node加入到队尾
-
-
-
     enq(node);
-
-
-
     return node;
-
-
-
 }
-
-
-
  
-
-
-
 // 线程加入同步队列中方法，追加到队尾
-
-
-
 // 这里需要重点注意的是，返回值是添加 node 的前一个节点
-
-
-
 private Node enq(final Node node) {
-
-
-
     for (;;) {
-
-
-
         // 得到队尾节点
-
-
-
         Node t = tail;
-
-
-
         // 如果队尾为空，说明当前同步队列都没有初始化，进行初始化
-
-
-
         // tail = head = new Node();
-
-
-
         if (t == null) {
-
-
-
             if (compareAndSetHead(new Node()))
-
-
-
                 tail = head;
-
-
-
         // 队尾不为空，将当前节点追加到队尾
-
-
-
         } else {
-
-
-
             node.prev = t;
-
-
-
             // node 追加到队尾
-
-
-
             if (compareAndSetTail(t, node)) {
-
-
-
                 t.next = node;
-
-
-
                 return t;
-
-
-
             }
-
-
-
         }
-
-
-
     }
-
-
-
 }
 ```
 
@@ -783,321 +405,90 @@ private Node enq(final Node node) {
 
 下一步就是要阻塞当前线程了，是 acquireQueued 方法来实现的，我们来看下源码实现：
 
-```
+```java
 // 主要做两件事情：
-
-
-
 // 1：通过不断的自旋尝试使自己前一个节点的状态变成 signal，然后阻塞自己。
-
-
-
 // 2：获得锁的线程执行完成之后，释放锁时，会把阻塞的 node 唤醒,node 唤醒之后再次自旋，尝试获得锁
-
-
-
 // 返回 false 表示获得锁成功，返回 true 表示失败
-
-
-
 final boolean acquireQueued(final Node node, int arg) {
-
-
-
     boolean failed = true;
-
-
-
     try {
-
-
-
         boolean interrupted = false;
-
-
-
         // 自旋
-
-
-
         for (;;) {
-
-
-
             // 选上一个节点
-
-
-
             final Node p = node.predecessor();
-
-
-
             // 有两种情况会走到 p == head：
-
-
-
             // 1:node 之前没有获得锁，进入 acquireQueued 方法时，才发现他的前置节点就是头节点，于是尝试获得一次锁；
-
-
-
             // 2:node 之前一直在阻塞沉睡，然后被唤醒，此时唤醒 node 的节点正是其前一个节点，也能走到 if
-
-
-
             // 如果自己 tryAcquire 成功，就立马把自己设置成 head，把上一个节点移除
-
-
-
             // 如果 tryAcquire 失败，尝试进入同步队列
-
-
-
             if (p == head && tryAcquire(arg)) {
-
-
-
                 // 获得锁，设置成 head 节点
-
-
-
                 setHead(node);
-
-
-
                 //p被回收
-
-
-
                 p.next = null; // help GC
-
-
-
                 failed = false;
-
-
-
                 return interrupted;
-
-
-
             }
-
-
-
  
-
-
-
             // shouldParkAfterFailedAcquire 把 node 的前一个节点状态置为 SIGNAL
-
-
-
             // 只要前一个节点状态是 SIGNAL了，那么自己就可以阻塞(park)了
-
-
-
             // parkAndCheckInterrupt 阻塞当前线程
-
-
-
             if (shouldParkAfterFailedAcquire(p, node) &&
-
-
-
                 // 线程是在这个方法里面阻塞的，醒来的时候仍然在无限 for 循环里面，就能再次自旋尝试获得锁
-
-
-
                 parkAndCheckInterrupt())
-
-
-
                 interrupted = true;
-
-
-
         }
-
-
-
     } finally {
-
-
-
         // 如果获得node的锁失败，将 node 从队列中移除
-
-
-
         if (failed)
-
-
-
             cancelAcquire(node);
-
-
-
     }
-
-
-
 }
 ```
 
 此方法的注释还是很清楚的，我们接着看下此方法的核心：shouldParkAfterFailedAcquire，这个方法的主要目的就是把前一个节点的状态置为 SIGNAL，只要前一个节点的状态是 SIGNAL，当前节点就可以阻塞了（parkAndCheckInterrupt 就是使节点阻塞的方法），源码如下：
 
-```
+```java
 // 当前线程可以安心阻塞的标准，就是前一个节点线程状态是 SIGNAL 了。
-
-
-
 // 入参 pred 是前一个节点，node 是当前节点。
-
-
-
  
-
-
-
 // 关键操作：
-
-
-
 // 1：确认前一个节点是否有效，无效的话，一直往前找到状态不是取消的节点。
-
-
-
 // 2: 把前一个节点状态置为 SIGNAL。
-
-
-
 // 1、2 两步操作，有可能一次就成功，有可能需要外部循环多次才能成功（外面是个无限的 for 循环），但最后一定是可以成功的
-
-
-
 private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) {
-
-
-
     int ws = pred.waitStatus;
-
-
-
     // 如果前一个节点 waitStatus 状态已经是 SIGNAL 了，直接返回，不需要在自旋了
-
-
-
     if (ws == Node.SIGNAL)
-
-
-
         /*
-
-
-
          * This node has already set status asking a release
-
-
-
          * to signal it, so it can safely park.
-
-
-
          */
-
-
-
         return true;
-
-
-
     // 如果当前节点状态已经被取消了。
-
-
-
     if (ws > 0) {
-
-
-
         /*
-
-
-
          * Predecessor was cancelled. Skip over predecessors and
-
-
-
          * indicate retry.
-
-
-
          */
-
-
-
         // 找到前一个状态不是取消的节点，因为把当前 node 挂在有效节点身上
-
-
-
         // 因为节点状态是取消的话，是无效的，是不能作为 node 的前置节点的，所以必须找到 node 的有效节点才行
-
-
-
         do {
-
-
-
             node.prev = pred = pred.prev;
-
-
-
         } while (pred.waitStatus > 0);
-
-
-
         pred.next = node;
-
-
-
     // 否则直接把节点状态置 为SIGNAL
-
-
-
     } else {
-
-
-
         /*
-
-
-
          * waitStatus must be 0 or PROPAGATE.  Indicate that we
-
-
-
          * need a signal, but don't park yet.  Caller will need to
-
-
-
          * retry to make sure it cannot acquire before parking.
-
-
-
          */
-
-
-
         compareAndSetWaitStatus(pred, ws, Node.SIGNAL);
-
-
-
     }
-
-
-
     return false;
-
-
-
 }
 ```
 
@@ -1120,293 +511,83 @@ acquire 整个过程非常长，代码也非常多，但注释很清楚，可以
 acquireShared 整体流程和 acquire 相同，代码也很相似，重复的源码就不贴了，我们就贴出来不一样的代码来，也方便大家进行比较：
 
 1. 第一步尝试获得锁的地方，有所不同，排它锁使用的是 tryAcquire 方法，共享锁使用的是 tryAcquireShared 方法，如下图：
-   ![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYzM3Y2QzMDAwMTUyMjIxODQyMDQ0Ni5wbmc)
+   ![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYzM3Y2QzMDAwMTUyMjIxODQyMDQ0Ni5wbmc)
 2. 第二步不同，在于节点获得排它锁时，仅仅把自己设置为同步队列的头节点即可（setHead 方法），但如果是共享锁的话，还会去唤醒自己的后续节点，一起来获得该锁（setHeadAndPropagate 方法），不同之处如下（左边排它锁，右边共享锁）：
-   ![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYzM3Y2M0MDAwMTEwMDAxODYzMDkxNC5wbmc)
+   ![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYzM3Y2M0MDAwMTEwMDAxODYzMDkxNC5wbmc)
 
 接下来我们一起来看下 setHeadAndPropagate 方法的源码：
 
-```
+```java
 // 主要做两件事情
-
-
-
 // 1:把当前节点设置成头节点
-
-
-
 // 2:看看后续节点有无正在等待，并且也是共享模式的，有的话唤醒这些节点
-
-
-
 private void setHeadAndPropagate(Node node, int propagate) {
-
-
-
     Node h = head; // Record old head for check below
-
-
-
     // 当前节点设置成头节点
-
-
-
     setHead(node);
-
-
-
     /*
-
-
-
      * Try to signal next queued node if:
-
-
-
      *   Propagation was indicated(表示指示) by caller,
-
-
-
      *     or was recorded (as h.waitStatus either before
-
-
-
      *     or after setHead) by a previous operation
-
-
-
      *     (note: this uses sign-check of waitStatus because
-
-
-
      *      PROPAGATE status may transition to SIGNAL.)
-
-
-
      * and
-
-
-
      *   The next node is waiting in shared mode,
-
-
-
      *     or we don't know, because it appears null
-
-
-
      *
-
-
-
      * The conservatism(保守) in both of these checks may cause
-
-
-
      * unnecessary wake-ups, but only when there are multiple
-
-
-
      * racing acquires/releases, so most need signals now or soon
-
-
-
      * anyway.
-
-
-
      */
-
-
-
     // propagate > 0 表示已经有节点获得共享锁了
-
-
-
     if (propagate > 0 || h == null || h.waitStatus < 0 ||
-
-
-
         (h = head) == null || h.waitStatus < 0) {
-
-
-
         Node s = node.next;
-
-
-
         //共享模式，还唤醒头节点的后置节点
-
-
-
         if (s == null || s.isShared())
-
-
-
             doReleaseShared();
-
-
-
     }
-
-
-
 }
-
-
-
  
-
-
-
 // 释放后置共享节点
-
-
-
 private void doReleaseShared() {
-
-
-
     /*
-
-
-
      * Ensure that a release propagates, even if there are other
-
-
-
      * in-progress acquires/releases.  This proceeds in the usual
-
-
-
      * way of trying to unparkSuccessor of head if it needs
-
-
-
      * signal. But if it does not, status is set to PROPAGATE to
-
-
-
      * ensure that upon release, propagation continues.
-
-
-
      * Additionally, we must loop in case a new node is added
-
-
-
      * while we are doing this. Also, unlike other uses of
-
-
-
      * unparkSuccessor, we need to know if CAS to reset status
-
-
-
      * fails, if so rechecking.
-
-
-
      */
-
-
-
     for (;;) {
-
-
-
         Node h = head;
-
-
-
         // 还没有到队尾，此时队列中至少有两个节点
-
-
-
         if (h != null && h != tail) {
-
-
-
             int ws = h.waitStatus;
-
-
-
             // 如果队列状态是 SIGNAL ，说明后续节点都需要唤醒
-
-
-
             if (ws == Node.SIGNAL) {
-
-
-
                 // CAS 保证只有一个节点可以运行唤醒的操作
-
-
-
                 if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))
-
-
-
                     continue;            // loop to recheck cases
-
-
-
                 // 进行唤醒操作
-
-
-
                 unparkSuccessor(h);
-
-
-
             }
-
-
-
             else if (ws == 0 &&
-
-
-
                      !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))
-
-
-
                 continue;                // loop on failed CAS
-
-
-
         }
-
-
-
         // 第一种情况，头节点没有发生移动，结束。
-
-
-
         // 第二种情况，因为此方法可以被两处调用，一次是获得锁的地方，一处是释放锁的地方，
-
-
-
         // 加上共享锁的特性就是可以多个线程获得锁，也可以释放锁，这就导致头节点可能会发生变化，
-
-
-
         // 如果头节点发生了变化，就继续循环，一直循环到头节点不变化时，结束循环。
-
-
-
         if (h == head)                   // loop if head changed
-
-
-
             break;
-
-
-
     }
-
-
-
 }
 ```
 

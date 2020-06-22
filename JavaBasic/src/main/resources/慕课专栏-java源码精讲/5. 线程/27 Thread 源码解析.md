@@ -43,7 +43,7 @@
 ### 2.1 线程的状态
 
 网上有各种介绍线程状态的文章，我们这里说线程的状态是从源码的角度，源码中一共列举了六种状态，如下图：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyNzE4MDAwMTA1ZTkxMjU0MDU1MC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyNzE4MDAwMTA1ZTkxMjU0MDU1MC5wbmc)
 
 我们解析一下这个图：
 
@@ -63,35 +63,14 @@
 
 优先级代表线程执行的机会的大小，优先级高的可能先执行，低的可能后执行，在 Java 源码中，优先级从低到高分别是 1 到 10，线程默认 new 出来的优先级都是 5，源码如下：
 
-```
+```java
 // 最低优先级
-
-
-
 public final static int MIN_PRIORITY = 1;
 
-
-
- 
-
-
-
 // 普通优先级，也是默认的
-
-
-
 public final static int NORM_PRIORITY = 5;
 
-
-
- 
-
-
-
 // 最大优先级
-
-
-
 public final static int MAX_PRIORITY = 10;
 ```
 
@@ -105,7 +84,7 @@ public final static int MAX_PRIORITY = 10;
 
 
 
-###  
+###
 
 ### 2.4 ClassLoader
 
@@ -125,51 +104,19 @@ ClassLoader 我们可以简单理解成类加载器，就是把类从文件、�
 
 ### 3.1 继承 Thread，成为 Thread 的子类
 
-```
+```java
 // 继承 Thread，实现其 run 方法
-
-
-
 class MyThread extends Thread{
-
-
-
-  @Override
-
-
-
-  public void run() {
-
-
-
-    log.info(Thread.currentThread().getName());
-
-
-
-  }
-
-
-
+    @Override
+    public void run() {
+        log.info(Thread.currentThread().getName());
+    }
 }
 
-
-
 @Test
-
-
-
 // 调用 start 方法即可，会自动调用到 run 方法的
-
-
-
 public void extendThreadInit(){
-
-
-
-  new MyThread().start();
-
-
-
+    new MyThread().start();
 }
 ```
 
@@ -177,119 +124,36 @@ public void extendThreadInit(){
 
 我们一起来看下 start 的底层源码：
 
-```
+```java
 // 该方法可以创建一个新的线程出来
-
-
-
 public synchronized void start() {
 
-
-
     // 如果没有初始化，抛异常
-
-
-
     if (threadStatus != 0)
-
-
-
         throw new IllegalThreadStateException();
-
-
-
     group.add(this);
-
-
-
     // started 是个标识符，我们在做一些事情的时候，经常这么写
-
-
-
     // 动作发生之前标识符是 false，发生完成之后变成 true
-
-
-
     boolean started = false;
-
-
-
     try {
-
-
-
         // 这里会创建一个新的线程，执行完成之后，新的线程已经在运行了，既 target 的内容已经在运行了
-
-
-
         start0();
-
-
-
         // 这里执行的还是主线程
-
-
-
         started = true;
-
-
-
     } finally {
-
-
-
         try {
-
-
-
             // 如果失败，把线程从线程组中删除
-
-
-
             if (!started) {
-
-
-
                 group.threadStartFailed(this);
-
-
-
             }
-
-
-
          // Throwable 可以捕捉一些 Exception 捕捉不到的异常，比如说子线程抛出的异常
-
-
-
         } catch (Throwable ignore) {
-
-
-
             /* do nothing. If start0 threw a Throwable then
-
-
-
               it will be passed up the call stack */
-
-
-
         }
-
-
-
     }
-
-
-
 }
-
-
-
 // 开启新线程使用的是 native 方法
-
-
-
 private native void start0();
 ```
 
@@ -299,43 +163,16 @@ private native void start0();
 
 ### 3.2 实现 Runnable 接口，作为 Thread 的入参
 
-```
+```java
 Thread thread = new Thread(new Runnable() {
-
-
-
-  @Override
-
-
-
-  public void run() {
-
-
-
-    log.info("{} begin run",Thread.currentThread().getName());
-
-
-
-  }
-
-
-
+    @Override
+    public void run() {
+        log.info("{} begin run",Thread.currentThread().getName());
+    }
 });
-
-
-
 // 开一个子线程去执行
-
-
-
 thread.start();
-
-
-
 // 不会新起线程，是在当前主线程上继续运行
-
-
-
 thread.run();
 ```
 
@@ -343,27 +180,12 @@ thread.run();
 
 我们来看下 run 方法的源码：
 
-```
+```java
 // 简单的运行，不会新起线程，target 是 Runnable
-
-
-
 public void run() {
-
-
-
     if (target != null) {
-
-
-
         target.run();
-
-
-
     }
-
-
-
 }
 ```
 
@@ -377,172 +199,48 @@ public void run() {
 
 线程初始化的源码有点长，我们只看比较重要的代码 (不重要的被我删掉了)，如下：
 
-```
+```java
 // 无参构造器，线程名字自动生成
-
-
-
 public Thread() {
-
-
-
     init(null, null, "Thread-" + nextThreadNum(), 0);
-
-
-
 }
-
-
-
 // g 代表线程组，线程组可以对组内的线程进行批量的操作，比如批量的打断 interrupt
-
-
-
 // target 是我们要运行的对象
-
-
-
 // name 我们可以自己传，如果不传默认是 "Thread-" + nextThreadNum()，nextThreadNum 方法返回的是自增的数字
-
-
-
 // stackSize 可以设置堆栈的大小
-
-
-
 private void init(ThreadGroup g, Runnable target, String name,
-
-
-
                   long stackSize, AccessControlContext acc) {
-
-
-
     if (name == null) {
-
-
-
         throw new NullPointerException("name cannot be null");
-
-
-
     }
 
-
-
- 
-
-
-
     this.name = name.toCharArray();
-
-
-
     // 当前线程作为父线程
-
-
-
     Thread parent = currentThread();
-
-
-
     this.group = g;
-
-
-
     // 子线程会继承父线程的守护属性
-
-
-
     this.daemon = parent.isDaemon();
-
-
-
     // 子线程继承父线程的优先级属性
-
-
-
     this.priority = parent.getPriority();
-
-
-
     // classLoader
-
-
-
     if (security == null || isCCLOverridden(parent.getClass()))
-
-
-
         this.contextClassLoader = parent.getContextClassLoader();
-
-
-
     else
-
-
-
         this.contextClassLoader = parent.contextClassLoader;
-
-
-
     this.inheritedAccessControlContext =
-
-
-
-            acc != null ? acc : AccessController.getContext();
-
-
-
+        acc != null ? acc : AccessController.getContext();
     this.target = target;
-
-
-
     setPriority(priority);
-
-
-
     // 当父线程的 inheritableThreadLocals 的属性值不为空时
-
-
-
     // 会把 inheritableThreadLocals 里面的值全部传递给子线程
-
-
-
     if (parent.inheritableThreadLocals != null)
-
-
-
         this.inheritableThreadLocals =
-
-
-
-            ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
-
-
-
+        ThreadLocal.createInheritedMap(parent.inheritableThreadLocals);
     this.stackSize = stackSize;
-
-
-
     /* Set thread ID */
-
-
-
     // 线程 id 自增
-
-
-
     tid = nextThreadID();
-
-
-
 }
-
-
-
- 
 ```
 
 从初始化源码中可以看到，很多属性，子线程都是直接继承父线程的，包括优先性、守护线程、inheritableThreadLocals 里面的值等等。
@@ -561,96 +259,33 @@ private void init(ThreadGroup g, Runnable target, String name,
 
 join 的意思就是当前线程等待另一个线程执行完成之后，才能继续操作，我们写了一个 demo，如下：
 
-```
-@Test
-
-
-
+```java
+ @Test
 public void join() throws Exception {
-
-
-
-  Thread main = Thread.currentThread();
-
-
-
-  log.info("{} is run。",main.getName());
-
-
-
-  Thread thread = new Thread(new Runnable() {
-
-
-
-    @Override
-
-
-
-    public void run() {
-
-
-
-      log.info("{} begin run",Thread.currentThread().getName());
-
-
-
-      try {
-
-
-
-        Thread.sleep(30000L);
-
-
-
-      } catch (InterruptedException e) {
-
-
-
-        e.printStackTrace();
-
-
-
-      }
-
-
-
-      log.info("{} end run",Thread.currentThread().getName());
-
-
-
-    }
-
-
-
-  });
-
-
-
-  // 开一个子线程去执行
-
-
-
-  thread.start();
-
-
-
-  // 当前主线程等待子线程执行完成之后再执行
-
-
-
-  thread.join();
-
-
-
-  log.info("{} is end", Thread.currentThread());
-
-
-
+    Thread main = Thread.currentThread();
+    log.info("{} is run。",main.getName());
+    Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            log.info("{} begin run",Thread.currentThread().getName());
+            try {
+                Thread.sleep(30000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            log.info("{} end run",Thread.currentThread().getName());
+        }
+    });
+    // 开一个子线程去执行
+    thread.start();
+    // 当前主线程等待子线程执行完成之后再执行
+    thread.join();
+    log.info("{} is end", Thread.currentThread());
 }
 ```
 
 执行的结果，就是主线程在执行 thread.join (); 代码后会停住，会等待子线程沉睡 30 秒后再执行，这里的 join 的作用就是让主线程等待子线程执行完成，我们画一个图示意一下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyNzM3MDAwMWY3ZTQxMTUyMDQ0OC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyNzM3MDAwMWY3ZTQxMTUyMDQ0OC5wbmc)
 
 从图中可以看出，主线程一直等待子线程沉睡 30s 后才继续执行，在等待期间，主线程的状态也是 TIMED_WAITING。
 
@@ -662,7 +297,7 @@ public void join() throws Exception {
 
 yield 是个 native 方法，底层代码如下：
 
-```
+```java
 public static native void yield();
 ```
 
@@ -693,97 +328,34 @@ interrupt 中文是打断的意思，意思是可以打断中止正在运行的�
 
 我们举一个例子来说明如何打断 WAITING 的线程，代码如下：
 
-```
-@Test
-
-
-
+```java
+ @Test
 public void testInterrupt() throws InterruptedException {
-
-
-
-  Thread thread = new Thread(new Runnable() {
-
-
-
-    @Override
-
-
-
-    public void run() {
-
-
-
-      log.info("{} begin run",Thread.currentThread().getName());
-
-
-
-      try {
-
-
-
-        log.info("子线程开始沉睡 30 s");
-
-
-
-        Thread.sleep(30000L);
-
-
-
-      } catch (InterruptedException e) {
-
-
-
-        log.info("子线程被打断");
-
-
-
-        e.printStackTrace();
-
-
-
-      }
-
-
-
-      log.info("{} end run",Thread.currentThread().getName());
-
-
-
-    }
-
-
-
-  });
-
-
-
-  // 开一个子线程去执行
-
-
-
-  thread.start();
-
-
-
-  Thread.sleep(1000L);
-
-
-
-  log.info("主线程等待 1s 后，发现子线程还没有运行成功，打断子线程");
-
-
-
-  thread.interrupt();
-
-
-
+    Thread thread = new Thread(new Runnable() {
+        @Override
+        public void run() {
+            log.info("{} begin run",Thread.currentThread().getName());
+            try {
+                log.info("子线程开始沉睡 30 s");
+                Thread.sleep(30000L);
+            } catch (InterruptedException e) {
+                log.info("子线程被打断");
+                e.printStackTrace();
+            }
+            log.info("{} end run",Thread.currentThread().getName());
+        }
+    });
+    // 开一个子线程去执行
+    thread.start();
+    Thread.sleep(1000L);
+    log.info("主线程等待 1s 后，发现子线程还没有运行成功，打断子线程");
+    thread.interrupt();
 }
 ```
 
 例子主要说的是，主线程会等待子线程执行 1s，如果 1s 内子线程还没有执行完，就会打断子线程，子线程被打断后，会抛出 InterruptedException 异常，执行结束，运行的结果如下图：
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyNzRiMDAwMWViOTcxODg0MDUwNi5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyNzRiMDAwMWViOTcxODg0MDUwNi5wbmc)
 
  
 

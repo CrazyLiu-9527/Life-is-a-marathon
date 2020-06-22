@@ -1,4 +1,4 @@
-## 引导语
+引导语
 
 在 ArrayList 的类注释上，JDK 就提醒了我们，如果要把 ArrayList 作为共享变量的话，是线程不安全的，推荐我们自己加锁或者使用 Collections.synchronizedList 方法，其实 JDK 还提供了另外一种线程安全的 List，叫做 CopyOnWriteArrayList，这个 List 具有以下特征：
 
@@ -21,7 +21,7 @@
 
 除了加锁之外，CopyOnWriteArrayList 的底层数组还被 volatile 关键字修饰，意思是一旦数组被修改，其它线程立马能够感知到，代码如下：
 
-```
+```java
 private transient volatile Object[] array;
 ```
 
@@ -49,87 +49,27 @@ private transient volatile Object[] array;
 
 新增有很多种情况，比如说：新增到数组尾部、新增到数组某一个索引位置、批量新增等等，操作的思路还是我们开头说的四步，我们拿新增到数组尾部的方法举例，来看看底层源码的实现：
 
-```
+```java
 // 添加元素到数组尾部
-
-
-
 public boolean add(E e) {
-
-
-
     final ReentrantLock lock = this.lock;
-
-
-
     // 加锁
-
-
-
     lock.lock();
-
-
-
     try {
-
-
-
         // 得到所有的原数组
-
-
-
         Object[] elements = getArray();
-
-
-
         int len = elements.length;
-
-
-
         // 拷贝到新数组里面，新数组的长度是 + 1 的，因为新增会多一个元素
-
-
-
         Object[] newElements = Arrays.copyOf(elements, len + 1);
-
-
-
         // 在新数组中进行赋值，新元素直接放在数组的尾部
-
-
-
         newElements[len] = e;
-
-
-
         // 替换掉原来的数组
-
-
-
         setArray(newElements);
-
-
-
         return true;
-
-
-
     // finally 里面释放锁，保证即使 try 发生了异常，仍然能够释放锁   
-
-
-
     } finally {
-
-
-
         lock.unlock();
-
-
-
     }
-
-
-
 }
 ```
 
@@ -142,75 +82,23 @@ public boolean add(E e) {
 
 简单 add 操作是直接添加到数组的尾部，接着我们来看下指定位置添加元素的关键源码（部分源码）：
 
-```
+```java
 // len：数组的长度、index：插入的位置
-
-
-
 int numMoved = len - index;
-
-
-
 // 如果要插入的位置正好等于数组的末尾，直接拷贝数组即可
-
-
-
 if (numMoved == 0)
-
-
-
     newElements = Arrays.copyOf(elements, len + 1);
-
-
-
 else {
-
-
-
 // 如果要插入的位置在数组的中间，就需要拷贝 2 次
-
-
-
 // 第一次从 0 拷贝到 index。
-
-
-
 // 第二次从 index+1 拷贝到末尾。
-
-
-
     newElements = new Object[len + 1];
-
-
-
     System.arraycopy(elements, 0, newElements, 0, index);
-
-
-
-    System.arraycopy(elements, index, newElements, index + 1,
-
-
-
-         numMoved);
-
-
-
+    System.arraycopy(elements, index, newElements, index + 1, numMoved);
 }
-
-
-
 // index 索引位置的值是空的，直接赋值即可。
-
-
-
 newElements[index] = element;
-
-
-
 // 把新数组的值赋值给数组的容器中
-
-
-
 setArray(newElements);
 ```
 
@@ -240,123 +128,37 @@ setArray(newElements);
 
 接着我们来看下指定数组索引位置删除的源码：
 
-```
+```java
 // 删除某个索引位置的数据
-
-
-
 public E remove(int index) {
-
-
-
     final ReentrantLock lock = this.lock;
-
-
-
     // 加锁
-
-
-
     lock.lock();
-
-
-
     try {
-
-
-
         Object[] elements = getArray();
-
-
-
         int len = elements.length;
-
-
-
         // 先得到老值
-
-
-
         E oldValue = get(elements, index);
-
-
-
         int numMoved = len - index - 1;
-
-
-
         // 如果要删除的数据正好是数组的尾部，直接删除
-
-
-
         if (numMoved == 0)
-
-
-
             setArray(Arrays.copyOf(elements, len - 1));
-
-
-
         else {
-
-
-
             // 如果删除的数据在数组的中间，分三步走
-
-
-
             // 1. 设置新数组的长度减一，因为是减少一个元素
-
-
-
             // 2. 从 0 拷贝到数组新位置
-
-
-
             // 3. 从新位置拷贝到数组尾部
-
-
-
             Object[] newElements = new Object[len - 1];
-
-
-
             System.arraycopy(elements, 0, newElements, 0, index);
-
-
-
             System.arraycopy(elements, index + 1, newElements, index,
-
-
-
                              numMoved);
 
-
-
             setArray(newElements);
-
-
-
         }
-
-
-
         return oldValue;
-
-
-
     } finally {
-
-
-
         lock.unlock();
-
-
-
     }
-
-
-
 }
 ```
 
@@ -376,127 +178,37 @@ public E remove(int index) {
 
 数组的批量删除很有意思，接下来我们来看下 CopyOnWriteArrayList 的批量删除的实现过程：
 
-```
+```java
 // 批量删除包含在 c 中的元素
-
-
-
 public boolean removeAll(Collection<?> c) {
-
-
-
     if (c == null) throw new NullPointerException();
-
-
-
     final ReentrantLock lock = this.lock;
-
-
-
     lock.lock();
-
-
-
     try {
-
-
-
         Object[] elements = getArray();
-
-
-
         int len = elements.length;
-
-
-
         // 说明数组有值，数组无值直接返回 false
-
-
-
         if (len != 0) {
-
-
-
             // newlen 表示新数组的索引位置，新数组中存在不包含在 c 中的元素
-
-
-
             int newlen = 0;
-
-
-
             Object[] temp = new Object[len];
-
-
-
             // 循环，把不包含在 c 里面的元素，放到新数组中
-
-
-
             for (int i = 0; i < len; ++i) {
-
-
-
                 Object element = elements[i];
-
-
-
                 // 不包含在 c 中的元素，从 0 开始放到新数组中
-
-
-
                 if (!c.contains(element))
-
-
-
                     temp[newlen++] = element;
-
-
-
             }
-
-
-
             // 拷贝新数组，变相的删除了不包含在 c 中的元素
-
-
-
             if (newlen != len) {
-
-
-
                 setArray(Arrays.copyOf(temp, newlen));
-
-
-
                 return true;
-
-
-
             }
-
-
-
         }
-
-
-
         return false;
-
-
-
     } finally {
-
-
-
         lock.unlock();
-
-
-
     }
-
-
-
 }
 ```
 
@@ -516,87 +228,27 @@ public boolean removeAll(Collection<?> c) {
 
 indexOf 方法的主要用处是查找元素在数组中的下标位置，如果元素存在就返回元素的下标位置，元素不存在的话返回 -1，不但支持 null 值的搜索，还支持正向和反向的查找，我们以正向查找为例，通过源码来说明一下其底层的实现方式：
 
-```
+```java
 // o：我们需要搜索的元素
-
-
-
 // elements：我们搜索的目标数组
-
-
-
 // index：搜索的开始位置
-
-
-
 // fence：搜索的结束位置
-
-
-
 private static int indexOf(Object o, Object[] elements,
-
-
-
                            int index, int fence) {
-
-
-
     // 支持对 null 的搜索
-
-
-
     if (o == null) {
-
-
-
         for (int i = index; i < fence; i++)
-
-
-
             // 找到第一个 null 值，返回下标索引的位置
-
-
-
             if (elements[i] == null)
-
-
-
                 return i;
-
-
-
     } else {
-
-
-
         // 通过 equals 方法来判断元素是否相等
-
-
-
         // 如果相等，返回元素的下标位置
-
-
-
         for (int i = index; i < fence; i++)
-
-
-
             if (o.equals(elements[i]))
-
-
-
                 return i;
-
-
-
     }
-
-
-
     return -1;
-
-
-
 }
 ```
 
@@ -609,13 +261,13 @@ indexOf 方法在 CopyOnWriteArrayList 内部使用也比较广泛，比如在�
 在 CopyOnWriteArrayList 类注释中，明确说明了，在其迭代过程中，即使数组的原值被改变，也不会抛出 ConcurrentModificationException 异常，其根源在于数组的每次变动，都会生成新的数组，不会影响老数组，这样的话，迭代过程中，根本就不会发生迭代数组的变动，我们截几个图说明一下：
 
 1. 迭代是直接持有原有数组的引用，也就是说迭代过程中，一旦原有数组的值内存地址发生变化，必然会影响到迭代过程，下图源码演示的是 CopyOnWriteArrayList 的迭代方法，我们可以看到迭代器是直接持有原数组的引用：
-   ![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1NDMwMDAxMGM1MTExNDYwNTkyLnBuZw)
+   ![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1NDMwMDAxMGM1MTExNDYwNTkyLnBuZw)
 2. 我们写了一个 demo，在 CopyOnWriteArrayList 迭代之后，往 CopyOnWriteArrayList 里面新增值，从下图中可以看到在 CopyOnWriteArrayList 迭代之前，数组的内存地址是 962，请记住这个数字：
-   ![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1ODAwMDAxZmZjYTE0MDQwNzAwLnBuZw)
+   ![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1ODAwMDAxZmZjYTE0MDQwNzAwLnBuZw)
 3. CopyOnWriteArrayList 迭代之后，我们使用 add(“50”) 代码给数组新增一个数据后，数组内存地址发生了变化，内存地址从原来的 962 变成了 968，这是因为 CopyOnWriteArrayList 的 add 操作，会生成新的数组，所以数组的内存地址发生了变化：
-   ![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1YWMwMDAxYWY3ZDEzOTgwNTUwLnBuZw)
+   ![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1YWMwMDAxYWY3ZDEzOTgwNTUwLnBuZw)
 4. 迭代继续进行时，我们发现迭代器中的地址仍然是迭代之前引用的地址，是 962，而不是新的数组的内存地址：
-   ![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1YzIwMDAxNTk2NjE1NzgwNzQwLnBuZw)
+   ![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODM1YzIwMDAxNTk2NjE1NzgwNzQwLnBuZw)
 
 从上面 4 张截图，我们可以得到迭代过程中，即使 CopyOnWriteArrayList 的结构发生变动了，也不会抛出 ConcurrentModificationException 异常的原因：CopyOnWriteArrayList 迭代持有的是老数组的引用，而 CopyOnWriteArrayList 每次的数据变动，都会产生新的数组，对老数组的值不会产生影响，所以迭代也可以正常进行。
 

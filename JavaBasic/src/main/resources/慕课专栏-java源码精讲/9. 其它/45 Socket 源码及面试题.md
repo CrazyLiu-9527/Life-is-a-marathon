@@ -15,7 +15,7 @@ Socket 中文翻译叫套接字，可能很多工作四五年的同学都没有�
 Socket 的结构非常简单，Socket 就像一个壳一样，将套接字初始化、创建连接等各种操作包装了一下，其底层实现都是 SocketImpl 实现的，Socket 本身的业务逻辑非常简单。
 
 Socket 的属性不多，有套接字的状态，SocketImpl，读写的状态等等，源码如下图：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNDcwMDAwMTY0Y2EwNDk2MDI2NC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkZDYwNDcwMDAwMTY0Y2EwNDk2MDI2NC5wbmc)
 
 套接字的状态变更都是有对应操作方法的，比如套接字新建（createImpl 方法）后，状态就会更改成 created = true，连接（connect）之后，状态更改成 connected = true 等等。
 
@@ -30,27 +30,12 @@ Socket 的构造器比较多，可以分成两大类：
 1. 指定代理类型（Proxy）创建套节点，一共有三种类型为：DIRECT（直连）、HTTP（HTTP、FTP 高级协议的代理）、SOCKS（SOCKS 代理），三种不同的代码方式对应的 SocketImpl 不同，分别是：PlainSocketImpl、HttpConnectSocketImpl、SocksSocketImpl，除了类型之外 Proxy 还指定了地址和端口；
 2. 默认 SocksSocketImpl 创建，并且需要在构造器中传入地址和端口，源码如下：
 
-```
+```java
 // address 代表IP地址，port 表示套接字的端口
-
-
-
 // address 我们一般使用 InetSocketAddress，InetSocketAddress 有 ip+port、域名+port、InetAddress 等初始化方式
-
-
-
 public Socket(InetAddress address, int port) throws IOException {
-
-
-
     this(address != null ? new InetSocketAddress(address, port) : null,
-
-
-
          (SocketAddress) null, true);
-
-
-
 }
 ```
 
@@ -58,111 +43,33 @@ public Socket(InetAddress address, int port) throws IOException {
 
 我们一起看一下这个构造器调用的 this 底层构造器的源码：
 
-```
+```java
 // stream 为 true 时，表示为stream socket 流套接字，使用 TCP 协议，比较稳定可靠，但占用资源多
-
-
-
 // stream 为 false 时，表示为datagram socket 数据报套接字，使用 UDP 协议，不稳定，但占用资源少
-
-
-
 private Socket(SocketAddress address, SocketAddress localAddr,
-
-
-
                boolean stream) throws IOException {
-
-
-
     setImpl();
 
-
-
- 
-
-
-
     // backward compatibility
-
-
-
     if (address == null)
-
-
-
         throw new NullPointerException();
 
-
-
- 
-
-
-
     try {
-
-
-
         // 创建 socket
-
-
-
         createImpl(stream);
-
-
-
         // 如果 ip 地址不为空，绑定地址
-
-
-
         if (localAddr != null)
-
-
-
             // create、bind、connect 也是 native 方法
-
-
-
             bind(localAddr);
-
-
-
         connect(address);
-
-
-
     } catch (IOException | IllegalArgumentException | SecurityException e) {
-
-
-
         try {
-
-
-
             close();
-
-
-
         } catch (IOException ce) {
-
-
-
             e.addSuppressed(ce);
-
-
-
         }
-
-
-
         throw e;
-
-
-
     }
-
-
-
 }
 ```
 
@@ -181,11 +88,8 @@ private Socket(SocketAddress address, SocketAddress localAddr,
 
 connect 方法主要用于 Socket 客户端连接上服务端，如果底层是 TCP 层协议的话，就是通过三次握手和服务端建立连接，为客户端和服务端之间的通信做好准备，底层源码如下：
 
-```
+```java
 public void connect(SocketAddress endpoint, int timeout) throws IOException {
-
-
-
 }
 ```
 
@@ -232,83 +136,26 @@ setSoLinger 方法主要用来设置 SO_LINGER 属性值的。
 
 我们看一下 setSoLinger 源码：
 
-```
+```java
 // on 为 false，表示不启用延时关闭，true 的话表示启用延时关闭
-
-
-
 // linger 为延时的时间，单位秒
-
-
-
 public void setSoLinger(boolean on, int linger) throws SocketException {
-
-
-
     // 检查是否已经关闭
-
-
-
     if (isClosed())
-
-
-
         throw new SocketException("Socket is closed");
-
-
-
     // 不启用延时关闭
-
-
-
     if (!on) {
-
-
-
         getImpl().setOption(SocketOptions.SO_LINGER, new Boolean(on));
-
-
-
     // 启用延时关闭，如果 linger 为 0，那么会立即关闭
-
-
-
     // linger 最大为 65535 秒，约 18 小时
-
-
-
     } else {
-
-
-
         if (linger < 0) {
-
-
-
             throw new IllegalArgumentException("invalid value for SO_LINGER");
-
-
-
         }
-
-
-
         if (linger > 65535)
-
-
-
             linger = 65535;
-
-
-
         getImpl().setOption(SocketOptions.SO_LINGER, new Integer(linger));
-
-
-
     }
-
-
-
 }
 ```
 

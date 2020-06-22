@@ -7,77 +7,30 @@
 # 1 整体架构
 
 画了一个关于线程 API 之间关系的依赖图，如下：
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyOGY1MDAwMWMxOTUyMDYyMzE3Mi5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYjkyOGY1MDAwMWMxOTUyMDYyMzE3Mi5wbmc)
 
 在上一章节，我们说了 Thread 和 Runnable，本小节我们按照这个图把剩下的几个 API 也说完，然后把 API 之间的关系理清楚。
 
 为了方便大家更好的理解，我们首先看一个 demo，这个场景说的是我们往线程池里面提交一个有返回值的线程，代码如下：
 
-```
+```java
 // 首先我们创建了一个线程池
-
-
-
 ThreadPoolExecutor executor = new ThreadPoolExecutor(3, 3, 0L, TimeUnit.MILLISECONDS,
-
-
-
                                                      new LinkedBlockingQueue<>());
 
-
-
 // futureTask 我们叫做线程任务，构造器的入参是 Callable
-
-
-
-FutureTask futureTask = new FutureTask(new Callable<String> () {
-
-
-
-  @Override
-
-
-
-  public String call() throws Exception {
-
-
-
-    Thread.sleep(3000);
-
-
-
-    // 返回一句话
-
-
-
-    return "我是子线程"+Thread.currentThread().getName();
-
-
-
-  }
-
-
-
+FutureTask futureTask = new FutureTask(new Callable<String>() {
+    @Override
+    public String call() throws Exception {
+        Thread.sleep(3000);
+        // 返回一句话
+        return "我是子线程"+Thread.currentThread().getName();
+    }
 });
-
-
-
 // 把任务提交到线程池中，线程池会分配线程帮我们执行任务
-
-
-
 executor.submit(futureTask);
-
-
-
 // 得到任务执行的结果
-
-
-
 String result = (String) futureTask.get();
-
-
-
 log.info("result is {}",result);
 ```
 
@@ -97,15 +50,9 @@ log.info("result is {}",result);
 
 Callable 是一个接口，约定了线程要做的事情，和 Runnable 一样，不过这个线程任务是有返回值的，我们来看下接口定义：
 
-```
+```java
 public interface Callable<V> {
-
-
-
     V call() throws Exception;
-
-
-
 }
 ```
 
@@ -119,11 +66,8 @@ public interface Callable<V> {
 
 FutureTask 我们可以当做是线程运行的具体任务，从上图中，我们可以看到 FutureTask 实现了 RunnableFuture 接口，源码如下：
 
-```
+```java
 public class FutureTask<V> implements RunnableFuture<V> {
-
-
-
 }
 ```
 
@@ -145,87 +89,27 @@ Future 接口注释上写了这些：
 
 Future 接口定义了这些方法：
 
-```
+```java
 // 如果任务已经成功了，或已经取消了，是无法再取消的，会直接返回取消成功(true)
-
-
-
 // 如果任务还没有开始进行时，发起取消，是可以取消成功的。
-
-
-
 // 如果取消时，任务已经在运行了，mayInterruptIfRunning 为 true 的话，就可以打断运行中的线程
-
-
-
 // mayInterruptIfRunning 为 false，表示不能打断直接返回
-
-
-
 boolean cancel(boolean mayInterruptIfRunning);
 
-
-
- 
-
-
-
 // 返回线程是否已经被取消了，true 表示已经被取消了
-
-
-
 // 如果线程已经运行结束了，isCancelled 和 isDone 返回的都是 true
-
-
-
 boolean isCancelled();
 
-
-
- 
-
-
-
 // 线程是否已经运行结束了
-
-
-
 boolean isDone();
 
-
-
- 
-
-
-
 // 等待结果返回
-
-
-
 // 如果任务被取消了，抛 CancellationException 异常
-
-
-
 // 如果等待过程中被打断了，抛 InterruptedException 异常
-
-
-
 V get() throws InterruptedException, ExecutionException;
 
-
-
- 
-
-
-
 // 等待，但是带有超时时间的，如果超时时间外仍然没有响应，抛 TimeoutException 异常
-
-
-
 V get(long timeout, TimeUnit unit)
-
-
-
         throws InterruptedException, ExecutionException, TimeoutException;
 ```
 
@@ -239,15 +123,9 @@ V get(long timeout, TimeUnit unit)
 
 RunnableFuture 也是一个接口，定义如下：
 
-```
+```java
 public interface RunnableFuture<V> extends Runnable, Future<V> {
-
-
-
     void run();
-
-
-
 }
 ```
 
@@ -265,7 +143,7 @@ RunnableFuture 接口的最大目的，是让 Future 可以对 Runnable 进行�
 
 ### 3.3.1 FutureTask 的类定义
 
-```
+```java
 public class FutureTask<V> implements RunnableFuture<V> {}
 ```
 
@@ -277,75 +155,24 @@ public class FutureTask<V> implements RunnableFuture<V> {}
 
 我们一起来看下 FutureTask 有哪些重要属性：
 
-```
+```java
 // 任务状态
-
-
-
 private volatile int state;
-
-
-
 private static final int NEW          = 0;//线程任务创建
-
-
-
 private static final int COMPLETING   = 1;//任务执行中
-
-
-
 private static final int NORMAL       = 2;//任务执行结束
-
-
-
 private static final int EXCEPTIONAL  = 3;//任务异常
-
-
-
 private static final int CANCELLED    = 4;//任务取消成功
-
-
-
 private static final int INTERRUPTING = 5;//任务正在被打断中
-
-
-
 private static final int INTERRUPTED  = 6;//任务被打断成功
 
-
-
- 
-
-
-
 // 组合了 Callable 
-
-
-
 private Callable<V> callable;
-
-
-
 // 异步线程返回的结果
-
-
-
 private Object outcome; 
-
-
-
 // 当前任务所运行的线程
-
-
-
 private volatile Thread runner;
-
-
-
 // 记录调用 get 方法时被等待的线程
-
-
-
 private volatile WaitNode waiters;
 ```
 
@@ -357,67 +184,22 @@ private volatile WaitNode waiters;
 
 FutureTask 有两个构造器，分别接受 Callable 和 Runnable，如下：
 
-```
+```java
 // 使用 Callable 进行初始化
-
-
-
 public FutureTask(Callable<V> callable) {
-
-
-
     if (callable == null)
-
-
-
         throw new NullPointerException();
-
-
-
     this.callable = callable;
-
-
-
     // 任务状态初始化
-
-
-
     this.state = NEW;       // ensure visibility of callable
-
-
-
 }
 
-
-
- 
-
-
-
 // 使用 Runnable 初始化，并传入 result 作为返回结果。
-
-
-
 // Runnable 是没有返回值的，所以 result 一般没有用，置为 null 就好了
-
-
-
 public FutureTask(Runnable runnable, V result) {
-
-
-
     // Executors.callable 方法把 runnable 适配成 RunnableAdapter，RunnableAdapter 实现了 callable，所以也就是把 runnable 直接适配成了 callable。
-
-
-
     this.callable = Executors.callable(runnable, result);
-
-
-
     this.state = NEW;       // ensure visibility of callable
-
-
-
 }
 ```
 
@@ -425,60 +207,20 @@ Runnable 的两个构造器，只有一个目的，就是把入参都转化成 C
 
 我们注意到入参是 Runnable 的构造器，会使用 Executors.callable 方法来把 Runnnable 转化成 Callable，Runnnable 和 Callable 两者都是接口，两者之间是无法进行转化的，所以 Java 新建了一个转化类：RunnableAdapter 来进行转化，我们来看下转化的逻辑：
 
-```
+```java
 // 转化 Runnable 成 Callable 的工具类
-
-
-
 static final class RunnableAdapter<T> implements Callable<T> {
-
-
-
     final Runnable task;
-
-
-
     final T result;
-
-
-
     RunnableAdapter(Runnable task, T result) {
-
-
-
         this.task = task;
-
-
-
         this.result = result;
-
-
-
     }
-
-
-
     public T call() {
-
-
-
         task.run();
-
-
-
         return result;
-
-
-
     }
-
-
-
 }
-
-
-
- 
 ```
 
 我们可以看到：
@@ -500,255 +242,70 @@ FutureTask 构造器设计很巧妙，将 Runnable 和 Callable 灵活的打通�
 
 get 有无限阻塞和带超时时间两种方法，我们通常建议使用带超时时间的方法，源码如下：
 
-```
+```java
 public V get(long timeout, TimeUnit unit)
-
-
-
     throws InterruptedException, ExecutionException, TimeoutException {
-
-
-
     if (unit == null)
-
-
-
         throw new NullPointerException();
-
-
-
     int s = state;
-
-
-
     // 如果任务已经在执行中了，并且等待一定的时间后，仍然在执行中，直接抛出异常
-
-
-
     if (s <= COMPLETING &&
-
-
-
         (s = awaitDone(true, unit.toNanos(timeout))) <= COMPLETING)
-
-
-
         throw new TimeoutException();
-
-
-
     // 任务执行成功，返回执行的结果
-
-
-
     return report(s);
-
-
-
 }
-
-
-
 // 等待任务执行完成
-
-
-
 private int awaitDone(boolean timed, long nanos)
-
-
-
     throws InterruptedException {
-
-
-
     // 计算等待终止时间，如果一直等待的话，终止时间为 0
-
-
-
     final long deadline = timed ? System.nanoTime() + nanos : 0L;
-
-
-
     WaitNode q = null;
-
-
-
     // 不排队
-
-
-
     boolean queued = false;
-
-
-
     // 无限循环
-
-
-
     for (;;) {
-
-
-
         // 如果线程已经被打断了，删除，抛异常
-
-
-
         if (Thread.interrupted()) {
-
-
-
             removeWaiter(q);
-
-
-
             throw new InterruptedException();
-
-
-
         }
-
-
-
         // 当前任务状态
-
-
-
         int s = state;
-
-
-
         // 当前任务已经执行完了，返回
-
-
-
         if (s > COMPLETING) {
-
-
-
             // 当前任务的线程置空
-
-
-
             if (q != null)
-
-
-
                 q.thread = null;
-
-
-
             return s;
-
-
-
         }
-
-
-
         // 如果正在执行，当前线程让出 cpu，重新竞争，防止 cpu 飙高
-
-
-
         else if (s == COMPLETING) // cannot time out yet
-
-
-
             Thread.yield();
-
-
-
             // 如果第一次运行，新建 waitNode，当前线程就是 waitNode 的属性
-
-
-
         else if (q == null)
-
-
-
             q = new WaitNode();
-
-
-
             // 默认第一次都会执行这里，执行成功之后，queued 就为 true，就不会再执行了
-
-
-
             // 把当前 waitNode 当做 waiters 链表的第一个
-
-
-
         else if (!queued)
-
-
-
             queued = UNSAFE.compareAndSwapObject(this, waitersOffset,
-
-
-
                                                  q.next = waiters, q);
-
-
-
             // 如果设置了超时时间，并过了超时时间的话，从 waiters 链表中删除当前 wait
-
-
-
         else if (timed) {
-
-
-
             nanos = deadline - System.nanoTime();
-
-
-
             if (nanos <= 0L) {
-
-
-
                 removeWaiter(q);
-
-
-
                 return state;
-
-
-
             }
-
-
-
             // 没有过超时时间，线程进入 TIMED_WAITING 状态
-
-
-
             LockSupport.parkNanos(this, nanos);
 
-
-
         }
-
-
-
         // 没有设置超时时间，进入 WAITING 状态
-
-
-
         else
-
-
-
             LockSupport.park(this);
-
-
-
     }
-
-
-
 }
-
-
-
  
 ```
 
@@ -756,147 +313,42 @@ get 方法虽然名字叫做 get，但却做了很多 wait 的事情，当发现
 
 3.3.4.2 run
 
-```
+```java
 /**
-
-
-
  * run 方法可以直接被调用
-
-
-
  * 也可以开启新的线程进行调用
-
-
-
  */
-
-
-
 public void run() {
-
-
-
     // 状态不是任务创建，或者当前任务已经有线程在执行了，直接返回
-
-
-
     if (state != NEW ||
-
-
-
         !UNSAFE.compareAndSwapObject(this, runnerOffset,
-
-
-
                                      null, Thread.currentThread()))
-
-
-
         return;
-
-
-
     try {
-
-
-
         Callable<V> c = callable;
-
-
-
         // Callable 不为空，并且已经初始化完成
-
-
-
         if (c != null && state == NEW) {
-
-
-
             V result;
-
-
-
             boolean ran;
-
-
-
             try {
-
-
-
                 // 调用执行
-
-
-
                 result = c.call();
-
-
-
                 ran = true;
-
-
-
             } catch (Throwable ex) {
-
-
-
                 result = null;
-
-
-
                 ran = false;
-
-
-
                 setException(ex);
-
-
-
             }
-
-
-
             // 给 outcome 赋值
-
-
-
             if (ran)
-
-
-
                 set(result);
-
-
-
         }
-
-
-
     } finally {
-
-
-
         runner = null;
-
-
-
         int s = state;
-
-
-
         if (s >= INTERRUPTING)
-
-
-
             handlePossibleCancellationInterrupt(s);
-
-
-
     }
-
-
-
 }
 ```
 
@@ -907,103 +359,31 @@ run 方法我们再说明几点：
 
 3.3.4.3 cancel
 
-```
+```java
 // 取消任务，如果正在运行，尝试去打断
-
-
-
 public boolean cancel(boolean mayInterruptIfRunning) {
-
-
-
     if (!(state == NEW &&//任务状态不是创建 并且不能把 new 状态置为取消，直接返回 false
-
-
-
           UNSAFE.compareAndSwapInt(this, stateOffset, NEW,
-
-
-
               mayInterruptIfRunning ? INTERRUPTING : CANCELLED)))
-
-
-
         return false;
-
-
-
     // 进行取消操作，打断可能会抛出异常，选择 try finally 的结构
-
-
-
     try {    // in case call to interrupt throws exception
-
-
-
         if (mayInterruptIfRunning) {
-
-
-
             try {
-
-
-
                 Thread t = runner;
-
-
-
                 if (t != null)
-
-
-
                     t.interrupt();
-
-
-
             } finally { // final state
-
-
-
                 //状态设置成已打断
-
-
-
                 UNSAFE.putOrderedInt(this, stateOffset, INTERRUPTED);
-
-
-
             }
-
-
-
         }
-
-
-
     } finally {
-
-
-
         // 清理线程
-
-
-
         finishCompletion();
-
-
-
     }
-
-
-
     return true;
-
-
-
 }
-
-
-
  
 ```
 

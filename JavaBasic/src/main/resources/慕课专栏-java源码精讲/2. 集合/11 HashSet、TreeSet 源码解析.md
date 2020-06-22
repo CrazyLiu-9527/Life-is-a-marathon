@@ -37,19 +37,10 @@ HashSet 使用的就是组合 HashMap，其优点如下：
 
 组合就是把 HashMap 当作自己的一个局部变量，以下是 HashSet 的组合实现：
 
-```
+```java
 // 把 HashMap 组合进来，key 是 Hashset 的 key，value 是下面的 PRESENT
-
-
-
 private transient HashMap<E,Object> map;
-
-
-
 // HashMap 中的 value
-
-
-
 private static final Object PRESENT = new Object();
 ```
 
@@ -64,23 +55,11 @@ HashSet 在以 HashMap 为基础进行实现的时候，首先选择组合的方
 
 HashSet 的初始化比较简单，直接 new HashMap 即可，比较有意思的是，当有原始集合数据进行初始化的情况下，会对 HashMap 的初始容量进行计算，源码如下：
 
-```
+```java
 // 对 HashMap 的容量进行了计算
-
-
-
 public HashSet(Collection<? extends E> c) {
-
-
-
     map = new HashMap<>(Math.max((int) (c.size()/.75f) + 1, 16));
-
-
-
     addAll(c);
-
-
-
 }
 ```
 
@@ -95,19 +74,10 @@ public HashSet(Collection<? extends E> c) {
 
 至于 HashSet 的其他方法就比较简单了，就是对 Map 的 api 进行了一些包装，如下的 add 方法实现：
 
-```
+```java
 public boolean add(E e) {
-
-
-
     // 直接使用 HashMap 的 put 方法，进行一些简单的逻辑判断
-
-
-
     return map.put(e, PRESENT)==null;
-
-
-
 }
 ```
 
@@ -132,15 +102,9 @@ TreeSet 大致的结构和 HashSet 相似，底层组合的是 TreeMap，所以�
 
 场景一： TreeSet 的 add 方法，我们来看下其源码：
 
-```
+```java
 public boolean add(E e) {
-
-
-
     return m.put(e, PRESENT)==null;
-
-
-
 }
 ```
 
@@ -150,75 +114,33 @@ public boolean add(E e) {
 
 场景二：需要迭代 TreeSet 中的元素，那应该也是像 add 那样，直接使用 HashMap 已有的迭代能力，比如像下面这样：
 
-```
+```java
 // 模仿思路一的方式实现
-
-
-
 public Iterator<E> descendingIterator() {
-
-
-
     // 直接使用 HashMap.keySet 的迭代能力
-
-
-
     return m.keySet().iterator();
-
-
-
 }
 ```
 
 这种是思路一的实现方式，TreeSet 组合 TreeMap，直接选择 TreeMap 的底层能力进行包装，但 TreeSet 实际执行的思路却完全相反，我们看源码：
 
-```
+```java
 // NavigableSet 接口，定义了迭代的一些规范，和一些取值的特殊方法
-
-
-
 // TreeSet 实现了该方法，也就是说 TreeSet 本身已经定义了迭代的规范
-
-
-
 public interface NavigableSet<E> extends SortedSet<E> {
-
-
-
     Iterator<E> iterator();
-
-
-
     E lower(E e);
-
-
-
 }  
-
-
-
 // m.navigableKeySet() 是 TreeMap 写了一个子类实现了 NavigableSet
-
-
-
 // 接口，实现了 TreeSet 定义的迭代规范
-
-
-
 public Iterator<E> iterator() {
-
-
-
     return m.navigableKeySet().iterator();
-
-
-
 }
 ```
 
 TreeMap 中对 NavigableSet 接口的实现源码截图如下：
 
-![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ3NjNmNmUwMDAxOGUwMTE0NDYxMjUwLnBuZw)从截图中（截图是在 TreeMap 中），我们可以看出 TreeMap 实现了 TreeSet 定义的各种特殊方法。
+![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ3NjNmNmUwMDAxOGUwMTE0NDYxMjUwLnBuZw)从截图中（截图是在 TreeMap 中），我们可以看出 TreeMap 实现了 TreeSet 定义的各种特殊方法。
 
 我们可以看到，这种思路是 TreeSet 定义了接口的规范，TreeMap 负责去实现，实现思路和思路一是相反的。
 

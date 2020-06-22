@@ -3,7 +3,7 @@ ArrayList 我们几乎每天都会使用到，但真正面试的时候，发现�
 ## 1 整体架构
 
 ArrayList 整体架构比较简单，就是一个数组结构，比较简单，如下图：
-![图片描述](5d5fc5f80001e20e15080238.png)图中展示是长度为 10 的数组，从 1 开始计数，index 表示数组的下标，从 0 开始计数，elementData 表示数组本身，源码中除了这两个概念，还有以下三个基本概念：
+![图片描述](pic/5d5fc5f80001e20e15080238.png)图中展示是长度为 10 的数组，从 1 开始计数，index 表示数组的下标，从 0 开始计数，elementData 表示数组本身，源码中除了这两个概念，还有以下三个基本概念：
 
 - DEFAULT_CAPACITY 表示数组的初始大小，默认是 10，这个数字要记住；
 - size 表示当前数组的大小，类型 int，没有使用 volatile 修饰，非线程安全的；
@@ -57,7 +57,7 @@ public ArrayList(Collection<? extends E> c) {
 1：ArrayList 无参构造器初始化时，默认大小是空数组，并不是大家常说的 10，10 是在第一次 add 的时候扩容的数组值。
 
 2：指定初始数据初始化时，我们发现一个这样子的注释 see 6260652，这是 Java 的一个 bug，意思是当给定集合内的元素不是 Object 类型时，我们会转化成 Object 的类型。一般情况下都不会触发此 bug，只有在下列场景下才会触发：ArrayList 初始化之后（ArrayList 元素非 Object 类型），再次调用 toArray 方法，得到 Object 数组，并且往 Object 数组赋值时，才会触发此 bug，代码和原因如图：
-![图片描述](5d5fc6100001109518100714.png)官方查看文档地址：https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6260652 ，问题在 Java 9 中被解决。
+![图片描述](pic/5d5fc6100001109518100714.png)官方查看文档地址：https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6260652 ，问题在 Java 9 中被解决。
 
 ### 2.2 新增和扩容实现
 
@@ -70,11 +70,11 @@ public ArrayList(Collection<? extends E> c) {
 
 ```java
 public boolean add(E e) {
-  //确保数组大小是否足够，不够执行扩容，size 为当前数组的大小
-  ensureCapacityInternal(size + 1);  // Increments modCount!!
-  //直接赋值，线程不安全的
-  elementData[size++] = e;
-  return true;
+    //确保数组大小是否足够，不够执行扩容，size 为当前数组的大小
+    ensureCapacityInternal(size + 1);  // Increments modCount!!
+    //直接赋值，线程不安全的
+    elementData[size++] = e;
+    return true;
 }
 ```
 
@@ -82,36 +82,38 @@ public boolean add(E e) {
 
 ```java
 private void ensureCapacityInternal(int minCapacity) {
-  //如果初始化数组大小时，有给定初始值，以给定的大小为准，不走 if 逻辑
-  if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
-    minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
-  }
-  //确保容积足够
-  ensureExplicitCapacity(minCapacity);
+    //如果初始化数组大小时，有给定初始值，以给定的大小为准，不走 if 逻辑
+    if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
+        minCapacity = Math.max(DEFAULT_CAPACITY, minCapacity);
+    }
+    //确保容积足够
+    ensureExplicitCapacity(minCapacity);
 }
+
 private void ensureExplicitCapacity(int minCapacity) {
-  //记录数组被修改
-  modCount++;
-  // 如果我们期望的最小容量大于目前数组的长度，那么就扩容
-  if (minCapacity - elementData.length > 0)
-    grow(minCapacity);
+    //记录数组被修改
+    modCount++;
+    // 如果我们期望的最小容量大于目前数组的长度，那么就扩容
+    if (minCapacity - elementData.length > 0)
+        grow(minCapacity);
 }
+
 //扩容，并把现有数据拷贝到新的数组里面去
 private void grow(int minCapacity) {
-  int oldCapacity = elementData.length;
-  // oldCapacity >> 1 是把 oldCapacity 除以 2 的意思
-  int newCapacity = oldCapacity + (oldCapacity >> 1);
+    int oldCapacity = elementData.length;
+    // oldCapacity >> 1 是把 oldCapacity 除以 2 的意思
+    int newCapacity = oldCapacity + (oldCapacity >> 1);
 
-  // 如果扩容后的值 < 我们的期望值，扩容后的值就等于我们的期望值
-  if (newCapacity - minCapacity < 0)
-    newCapacity = minCapacity;
+    // 如果扩容后的值 < 我们的期望值，扩容后的值就等于我们的期望值
+    if (newCapacity - minCapacity < 0)
+        newCapacity = minCapacity;
 
-  // 如果扩容后的值 > jvm 所能分配的数组的最大值，那么就用 Integer 的最大值
-  if (newCapacity - MAX_ARRAY_SIZE > 0)
-    newCapacity = hugeCapacity(minCapacity);
- 
-  // 通过复制进行扩容
-  elementData = Arrays.copyOf(elementData, newCapacity);
+    // 如果扩容后的值 > jvm 所能分配的数组的最大值，那么就用 Integer 的最大值
+    if (newCapacity - MAX_ARRAY_SIZE > 0)
+        newCapacity = hugeCapacity(minCapacity);
+
+    // 通过复制进行扩容
+    elementData = Arrays.copyOf(elementData, newCapacity);
 }
 ```
 
@@ -126,7 +128,7 @@ private void grow(int minCapacity) {
 - 源码在扩容的时候，有数组大小溢出意识，就是说扩容后数组的大小下界不能小于 0，上界不能大于 Integer 的最大值，这种意识我们可以学习。
 
 扩容完成之后，赋值是非常简单的，直接往数组上添加元素即可：elementData [size++] = e。也正是通过这种简单赋值，没有任何锁控制，所以这里的操作是线程不安全的，对于新增和扩容的实现，画了一个动图，如下：
-![图片描述](5d5fc62e000112c203600240.gif)
+![图片描述](pic/5d5fc62e000112c203600240.gif)
 
 ### 2.3 扩容的本质
 
@@ -158,23 +160,23 @@ ArrayList 删除元素有很多种方式，比如根据数组索引删除、根�
 
 ```java
 public boolean remove(Object o) {
-  // 如果要删除的值是 null，找到第一个值是 null 的删除
-  if (o == null) {
-    for (int index = 0; index < size; index++)
-      if (elementData[index] == null) {
-        fastRemove(index);
-        return true;
-      }
-  } else {
-    // 如果要删除的值不为 null，找到第一个和要删除的值相等的删除
-    for (int index = 0; index < size; index++)
-      // 这里是根据  equals 来判断值相等的，相等后再根据索引位置进行删除
-      if (o.equals(elementData[index])) {
-        fastRemove(index);
-        return true;
-      }
-  }
-  return false;
+    // 如果要删除的值是 null，找到第一个值是 null 的删除
+    if (o == null) {
+        for (int index = 0; index < size; index++)
+            if (elementData[index] == null) {
+                fastRemove(index);
+                return true;
+            }
+    } else {
+        // 如果要删除的值不为 null，找到第一个和要删除的值相等的删除
+        for (int index = 0; index < size; index++)
+            // 这里是根据  equals 来判断值相等的，相等后再根据索引位置进行删除
+            if (o.equals(elementData[index])) {
+                fastRemove(index);
+                return true;
+            }
+    }
+    return false;
 }
 ```
 
@@ -187,21 +189,21 @@ public boolean remove(Object o) {
 
 ```java
 private void fastRemove(int index) {
-  // 记录数组的结构要发生变动了
-  modCount++;
-  // numMoved 表示删除 index 位置的元素后，需要从 index 后移动多少个元素到前面去
-  // 减 1 的原因，是因为 size 从 1 开始算起，index 从 0开始算起
-  int numMoved = size - index - 1;
-  if (numMoved > 0)
-    // 从 index +1 位置开始被拷贝，拷贝的起始位置是 index，长度是 numMoved
-    System.arraycopy(elementData, index+1, elementData, index, numMoved);
-  //数组最后一个位置赋值 null，帮助 GC
-  elementData[--size] = null;
+    // 记录数组的结构要发生变动了
+    modCount++;
+    // numMoved 表示删除 index 位置的元素后，需要从 index 后移动多少个元素到前面去
+    // 减 1 的原因，是因为 size 从 1 开始算起，index 从 0开始算起
+    int numMoved = size - index - 1;
+    if (numMoved > 0)
+        // 从 index +1 位置开始被拷贝，拷贝的起始位置是 index，长度是 numMoved
+        System.arraycopy(elementData, index+1, elementData, index, numMoved);
+    //数组最后一个位置赋值 null，帮助 GC
+    elementData[--size] = null;
 }
 ```
 
 从源码中，我们可以看出，某一个元素被删除后，为了维护数组结构，我们都会把数组后面的元素往前移动，下面动图也演示了其过程：
-![图片描述](5d5fc643000142a403600240.gif)
+![图片描述](pic/5d5fc643000142a403600240.gif)
 
 ### 2.5 迭代器
 
@@ -225,7 +227,7 @@ int expectedModCount = modCount;// expectedModCount 表示迭代过程中，期�
 
 ```java
 public boolean hasNext() {
-  return cursor != size;//cursor 表示下一个元素的位置，size 表示实际大小，如果两者相等，说明已经没有元素可以迭代了，如果不等，说明还可以迭代
+  	return cursor != size;//cursor 表示下一个元素的位置，size 表示实际大小，如果两者相等，说明已经没有元素可以迭代了，如果不等，说明还可以迭代
 }
 ```
 
@@ -233,24 +235,24 @@ public boolean hasNext() {
 
 ```java
 public E next() {
-  //迭代过程中，判断版本号有无被修改，有被修改，抛 ConcurrentModificationException 异常
-  checkForComodification();
-  //本次迭代过程中，元素的索引位置
-  int i = cursor;
-  if (i >= size)
-    throw new NoSuchElementException();
-  Object[] elementData = ArrayList.this.elementData;
-  if (i >= elementData.length)
-    throw new ConcurrentModificationException();
-  // 下一次迭代时，元素的位置，为下一次迭代做准备
-  cursor = i + 1;
-  // 返回元素值
-  return (E) elementData[lastRet = i];
+    //迭代过程中，判断版本号有无被修改，有被修改，抛 ConcurrentModificationException 异常
+    checkForComodification();
+    //本次迭代过程中，元素的索引位置
+    int i = cursor;
+    if (i >= size)
+        throw new NoSuchElementException();
+    Object[] elementData = ArrayList.this.elementData;
+    if (i >= elementData.length)
+        throw new ConcurrentModificationException();
+    // 下一次迭代时，元素的位置，为下一次迭代做准备
+    cursor = i + 1;
+    // 返回元素值
+    return (E) elementData[lastRet = i];
 }
 // 版本号比较
 final void checkForComodification() {
-  if (modCount != expectedModCount)
-    throw new ConcurrentModificationException();
+    if (modCount != expectedModCount)
+        throw new ConcurrentModificationException();
 }
 ```
 
@@ -260,23 +262,23 @@ final void checkForComodification() {
 
 ```java
 public void remove() {
-  // 如果上一次操作时，数组的位置已经小于 0 了，说明数组已经被删除完了
-  if (lastRet < 0)
-    throw new IllegalStateException();
-  //迭代过程中，判断版本号有无被修改，有被修改，抛 ConcurrentModificationException 异常
-  checkForComodification();
+    // 如果上一次操作时，数组的位置已经小于 0 了，说明数组已经被删除完了
+    if (lastRet < 0)
+        throw new IllegalStateException();
+    //迭代过程中，判断版本号有无被修改，有被修改，抛 ConcurrentModificationException 异常
+    checkForComodification();
 
-  try {
-    ArrayList.this.remove(lastRet);
-    cursor = lastRet;
-    // -1 表示元素已经被删除，这里也防止重复删除
-    lastRet = -1;
-    // 删除元素时 modCount 的值已经发生变化，在此赋值给 expectedModCount
-    // 这样下次迭代时，两者的值是一致的了
-    expectedModCount = modCount;
-  } catch (IndexOutOfBoundsException ex) {
-    throw new ConcurrentModificationException();
-  }
+    try {
+        ArrayList.this.remove(lastRet);
+        cursor = lastRet;
+        // -1 表示元素已经被删除，这里也防止重复删除
+        lastRet = -1;
+        // 删除元素时 modCount 的值已经发生变化，在此赋值给 expectedModCount
+        // 这样下次迭代时，两者的值是一致的了
+        expectedModCount = modCount;
+    } catch (IndexOutOfBoundsException ex) {
+        throw new ConcurrentModificationException();
+    }
 }
 ```
 

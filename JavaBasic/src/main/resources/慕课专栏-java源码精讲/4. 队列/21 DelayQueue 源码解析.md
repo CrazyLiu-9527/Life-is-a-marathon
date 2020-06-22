@@ -26,25 +26,16 @@ DelayQueue 延迟队列底层使用的是锁的能力，比如说要在当前时
 
 DelayQueue 的类图和之前的队列一样，不多说，关键是 DelayQueue 类上是有泛型的，如下：
 
-```
+```java
 public class DelayQueue<E extends Delayed> extends AbstractQueue<E>
-
-
-
     implements BlockingQueue<E> {
 ```
 
 从泛型中可以看出，DelayQueue 中的元素必须是 Delayed 的子类，Delayed 是表达延迟能力的关键接口，其继承了 Comparable 接口，并定义了还剩多久过期的方法，如下：
 
-```
+```java
 public interface Delayed extends Comparable<Delayed> {
-
-
-
     long getDelay(TimeUnit unit);
-
-
-
 }
 ```
 
@@ -52,7 +43,7 @@ public interface Delayed extends Comparable<Delayed> {
 
 除此之外 DelayQueue 还大量使用了 PriorityQueue 队列的大量功能，这个和 SynchronousQueue 队列很像，大量复用了其它基础类的逻辑，代码示例如下：
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYTU2ZGNjMDAwMTMwNmMxMzcwMTM3Ni5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVkYTU2ZGNjMDAwMTMwNmMxMzcwMTM3Ni5wbmc)
 
 PriorityQueue 中文叫做优先级队列，在此处的作用就是可以根据过期时间做优先级排序，让先过期的可以先执行，用来实现类注释中的第一点。
 
@@ -67,339 +58,92 @@ PriorityQueue 中文叫做优先级队列，在此处的作用就是可以根据
 
 为了方便大家理解，写了一个演示的 demo，演示了一下：
 
-```
-public class DelayQueueDemo {
-
-
-
-	// 队列消息的生产者
-
-
-
-  static class Product implements Runnable {
-
-
-
-    private final BlockingQueue queue;
-
-
-
-    public Product(BlockingQueue queue) {
-
-
-
-      this.queue = queue;
-
-
-
-    }
-
-
-
-    
-
-
-
-    @Override
-
-
-
-    public void run() {
-
-
-
-      try {
-
-
-
-        log.info("begin put");
-
-
-
-        long beginTime = System.currentTimeMillis();
-
-
-
-        queue.put(new DelayedDTO(System.currentTimeMillis() + 2000L,beginTime));//延迟 2 秒执行
-
-
-
-        queue.put(new DelayedDTO(System.currentTimeMillis() + 5000L,beginTime));//延迟 5 秒执行
-
-
-
-        queue.put(new DelayedDTO(System.currentTimeMillis() + 1000L * 10,beginTime));//延迟 10 秒执行
-
-
-
-        log.info("end put");
-
-
-
-      } catch (InterruptedException e) {
-
-
-
-        log.error("" + e);
-
-
-
-      }
-
-
-
-    }
-
-
-
-  }
-
-
-
-	// 队列的消费者
-
-
-
-  static class Consumer implements Runnable {
-
-
-
-    private final BlockingQueue queue;
-
-
-
-    public Consumer(BlockingQueue queue) {
-
-
-
-      this.queue = queue;
-
-
-
-    }
-
-
-
- 
-
-
-
-    @Override
-
-
-
-    public void run() {
-
-
-
-      try {
-
-
-
-        log.info("Consumer begin");
-
-
-
-        ((DelayedDTO) queue.take()).run();
-
-
-
-        ((DelayedDTO) queue.take()).run();
-
-
-
-        ((DelayedDTO) queue.take()).run();
-
-
-
-        log.info("Consumer end");
-
-
-
-      } catch (InterruptedException e) {
-
-
-
-        log.error("" + e);
-
-
-
-      }
-
-
-
-    }
-
-
-
-  }
-
-
-
- 
-
-
-
-  @Data
-
-
-
-  // 队列元素，实现了 Delayed 接口
-
-
-
-  static class DelayedDTO implements Delayed {
-
-
-
-    Long s;
-
-
-
-    Long beginTime;
-
-
-
-    public DelayedDTO(Long s,Long beginTime) {
-
-
-
-      this.s = s;
-
-
-
-      this.beginTime =beginTime;
-
-
-
-    }
-
-
-
- 
-
-
-
-    @Override
-
-
-
-    public long getDelay(TimeUnit unit) {
-
-
-
-      return unit.convert(s - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
-
-
-
-    }
-
-
-
- 
-
-
-
-    @Override
-
-
-
-    public int compareTo(Delayed o) {
-
-
-
-      return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
-
-
-
-    }
-
-
-
- 
-
-
-
-    public void run(){
-
-
-
-      log.info("现在已经过了{}秒钟",(System.currentTimeMillis() - beginTime)/1000);
-
-
-
-    }
-
-
-
-  }
-
-
-
-	// demo 运行入口
-
-
-
-  public static void main(String[] args) throws InterruptedException {
-
-
-
-    BlockingQueue q = new DelayQueue();
-
-
-
-    DelayQueueDemo.Product p = new DelayQueueDemo.Product(q);
-
-
-
-    DelayQueueDemo.Consumer c = new DelayQueueDemo.Consumer(q);
-
-
-
-    new Thread(c).start();
-
-
-
-    new Thread(p).start();
-
-
-
-  }
-
-
-
-}
-
-
+```java
+ public class DelayQueueDemo {
+
+     // 队列消息的生产者
+     static class Product implements Runnable {
+         private final BlockingQueue queue;
+         public Product(BlockingQueue queue) {
+             this.queue = queue;
+         }
+
+         @Override
+         public void run() {
+             try {
+                 log.info("begin put");
+                 long beginTime = System.currentTimeMillis();
+                 queue.put(new DelayedDTO(System.currentTimeMillis() + 2000L,beginTime));//延迟 2 秒执行
+                 queue.put(new DelayedDTO(System.currentTimeMillis() + 5000L,beginTime));//延迟 5 秒执行
+                 queue.put(new DelayedDTO(System.currentTimeMillis() + 1000L * 10,beginTime));//延迟 10 秒执行
+                 log.info("end put");
+             } catch (InterruptedException e) {
+                 log.error("" + e);
+             }
+         }
+     }
+     // 队列的消费者
+     static class Consumer implements Runnable {
+         private final BlockingQueue queue;
+         public Consumer(BlockingQueue queue) {
+             this.queue = queue;
+         }
+
+         @Override
+         public void run() {
+             try {
+                 log.info("Consumer begin");
+                 ((DelayedDTO) queue.take()).run();
+                 ((DelayedDTO) queue.take()).run();
+                 ((DelayedDTO) queue.take()).run();
+                 log.info("Consumer end");
+             } catch (InterruptedException e) {
+                 log.error("" + e);
+             }
+         }
+     }
+
+     @Data
+     // 队列元素，实现了 Delayed 接口
+     static class DelayedDTO implements Delayed {
+         Long s;
+         Long beginTime;
+         public DelayedDTO(Long s,Long beginTime) {
+             this.s = s;
+             this.beginTime =beginTime;
+         }
+
+         @Override
+         public long getDelay(TimeUnit unit) {
+             return unit.convert(s - System.currentTimeMillis(), TimeUnit.MILLISECONDS);
+         }
+
+         @Override
+         public int compareTo(Delayed o) {
+             return (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
+         }
+
+         public void run(){
+             log.info("现在已经过了{}秒钟",(System.currentTimeMillis() - beginTime)/1000);
+         }
+     }
+     // demo 运行入口
+     public static void main(String[] args) throws InterruptedException {
+         BlockingQueue q = new DelayQueue();
+         DelayQueueDemo.Product p = new DelayQueueDemo.Product(q);
+         DelayQueueDemo.Consumer c = new DelayQueueDemo.Consumer(q);
+         new Thread(c).start();
+         new Thread(p).start();
+     }
+ }
 
 打印出来的结果如下：
-
-
-
 06:57:50.544 [Thread-0] Consumer begin
-
-
-
 06:57:50.544 [Thread-1] begin put
-
-
-
 06:57:50.551 [Thread-1] end put
-
-
-
 06:57:52.554 [Thread-0] 延迟了2秒钟才执行
-
-
-
 06:57:55.555 [Thread-0] 延迟了5秒钟才执行
-
-
-
 06:58:00.555 [Thread-0] 延迟了10秒钟才执行
-
-
-
 06:58:00.556 [Thread-0] Consumer end
 ```
 
@@ -417,233 +161,68 @@ public class DelayQueueDemo {
 
 我们以 put 为例，put 调用的是 offer 的方法，offer 的源码如下：
 
-```
+```java
 public boolean offer(E e) {
-
-
-
     final ReentrantLock lock = this.lock;
-
-
-
     // 上锁
-
-
-
     lock.lock();
-
-
-
     try {
-
-
-
         // 使用 PriorityQueue 的扩容，排序等能力
-
-
-
         q.offer(e);
-
-
-
         // 如果恰好刚放进去的元素正好在队列头
-
-
-
         // 立马唤醒 take 的阻塞线程，执行 take 操作
-
-
-
         // 如果元素需要延迟执行的话，可以使其更快的沉睡计时
-
-
-
         if (q.peek() == e) {
-
-
-
             leader = null;
-
-
-
             available.signal();
-
-
-
         }
-
-
-
         return true;
-
-
-
     } finally {
-
-
-
         // 释放锁
-
-
-
         lock.unlock();
-
-
-
     }
-
-
-
 }
 ```
 
 可以看到其实底层使用到的是 PriorityQueue 的 offer 方法，我们来看下：
 
-```
+```java
 // 新增元素
-
-
-
 public boolean offer(E e) {
-
-
-
     // 如果是空元素的话，抛异常
-
-
-
     if (e == null)
-
-
-
         throw new NullPointerException();
-
-
-
     modCount++;
-
-
-
     int i = size;
-
-
-
     // 队列实际大小大于容量时，进行扩容
-
-
-
     // 扩容策略是：如果老容量小于 64，2 倍扩容，如果大于 64，50 % 扩容
-
-
-
     if (i >= queue.length)
-
-
-
         grow(i + 1);
-
-
-
     size = i + 1;
-
-
-
     // 如果队列为空，当前元素正好处于队头
-
-
-
     if (i == 0)
-
-
-
         queue[0] = e;
-
-
-
     else
-
-
-
     // 如果队列不为空，需要根据优先级进行排序
-
-
-
         siftUp(i, e);
-
-
-
     return true;
-
-
-
 }
-
-
-
-// 按照从小到大的顺序排列
-
-
-
+	// 按照从小到大的顺序排列
     private void siftUpComparable(int k, E x) {
-
-
-
         Comparable<? super E> key = (Comparable<? super E>) x;
-
-
-
         // k 是当前队列实际大小的位置
-
-
-
         while (k > 0) {
-
-
-
             // 对 k 进行减倍
-
-
-
             int parent = (k - 1) >>> 1;
-
-
-
             Object e = queue[parent];
-
-
-
             // 如果 x 比 e 大，退出，把 x 放在 k 位置上
-
-
-
             if (key.compareTo((E) e) >= 0)
-
-
-
                 break;
-
-
-
             // x 比 e 小，继续循环，直到找到 x 比队列中元素大的位置
-
-
-
             queue[k] = e;
-
-
-
             k = parent;
-
-
-
         }
-
-
-
         queue[k] = key;
-
-
-
     }
 ```
 
@@ -653,7 +232,7 @@ public boolean offer(E e) {
 2. 对队列进行扩容，扩容策略和集合的扩容策略很相近；
 3. 根据元素的 compareTo 方法进行排序，我们希望最终排序的结果是从小到大的，因为我们想让队头的都是过期的数据，我们需要在 compareTo 方法里面实现：通过每个元素的过期时间进行排序，如下：
 
-```
+```java
 (int) (this.getDelay(TimeUnit.MILLISECONDS) - o.getDelay(TimeUnit.MILLISECONDS));
 ```
 
@@ -667,131 +246,38 @@ public boolean offer(E e) {
 
 取数据时，如果发现有元素的过期时间到了，就能拿出数据来，如果没有过期元素，那么线程就会一直阻塞，我们以 take 为例子，来看一下核心源码：
 
-```
+```java
 for (;;) {
-
-
-
     // 从队头中拿数据出来
-
-
-
     E first = q.peek();
-
-
-
     // 如果为空，说明队列中，没有数据，阻塞住
-
-
-
     if (first == null)
-
-
-
         available.await();
-
-
-
     else {
-
-
-
         // 获取队头数据的过期时间
-
-
-
         long delay = first.getDelay(NANOSECONDS);
-
-
-
         // 如果过期了，直接返回队头数据
-
-
-
         if (delay <= 0)
-
-
-
             return q.poll();
-
-
-
         // 引用置为 null ，便于 gc，这样可以让线程等待时，回收 first 变量
-
-
-
         first = null;
-
-
-
         // leader 不为空的话，表示当前队列元素之前已经被设置过阻塞时间了
-
-
-
         // 直接阻塞当前线程等待。
-
-
-
         if (leader != null)
-
-
-
             available.await();
-
-
-
         else {
-
-
-
           // 之前没有设置过阻塞时间，按照一定的时间进行阻塞
-
-
-
             Thread thisThread = Thread.currentThread();
-
-
-
             leader = thisThread;
-
-
-
             try {
-
-
-
                 // 进行阻塞
-
-
-
                 available.awaitNanos(delay);
-
-
-
             } finally {
-
-
-
                 if (leader == thisThread)
-
-
-
                     leader = null;
-
-
-
             }
-
-
-
         }
-
-
-
     }
-
-
-
 }
 ```
 

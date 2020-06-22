@@ -30,7 +30,7 @@
 我们以在淘宝上买东西时，下单为例，下单指的是我们在淘宝选择好了商品和优惠券后，点击购买按钮时触发的动作。
 
 为了方便举例，我们假设在淘宝上买电视和电影票，在后端，会分别对应着两个下单流程，我们画图示意一下：
-![图片描述](aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODg1NmYwMDAxNDljZDEyNzQwOTI4LnBuZw)
+![图片描述](pic/aHR0cDovL2ltZy5tdWtld2FuZy5jb20vNWQ4ODg1NmYwMDAxNDljZDEyNzQwOTI4LnBuZw)
 上图中，左右两个黑色长方形大框代表着两个流程，流程下面有多个阶段，阶段用蓝色表示，每个阶段下面有多个领域行为，用红色表示。
 
 可以看到两个流程中，都包含有四个阶段，阶段都是相同的，但每个阶段中的领域行为，有的相同，有的却是特有的。
@@ -50,151 +50,52 @@
 
 首先给阶段定义一个枚举，如下 StageEnum 代表流程中的阶段或步骤：
 
-```
+```java
 public enum StageEnum {
+    PARAM_VALID("PARAM_VALID", "参数校验"),
 
+    BUSINESS_VALID("BUSINESS_VALID", "业务校验"),
 
+    IN_TRANSACTION("IN_TRANSACTION", "事务中落库"),
 
-  PARAM_VALID("PARAM_VALID", "参数校验"),
+    AFTER_TRANSACTION("AFTER_TRANSACTION", "事务后事件"),
+    ;
 
+    private String code;
+    private String desc;
 
-
- 
-
-
-
-  BUSINESS_VALID("BUSINESS_VALID", "业务校验"),
-
-
-
- 
-
-
-
-  IN_TRANSACTION("IN_TRANSACTION", "事务中落库"),
-
-
-
- 
-
-
-
-  AFTER_TRANSACTION("AFTER_TRANSACTION", "事务后事件"),
-
-
-
-  ;
-
-
-
- 
-
-
-
-  private String code;
-
-
-
-  private String desc;
-
-
-
- 
-
-
-
-  StageEnum(String code, String desc) {
-
-
-
-    this.code = code;
-
-
-
-    this.desc = desc;
-
-
-
-  }
-
-
-
+    StageEnum(String code, String desc) {
+        this.code = code;
+        this.desc = desc;
+    }
 }
 ```
 
 领域行为我们无需定义，目前通用的技术框架都是 Spring Boot，领域行为都是 Spring Bean，为了简单起见，我们给领域行为定义了一个接口，每个领域行为都要实现这个接口，方便我们编排，接口如下：
 
-```
+```java
 /**
-
-
-
  * 领域行为
-
-
-
  * author  wenhe
-
-
-
  * date 2019/8/11
-
-
-
  */
-
-
-
 public interface DomainAbilityBean {
 
-
-
- 
-
-
-
-  /**
-
-
-
-   * 领域行为的方法入口
-
-
-
-   */
-
-
-
-  FlowContent invoke(FlowContent content);
-
-
-
- 
-
-
+    /**
+     * 领域行为的方法入口
+     */
+    FlowContent invoke(FlowContent content);
 
 }
 ```
 
 接着我们使用 Map + List 来定义流程，定义如下：
 
-```
+```java
 /**
-
-
-
  * 第一个 key 是流程的名字
-
-
-
  * 第二个 map 的 key 是阶段，为 StageEnum 枚举，值为多个领域行为的集合
-
-
-
  */
-
-
-
 Map<String,Map<StageEnum,List<DomainAbilityBean>>> flowMap
 ```
 
@@ -215,78 +116,24 @@ Map<String,Map<StageEnum,List<DomainAbilityBean>>> flowMap
 
 以上两步最为关键的点就是 flowMap 必须是可以随时访问到的，所有我们会把 flowMap 作为共享变量使用，也就是会被 static final 关键字所修饰，我们首先来 mock 一下把所有信息初始化到 flowMap 中去的代码，如下：
 
-```
+```java
 @Component
-
-
-
 public class FlowCenter {
 
-
-
- 
-
-
-
   /**
-
-
-
    * flowMap 是共享变量，方便访问，并且是 ConcurrentHashMap
-
-
-
    */
-
-
-
   public static final Map<String, Map<StageEnum, List<DomainAbilityBean>>> flowMap
-
-
-
       = Maps.newConcurrentMap();
 
-
-
- 
-
-
-
   /**
-
-
-
    * PostConstruct 注解的意思就是
-
-
-
    * 在容器启动成功之后，执行 init 方法，初始化 flowMap
-
-
-
    */
-
-
-
   @PostConstruct
-
-
-
   public void init() {
-
-
-
       // 初始化 flowMap，可能是从数据库，或者 xml 文件中加载 map
-
-
-
   }
-
-
-
- 
-
-
 
 }
 ```
@@ -303,183 +150,54 @@ public class FlowCenter {
 
 那我们实际使用的时候，只需要告诉 flowMap 当前是那个流程的那个阶段，就可以返回该流程该阶段下面的所有领域行为了，我们写了一个流程引擎使用的工具类入口，如下：
 
-```
+```java
 // 流程引擎对外的 API
-
-
-
 public class FlowStart {
 
-
-
- 
-
-
-
-  /**
-
-
-
-   * 流程引擎开始
-
-
-
-   *
-
-
-
-   * @param flowName 流程的名字
-
-
-
-   */
-
-
-
-  public void start(String flowName, FlowContent content) {
-
-
-
-    invokeParamValid(flowName, content);
-
-
-
-    invokeBusinessValid(flowName, content);
-
-
-
-    invokeInTramsactionValid(flowName, content);
-
-
-
-    invokeAfterTramsactionValid(flowName, content);
-
-
-
-  }
-
-
-
-  // 执行参数校验
-
-
-
-  private void invokeParamValid(String flowName, FlowContent content) {
-
-
-
-    stageInvoke(flowName, StageEnum.PARAM_VALID, content);
-
-
-
-  }
-
-
-
-  // 执行业务校验
-
-
-
-  private void invokeBusinessValid(String flowName, FlowContent content) {
-
-
-
-    stageInvoke(flowName, StageEnum.BUSINESS_VALID, content);
-
-
-
-  }
-
-
-
-  // 执行事务中
-
-
-
-  private void invokeInTramsactionValid(String flowName, FlowContent content) {
-
-
-
-    stageInvoke(flowName, StageEnum.IN_TRANSACTION, content);
-
-
-
-  }
-
-
-
-  // 执行事务后
-
-
-
-  private void invokeAfterTramsactionValid(String flowName, FlowContent content) {
-
-
-
-    stageInvoke(flowName, StageEnum.AFTER_TRANSACTION, content);
-
-
-
-  }
-
-
-
-		
-
-
-
-  // 批量执行 Spring Bean
-
-
-
-  private void stageInvoke(String flowName, StageEnum stage, FlowContent content) {
-
-
-
-    List<DomainAbilityBean>
-
-
-
-        domainAbilitys =
-
-
-
-        FlowCenter.flowMap.getOrDefault(flowName, Maps.newHashMap()).get(stage);
-
-
-
-    if (CollectionUtils.isEmpty(domainAbilitys)) {
-
-
-
-      throw new RuntimeException("找不到该流程对应的领域行为" + flowName);
-
-
-
+    /**
+         * 流程引擎开始
+         *
+         * @param flowName 流程的名字
+         */
+    public void start(String flowName, FlowContent content) {
+        invokeParamValid(flowName, content);
+        invokeBusinessValid(flowName, content);
+        invokeInTramsactionValid(flowName, content);
+        invokeAfterTramsactionValid(flowName, content);
     }
 
-
-
-    for (DomainAbilityBean domainAbility : domainAbilitys) {
-
-
-
-      domainAbility.invoke(content);
-
-
-
+    // 执行参数校验
+    private void invokeParamValid(String flowName, FlowContent content) {
+        stageInvoke(flowName, StageEnum.PARAM_VALID, content);
     }
 
+    // 执行业务校验
+    private void invokeBusinessValid(String flowName, FlowContent content) {
+        stageInvoke(flowName, StageEnum.BUSINESS_VALID, content);
+    }
 
+    // 执行事务中
+    private void invokeInTramsactionValid(String flowName, FlowContent content) {
+        stageInvoke(flowName, StageEnum.IN_TRANSACTION, content);
+    }
 
-  }
+    // 执行事务后
+    private void invokeAfterTramsactionValid(String flowName, FlowContent content) {
+        stageInvoke(flowName, StageEnum.AFTER_TRANSACTION, content);
+    }
 
-
-
- 
-
-
-
+    // 批量执行 Spring Bean
+    private void stageInvoke(String flowName, StageEnum stage, FlowContent content) {
+        List<DomainAbilityBean>
+            domainAbilitys =
+            FlowCenter.flowMap.getOrDefault(flowName, Maps.newHashMap()).get(stage);
+        if (CollectionUtils.isEmpty(domainAbilitys)) {
+            throw new RuntimeException("找不到该流程对应的领域行为" + flowName);
+        }
+        for (DomainAbilityBean domainAbility : domainAbilitys) {
+            domainAbility.invoke(content);
+        }
+    }
 }
 ```
 

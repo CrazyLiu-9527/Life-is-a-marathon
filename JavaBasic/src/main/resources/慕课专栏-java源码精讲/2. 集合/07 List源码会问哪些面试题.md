@@ -59,21 +59,21 @@ if (newCapacity - minCapacity < 0)
 
 ```java
 List<String> list = new ArrayList<String>() {{
-  add("2");
-  add("3");
-  add("3");
-  add("3");
-  add("4");
+    add("2");
+    add("3");
+    add("3");
+    add("3");
+    add("4");
 }};
 for (int i = 0; i < list.size(); i++) {
-  if (list.get(i).equals("3")) {
-    list.remove(i);
-  }
+    if (list.get(i).equals("3")) {
+        list.remove(i);
+    }
 }
 ```
 
 答：不能删除干净，最终删除的结果是 2、3、4，有一个 3 删除不掉，原因我们看下图：
-![图片描述](5d5fc748000129db13361068.png)从图中我们可以看到，每次删除一个元素后，该元素后面的元素就会往前移动，而此时循环的 i 在不断地增长，最终会使每次删除 3 的后一个 3 被遗漏，导致删除不掉。
+![图片描述](pic/5d5fc748000129db13361068.png)从图中我们可以看到，每次删除一个元素后，该元素后面的元素就会往前移动，而此时循环的 i 在不断地增长，最终会使每次删除 3 的后一个 3 被遗漏，导致删除不掉。
 
 #### 2.2 还是上面的 ArrayList 数组，我们通过增强 for 循环进行删除，可以么？
 
