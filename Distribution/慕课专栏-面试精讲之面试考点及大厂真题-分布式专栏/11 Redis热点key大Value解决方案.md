@@ -42,7 +42,7 @@
 
  
 
-\1. **提前获知法：**
+1.**提前获知法：**
 根据业务，人肉统计 or 系统统计可能会成为热点的数据，如，促销活动商品，热门话题，节假日话题，纪念日活动等。
 
  
@@ -50,31 +50,13 @@
 2.**Redis 客户端收集法：**
 调用端通过计数的方式统计 key 的请求次数，但是无法预知 key 的个数，代码侵入性强。
 
-```
+```java
 public Connection sendCommand(final ProtocolCommand cmd, final byte[]... args) {
-
-
-
     //从参数中获取key
-
-
-
     String key = analysis(args);
-
-
-
     //计数
-
-
-
     counterKey(key);
-
-
-
     //ignore
-
-
-
 }
 ```
 
@@ -83,19 +65,19 @@ public Connection sendCommand(final ProtocolCommand cmd, final byte[]... args) {
 3.**Redis 集群代理层统计：**
 像 Twemproxy，codis 这些基于代理的 Redis 分布式架构，统一的入口，可以在 Proxy 层做收集上报，但是缺点很明显，并非所有的 Redis 集群架构都有 proxy。
 
-![图片描述](aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTIxMjNjNzAwMDEyZjc4MTI5NDEwMDQucG5n)
+![图片描述](pic/aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTIxMjNjNzAwMDEyZjc4MTI5NDEwMDQucG5n)
 
  
 
 4.**Redis 服务端收集：**
 监控 Redis 单个分片的 QPS，发现 QPS 倾斜到一定程度的节点进行 monitor，获取热点 key， Redis 提供了 monitor 命令，可以统计出一段时间内的某 Redis 节点上的所有命令，分析热点 key，在高并发条件下，会存在内存暴涨和 Redis 性能的隐患，所以此种方法适合在短时间内使用；同样只能统计一个 Redis 节点的热点 key，对于集群需要汇总统计，业务角度讲稍微麻烦一点。
 
-![图片描述](aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTIxMjNkOTAwMDFlYzE0MTM0ODEwMjAucG5n)
+![图片描述](pic/aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTIxMjNkOTAwMDFlYzE0MTM0ODEwMjAucG5n)
 以上为说的这 4 个方法都是现在业界比较常用的，方法，我通过学习 Redis 源码还有一个新的想法。第 5 种：修改 Redis 源码。
 
  
 
-\5. **修改 Redis 源代码：(从读源码中想到的思路)**
+5.**修改 Redis 源代码：(从读源码中想到的思路)**
 我发现 Redis4.0 为我们带来了许多新特性，其中便包括基于 LFU 的热点 key 发现机制，有了这个新特性，我们就可以在此基础上实现热点 key 的统计，这个只是我的个人思路。
 
 面试官心理：小伙子还挺有想法，思路挺开阔，还打起了修改源码的注意，我都没这个野心。团队里就需要这样的人。
@@ -116,11 +98,14 @@ public Connection sendCommand(final ProtocolCommand cmd, final byte[]... args) {
 
 1.**key 拆分**：
 如果当前 key 的类型是一个二级数据结构，例如哈希类型。如果该哈希元素个数较多，可以考虑将当前 hash 进行拆分，这样该热点 key 可以拆分为若干个新的 key 分布到不同 Redis 节点上，从而减轻压力
-\2. **迁移热点 key：**
+
+2.**迁移热点 key：**
 以 Redis Cluster 为例，可以将热点 key 所在的 slot 单独迁移到一个新的 Redis 节点上，这样这个热点 key 即使 QPS 很高，也不会影响到整个集群的其他业务，还可以定制化开发，热点 key 自动迁移到独立节点上，这种方案也较**多副本**。
-\3. **热点 key 限流：**
+
+3.**热点 key 限流：**
 对于读命令我们可以通过迁移热点 key 然后添加从节点来解决，对于写命令我们可以通过单独针对这个热点 key 来限流。
-\4. **增加本地缓存：**
+
+4.**增加本地缓存：**
 对于数据一致性不是那么高的业务，可以将热点 key 缓存到业务机器的本地缓存中，因为是业务端的本地内存中，省去了一次远程的 IO 调用。但是当数据更新时，可能会造成业务和 Redis 数据不一致。
 
 面试官：你回答得很好，考虑得很全面。
@@ -141,38 +126,30 @@ public Connection sendCommand(final ProtocolCommand cmd, final byte[]... args) {
 
 > 注：（经验值不是标准，都是根据集群运维人员长期观察线上 case 总结出来的）
 
-\1. **大**：string 类型 value > 10K，set、list、hash、zset 等集合数据类型中的元素个数 > 1000。
-\2. **超大：** string 类型 value > 100K，set、list、hash、zset 等集合数据类型中的元素个数 > 10000。
+1.**大**：string 类型 value > 10K，set、list、hash、zset 等集合数据类型中的元素个数 > 1000。
+
+2.**超大：** string 类型 value > 100K，set、list、hash、zset 等集合数据类型中的元素个数 > 10000。
 
 由于 Redis 是单线程运行的，如果一次操作的 value 很大会对整个 redis 的响应时间造成负面影响，所以，业务上能拆则拆，下面举几个典型的分拆方案：
 
-\1. 一个较大的 key-value 拆分成几个 key-value ，将操作压力平摊到多个 redis 实例中，降低对单个 redis 的 IO 影响
+1.一个较大的 key-value 拆分成几个 key-value ，将操作压力平摊到多个 redis 实例中，降低对单个 redis 的 IO 影响
 
-\2. 将分拆后的几个 key-value 存储在一个 hash 中，每个 field 代表一个具体的属性，使用 hget,hmget 来获取部分的 value，使用 hset，hmset 来更新部分属性。
+2.将分拆后的几个 key-value 存储在一个 hash 中，每个 field 代表一个具体的属性，使用 hget,hmget 来获取部分的 value，使用 hset，hmset 来更新部分属性。
 
 3.hash、set、zset、list 中存储过多的元素
 类似于场景一种的第一个做法，可以将这些元素分拆。
 以 hash 为例，原先的正常存取流程是:
 
-```
+```java
 hget(hashKey, field); 
-
-
-
 hset(hashKey, field, value)
 ```
 
 现在，固定一个桶的数量，比如 10000，每次存取的时候，先在本地计算 field 的 hash 值，模除 10000，确定该 field 落在哪个 key 上，核心思想就是将 value 打散，每次只 get 你需要的。
 
-```
+```java
 newHashKey = hashKey + (hash(field) % 10000); 
-
-
-
 hset(newHashKey, field, value); 
-
-
-
 hget(newHashKey, field)
 ```
 

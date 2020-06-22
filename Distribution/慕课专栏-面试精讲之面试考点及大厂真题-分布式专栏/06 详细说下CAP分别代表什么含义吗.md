@@ -36,7 +36,7 @@ CAP 问题已经成了计算机科学中一个研究领域，之前说到分布�
 - 同时满足可用性（A）和分区容错性（P）就要牺牲掉一致性（C）
 - 同时满足一致性（C）和分区容错性（P）就要牺牲掉可用性（A）
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5ODgxMDAwMWJkZGIxMTE2MTAwOC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5ODgxMDAwMWJkZGIxMTE2MTAwOC5wbmc)
 
 （开始拿起纸笔画了三个圈圈）
 
@@ -51,7 +51,7 @@ CAP 问题已经成了计算机科学中一个研究领域，之前说到分布�
 ## 举例深入分析
 
 用 **Redis Cluster** 高可用架构举例：Redis 就能会将数据分片到多个实例 (按照 slot 存储) 中，即一个机房分担一部分数据。Master 负责写，Master 会自动同步到 Slave。
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTMwMWFiMDAwMWY5ZWMxNDkwMTIyMC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTMwMWFiMDAwMWY5ZWMxNDkwMTIyMC5wbmc)
 
 **Redis 去中心集群架构优点：**
 \1. 无中心架构：三机房部署，其中一主一从构成一个分片，之间通过异步复制同步数据，异步复制存在数据不一致的时间窗口，保证高性能的同时牺牲了部分一致性。一旦某个机房掉线，则分片上位于另一个机房的 ***slave*** 会被提升为 ***master*** 从而可以继续提供服务。

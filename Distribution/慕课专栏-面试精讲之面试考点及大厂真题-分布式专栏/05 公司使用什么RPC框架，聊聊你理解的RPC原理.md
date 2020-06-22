@@ -22,7 +22,7 @@ RPC 是一个分布式计算的 CS 模式，总是由 Client 向 Server 发出�
 
 这些 RPC 大致原理基本都是一样的。（这个时候，跟面试官要纸和笔，画图解释 RPC 原理）
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5ODA0MDAwMThjZDMxNTk2MDkxNi5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5ODA0MDAwMThjZDMxNTk2MDkxNi5wbmc)
 
  
 
@@ -72,7 +72,7 @@ RPC 是一个分布式计算的 CS 模式，总是由 Client 向 Server 发出�
 ## 4. 面试官：你对 RPC 了解的很透彻，那你能否自己写一个 RPC 框架？可以简答描述下思路也行。
 
 **我：** 这个问题，虽然没有自己动手写过，但是我阅读过源码，大致实现思路是这样的。（画图给面试官）
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5N2E5MDAwMTNiNjIwOTc2MTEwMi5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5N2E5MDAwMTNiNjIwOTc2MTEwMi5wbmc)
 
 1. 客户端 invoke 方法编写，使用 JDK 的动态代理技术，客户端调用远程服务方法时调用的是 InvocationHandler 的 invoke 方法。
 2. 客户端 Filter 方法编写，完善的 RPC 框架少不了监控、路由、降级、鉴权等功能。

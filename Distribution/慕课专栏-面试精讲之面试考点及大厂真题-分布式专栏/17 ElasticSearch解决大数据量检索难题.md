@@ -39,7 +39,7 @@ ElasticSearch是开源的，它基于lucene，是伸缩性强、分布式、高�
 
 系统架构图这样的：（尽量给面试官展示明白这个图）
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMzI1ZGZkMDAwMTU3ZDIyODY2MTYwMC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMzI1ZGZkMDAwMTU3ZDIyODY2MTYwMC5wbmc)
 重点关注红色框，我使用了 ES 作为首选订单查询源，MySQL作为备份数据源，中间加入自动降级开关。
 
 **面试官：那使用了ES后结果如何？**
@@ -50,7 +50,7 @@ ElasticSearch是开源的，它基于lucene，是伸缩性强、分布式、高�
 
 我还保留了性能监控的图放在我述职报告里，为升级加薪打下扎实的基础。
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMzI1ZGFhMDAwMTY4MmIyODA2MTU0OC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMzI1ZGFhMDAwMTY4MmIyODA2MTU0OC5wbmc)
 
 面试官一直点头，对我这一波操作非常认可。
 
@@ -104,58 +104,19 @@ ES属于文档型数据库，文档的概念就相当于MySQL里一条数据的�
 使用ES保存后结构如下：
 
 ```
- hello                (1, 1) 
-
-
-
+ hello                (1, 1)
  everyone             (1, 2)
-
-
-
  this                 (2, 1)
-
-
-
  article              (2, 2)
-
-
-
  is                   (2, 3); (3, 2)
-
-
-
  based                (2, 4)
-
-
-
  on                   (2, 5)
-
-
-
  inverted             (2, 6)
-
-
-
  index                (2, 7)
-
-
-
  which                (3, 1)
-
-
-
  hashmap              (3, 3)
-
-
-
  like                 (3, 4)
-
-
-
  data                 (3, 5)
-
-
-
  structure            (3, 6)
 ```
 

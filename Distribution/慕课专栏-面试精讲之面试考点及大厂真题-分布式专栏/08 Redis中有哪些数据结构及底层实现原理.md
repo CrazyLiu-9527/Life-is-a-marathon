@@ -1,17 +1,9 @@
-不经一翻彻骨寒，怎得梅花扑鼻香。
-
-——宋帆
-
- 
-
-
-
 ## 引言
 
 07小节面完了负载均衡，正向代理，反向代理，终于松了一口气，然后话题转向了缓存Redis，为什么是这个顺序呢？
 
 回想了一下系统架构，我大概知道原因了。
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5YTU0MDAwMTNiMWQxMTA4MTA3OC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5YTU0MDAwMTNiMWQxMTA4MTA3OC5wbmc)
 
 Redis 处于服务最上层。面试官是按照这个顺序从上到下考察我对整个系统设计能力，围着整个系统自顶向下的结构考察基础。不纠结这么多，反正先问后问，Redis一定是你必须掌握的。
 
@@ -36,7 +28,7 @@ Redis 处于服务最上层。面试官是按照这个顺序从上到下考察�
 
 工作中负责过的一个风控系统在日常24H中 Redis集群 QPS 曲线图，从业务低峰期几千或晚高峰最高30W，一个 Redis 集群都可轻松应对，30WQPS 在大型系统中流量并不算高，且不是核心系统，如果在多几倍几十倍多流量，一个结构优良的Redis 集群都可轻松应对，这充分说明了我们为什么要使用缓存，缓存可以把系统响应能力提高N个数量级，远高于传统基于硬盘的关系型数据库
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5YTFkMDAwMThhNjEyMTAwMTQwMC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5YTFkMDAwMThhNjEyMTAwMTQwMC5wbmc)
 
 面试官心想：看来是做足了功课。
 
@@ -91,63 +83,24 @@ Redis 处于服务最上层。面试官是按照这个顺序从上到下考察�
 
 简单动态字符串（simple dynamic string）简称SDS。Redis使用C语言编写，但是传统的C字符串使用长度为 **N+1** 的字符串数组来表示长度为N的字符串，所以为了获取一个长度为C字符串的长度，必须遍历整个字符串。和C字符串不同，动态字符串的数据结构中，有专门用于保存字符串长度的变量，我们可以通过获取len属性的值，直接知道字符串长度，从一定程度上提高了读取效率。
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5OWVkMDAwMWE0NzkwMzE5MDE3NC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5OWVkMDAwMWE0NzkwMzE5MDE3NC5wbmc)
 
 Redis源码中，动态字符串的定义：
 
-```
-/*  
-
-
-
+```java
+/* 
  * 保存字符串对象的结构  
-
-
-
  */  
-
-
-
 struct sdshdr {  
 
-
-
-      
-
-
-
     // buf 中已占用空间的长度  
-
-
-
     int len;  
 
-
-
-  
-
-
-
     // buf 中剩余可用空间的长度  
-
-
-
     int free;  
 
-
-
-  
-
-
-
     // 数据空间  
-
-
-
     char buf[];  
-
-
-
 };
 ```
 
@@ -168,7 +121,7 @@ struct sdshdr {
 3. 订阅/发送模块使用双端链表来保存订阅模式的多个客户端。
 4. 事件模块使用双端链表来保存时间事件（time event）。
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5OWQwMDAwMWRkMDAwNjA3MDIwNS5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMTI5OWQwMDAwMWRkMDAwNjA3MDIwNS5wbmc)
 
 
 

@@ -35,35 +35,14 @@
 
 造成穿透的伪代码多为这样：
 
-```
+```java
 if(redis.get(key) == null){
-
-
-
-  // redis数据不存在或已经过期 查询数据库
-
-
-
- Object value = dao.query(key);
-
-
-
-  // 重新将value刷入缓存。
-
-
-
-  redis.set(key);
-
-
-
+  	// redis数据不存在或已经过期 查询数据库
+ 	Object value = dao.query(key);
+  	// 重新将value刷入缓存。
+  	redis.set(key);
 } else {
-
-
-
-  return reids.get(key);
-
-
-
+  	return reids.get(key);
 }
 ```
 
@@ -75,43 +54,16 @@ if(redis.get(key) == null){
 
 伪代码：
 
-```
+```java
 try {
-
-
-
-  Object value = dao.query(key); // 从数据库中查询数据
-
-
-
-  if (value == null) {
-
-
-
-    redis.set(key, null, 20);   // set null值，10ms过期时间
-
-
-
-  } else {
-
-
-
-    redis.set(key, value, 1000);
-
-
-
-  }
-
-
-
+  	Object value = dao.query(key); // 从数据库中查询数据
+  	if (value == null) {
+    	redis.set(key, null, 20);   // set null值，10ms过期时间
+  	} else {
+    	redis.set(key, value, 1000);
+  	}
 } catch(Exception e) {
-
-
-
-  redis.set(key, null, 20);
-
-
-
+  	redis.set(key, null, 20);
 }
 ```
 
@@ -127,67 +79,22 @@ try {
 
 业界比较常用的做法，是使用mutex。简单地来说，就是在缓存失效的时候（判断拿出来的值为空），不是立即去load db，而是先使用缓存工具的某些带成功操作返回值的操作（比如Redis的SETNX或者Memcache的ADD）去set一个mutex key，当操作返回成功时，再进行load db的操作并回设缓存；否则，就重试整个get缓存的方法。类似下面的代码：
 
-```
+```java
 public String get(key) {
-
-
-
     String value = redis.get(key);
-
-
-
     if (value == null) { //代表缓存值过期
-
-
-
         //设置3min的超时，防止del操作失败的时候，下次缓存过期一直不能load db
-
-
-
         if (redis.setnx(key_mutex, 1, 3 * 60) == 1) {  //代表设置成功
-
-
-
             value = db.get(key);
-
-
-
-                    redis.set(key, value, expire_secs);
-
-
-
-                    redis.del(key_mutex);
-
-
-
-            } else {  //这个时候代表同时候的其他线程已经load db并回设到缓存了，这时候重试获取缓存值即可
-
-
-
-                    sleep(50);
-
-
-
-                    get(key);  //重试
-
-
-
-            }
-
-
-
-        } else {
-
-
-
-            return value;      
-
-
-
+            redis.set(key, value, expire_secs);
+            redis.del(key_mutex);
+		} else {  //这个时候代表同时候的其他线程已经load db并回设到缓存了，这时候重试获取缓存值即可
+            sleep(50);
+            get(key);  //重试
         }
-
-
-
+	} else {
+		return value;      
+	}
 }
 ```
 
@@ -203,7 +110,7 @@ public String get(key) {
 
 公司 app 首页右上角有一个【未读消息】功能。（出于公司规定，我不能直接把公司的东西搬上来，用JD代替）
 
-![图片描述](aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWIzYTAwMDFjMTAzMTA4MDIzMzgucG5n)
+![图片描述](pic/aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWIzYTAwMDFjMTAzMTA4MDIzMzgucG5n)
 APP用户打开页面都要轮询一遍未读消息。比如对于京东 APP 首页，每个用户每次进入都会查询有没有未读消息，公司用户总数是数亿级别，但是实际上并不是真的每个用户都有未读消息，对于没有未读消息的用户，也需要查询未读消息，甚至需要查询DB，实际上是比较浪费的，当类似场景越来越多，DB负载越来越大，服务后台经常发出高压报警，项目初期没有考虑到这个问题，导致部分服务发出告警。
 
 接口初期的设计是这样的，在Redis记录了有消息的用户userId，用户打开app，查询一次Redis，返回true代表有消息，然后查询真正的Redis消息列表或者DB等其它后续操作。如果返回，当用户量逐渐变大，内存或Redis占用的空间也越来越多，有几千万、甚至几亿用户，那么内存空间会增加很多。如果是存储URL之类的字符串，消耗的内存简直是不能忍受。某些场景对所有用户轮询DB也是不可取的。
@@ -243,7 +150,7 @@ BloomFilter检索一个元素是否在一个集合中有一定的错误率（很
 
 x1和x2可能都会映射到同一位。
 
-![图片描述](aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWIxODAwMDE4MGRiMDU5MDAxNTYucG5n)
+![图片描述](pic/aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWIxODAwMDE4MGRiMDU5MDAxNTYucG5n)
 如何根据输入元素个数n，确定位数组m的大小及Hash函数个数？已知文献证明，当Hash函数个数k=(ln2)*(m/n)时错误率最小。
 
 BloomFilter有个缺点是不能删除数据，因为删除数据可能会影响到其它数据，有一些增强算法可以实现改功能，但代价比较大，不建议使用。

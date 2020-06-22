@@ -86,7 +86,7 @@ AOF 备份产生的 appendonly.aof 文件较大，数据恢复的时候，也会
 过去的项目中， 公司主要使用的是 Redis-cluster 无中心结构。
 
 （开始画图，能画就画，必须专业一点）
-![图片描述](aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWFjZjAwMDFmOWVjMTQ5MDEyMjAucG5n)
+![图片描述](pic/aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWFjZjAwMDFmOWVjMTQ5MDEyMjAucG5n)
 
 **Redis Cluste 集群模式**
 
@@ -123,7 +123,7 @@ Master-slave 模式中，Master 成为集群中至关重要的一个节点，Mas
 
 还是上面的图，有同学还是不太明白这样设计有什么好处。详细分析下。
 
-![图片描述](aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWFiNjAwMDFmOWVjMTQ5MDEyMjAucG5n)
+![图片描述](pic/aHR0cHM6Ly9pbWcxLnN5Y2RuLmltb29jLmNvbS81ZTEyOWFiNjAwMDFmOWVjMTQ5MDEyMjAucG5n)
 三机房部署，每个机房有一主一从，即一个 Master 对应一个 Slave ，但是你会发现，机房 1 中的 Master 1 连接的 Slave 在机房 2，机房 2 中的 Master 2 连接的 Slave 在机房 3，机房 3 中的 Master 3 连接的 Slave 在机房 1，这样构成一个环，为什么要这样设计？
 
 三机房部署（其中一主一从构成一个分片，之间通过异步复制同步数据，一旦某个机房掉线，则分片上位于另一个机房的 ***slave*** 会被提升为 ***master*** 从而可以继续提供服务） ；每个 ***master*** 负责一部分 ***slot***，数目尽量均摊；客户端对于某个 ***Key*** 操作先通过公式计算（计算方法见下文）出所映射到的 ***slot***，然后直连某个分片，写请求一律走 ***master***，读请求根据路由规则选择连接的分片节点，

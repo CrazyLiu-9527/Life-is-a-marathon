@@ -1,6 +1,6 @@
 ## 引言
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOGZhMDAwMTc5ZWQ0MDAwMzAwMC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOGZhMDAwMTc5ZWQ0MDAwMzAwMC5wbmc)
 
 （图片来源：https://medium.com/）
 
@@ -46,12 +46,12 @@ Kafka 是我工作多年使用最多的消息中间件 ，特点是拥有巨大�
   集群就是 Broker 的集合，多个 Broker 组成一个高可用集群。
 
 **Producer 与 Consumer的关系**
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOTI2MDAwMTcwOWQwMjU4MDE4MC5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOTI2MDAwMTcwOWQwMjU4MDE4MC5wbmc)
 
 **topic 和 Partition 的关系**
 
 一个 **topic** 可以分别存储到多个 **Partition**，每个 **Partition** 有序的。
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOTM4MDAwMTFhODQwNDE2MDI2Ny5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOTM4MDAwMTFhODQwNDE2MDI2Ny5wbmc)
 
 到这里面试官并没有打断我… 我就继续了。
 
@@ -106,7 +106,7 @@ Kafka 是一个高吞吐量分布式消息系统，并且提供了持久化。�
 
 2. 并发，将一个topic拆分多个partition， kafka读写的单位是partition，因此，将一个topic拆分为多个partition可以提高吞吐量。但是，这里有个前提，就是不同partition需要位于不同的磁盘（可以在同一个机器）。如果多个partition位于同一个磁盘，那么意味着有多个进程同时对一个磁盘的多个文件进行读写，使得操作系统会对磁盘读写进行频繁调度，也就是破坏了磁盘读写的连续性。
    在linkedlin的测试中，每台机器就加载了6个磁盘，并且不做raid，就是为了充分利用多磁盘并发读写，又保证每个磁盘连续读写的特性。
-   ![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOTdiMDAwMThmMWYxNjQ3MDUxNS5wbmc)
+   ![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOTdiMDAwMThmMWYxNjQ3MDUxNS5wbmc)
 
    同一个topic会被分散到多个分片上，并行处理。
 
@@ -128,63 +128,22 @@ Kafka 是一个高吞吐量分布式消息系统，并且提供了持久化。�
 
 **伪代码：使用KafKa客户端发送一条消息**
 
-```
+```java
 public class MqProducer {
 
-
-
     private final Logger LOG = LoggerFactory.getLogger(MqProducer.class);
-
-
-
- 
-
-
-
+    
     @Resource
-
-
-
     private Producer payProducer;
 
-
-
- 
-
-
-
     public void sendPayMsg(String msg) {
-
-
-
         try {
-
-
-
             LOG.debug("send msg:{}", msg);
-
-
-
             payProducer.send(msg);//发送出去一条消息。
-
-
-
         } catch (MQException e) {
-
-
-
             LOG.error("mq消息异常 message:{}", msg, e);
-
-
-
         }
-
-
-
     }
-
-
-
 }
 ```
 
@@ -192,7 +151,7 @@ public class MqProducer {
 
 即payProducer.send(msg)里的msg的值：
 
-```
+```java
 {"businessType":1,"cityId":10,"ctime":1567426767077,"dataKey":20190902,"logType":1,"phone":"13212341234","uid":12345678,"userType":1,"uuid":"32EA02C86D78863"}
 ```
 
@@ -200,127 +159,37 @@ public class MqProducer {
 
 **伪代码：接收一条消息**
 
-```
+```JAVA
 public class DemoConsumer {
 
-
-
- 
-
-
-
     /**
-
-
-
-    * 注意：服务端对单ip创建相同主题相同队列的消费者实例数有限制，超过100个拒绝创建.
-
-
-
-    * */
-
-
-
+     * 注意：服务端对单ip创建相同主题相同队列的消费者实例数有限制，超过100个拒绝创建.
+     **/
     private static IConsumerProcessor consumer;
 
-
-
- 
-
-
-
     public static void main(String[] args) throws Exception {
-
-
-
         Properties properties = new Properties();
-
-
-
-            properties.setProperty(ConsumerConstants.SubscribeGroup, "dache.risk.log.queue.v2");
-
-
-
- 
-
-
+		properties.setProperty(ConsumerConstants.SubscribeGroup, "dache.risk.log.queue.v2");
 
         // 创建topic对应的consumer对象（注意每次build调用会产生一个新的实例）
-
-
-
         consumer = KafkaClient.buildConsumerFactory(properties, "topic.xxx.xxx");
 
-
-
- 
-
-
-
         // 调用recvMessageWithParallel设置listener
-
-
-
         consumer.recvMessageWithParallel(String.class, new IMessageListener() {
-
-
-
             @Override
-
-
-
             public ConsumeStatus recvMessage(Message message, MessagetContext context) {
-
-
-
                 //TODO:业务侧的消费逻辑代码
-
-
-
                 try {
-
-
-
                     System.out.println("message=[" + message.getBody() + "]  partition=" + message.getParttion());
-
-
-
                 } catch (Exception e) {
-
-
-
                     e.printStackTrace();
-
-
-
                 }
 
-
-
-              
-
-
-
                 return ConsumeStatus.CONSUME_SUCCESS;
-
-
-
             }
-
-
-
         });
 
-
-
-       
-
-
-
     }
-
-
-
 }
 ```
 
@@ -336,7 +205,7 @@ public class DemoConsumer {
 
 1. **Kafka Manager** ：由 yahoo 团队开发。使用可参考：https://github.com/yahoo/kafka-manager
 
-![图片描述](aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOWNlMDAwMTdlNTYyMTI2MTA2Mi5wbmc)
+![图片描述](pic/aHR0cHM6Ly9pbWcubXVrZXdhbmcuY29tLzVlMjNiOWNlMDAwMTdlNTYyMTI2MTA2Mi5wbmc)
 \2. **Kafka Lens**：开源项目，允许开发人员在通过代理传递消息时查看消息，也可以按分区过滤消息。
 
 参考：https://github.com/kafka-lens/kafka-lens
