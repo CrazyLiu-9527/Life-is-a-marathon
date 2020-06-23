@@ -2,39 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/BST.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/BSTSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/FileOperation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/LinkedList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/LinkedListSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/LinkedListSet02/Set.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/SetBasicAndBSTSet01/BST.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/SetBasicAndBSTSet01/BSTSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/SetBasicAndBSTSet01/FileOperation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/SetBasicAndBSTSet01/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/SetBasicAndBSTSet01/Set.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/BST.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/BSTSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/FileOperation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/LinkedList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/LinkedListSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03/Set.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/resources/a-tale-of-two-cities.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/resources/pride-and-prejudice.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/AddElementsInLinkedList02/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/AddElementsInLinkedList02/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/DummyHeadInLinkedList03/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/DummyHeadInLinkedList03/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/ImplentStackInLinkedList06/Array.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/ImplentStackInLinkedList06/Array.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/ImplentStackInLinkedList06/ArrayStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/ImplentStackInLinkedList06/ArrayStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/ImplentStackInLinkedList06/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/ImplentStackInLinkedList06/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/ImplentStackInLinkedList06/LinkedListStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/ImplentStackInLinkedList06/LinkedListStack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/ImplentStackInLinkedList06/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/ImplentStackInLinkedList06/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/ImplentStackInLinkedList06/Stack.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/ImplentStackInLinkedList06/Stack.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/LinkedListBasic01/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/LinkedListBasic01/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/QueryAndUpdateInLinedList04/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/QueryAndUpdateInLinedList04/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/RemoveElementInLinkedList05/LinkedList.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/RemoveElementInLinkedList05/LinkedList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkList/RemoveElementInLinkedList05/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/LinkedList/RemoveElementInLinkedList05/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TreeSetAndSetProblemsInLeetCode04/Solution.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,7 +187,7 @@
       <workItem from="1591843081806" duration="1440000" />
       <workItem from="1592386127389" duration="4982000" />
       <workItem from="1592633155693" duration="10658000" />
-      <workItem from="1592879423441" duration="2833000" />
+      <workItem from="1592879423441" duration="3820000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -281,10 +249,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592882084091" />
-    <state x="453" y="111" key="CommitChangelistDialog2" timestamp="1589875295617">
+    <state x="453" y="111" key="CommitChangelistDialog2" timestamp="1592891621868">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589875295617" />
+    <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891621868" />
     <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1591844947675">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
