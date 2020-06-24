@@ -16,8 +16,15 @@
         <module name="Others" />
         <module name="DataStructure" />
       </profile>
+      <profile name="Annotation profile for Algorithms" enabled="true">
+        <sourceOutputDir name="../../Algorithms/target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../../Algorithms/target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Algorithms" />
+      </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Algorithms" target="1.5" />
       <module name="Concurrency" target="1.5" />
       <module name="DataStructure" target="8" />
       <module name="DesignPatterns" target="1.5" />

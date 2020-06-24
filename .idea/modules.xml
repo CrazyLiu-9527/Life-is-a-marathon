@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/Algorithms.iml" filepath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/Algorithms.iml" />
       <module fileurl="file://$PROJECT_DIR$/Concurrency/Concurrency.iml" filepath="$PROJECT_DIR$/Concurrency/Concurrency.iml" />
       <module fileurl="file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/DataStructure.iml" filepath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/DataStructure.iml" />
       <module fileurl="file://$PROJECT_DIR$/DesignPatterns/DesignPatterns.iml" filepath="$PROJECT_DIR$/DesignPatterns/DesignPatterns.iml" />
