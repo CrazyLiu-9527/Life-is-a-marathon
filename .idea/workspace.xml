@@ -2,7 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TreeSetAndSetProblemsInLeetCode04/Solution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/AddAndSiftUpInHeap03/Array.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/AddAndSiftUpInHeap03/MaxHeap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/Array.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/MaxHeap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/HeapifyAndReplaceInHeap05/Array.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/HeapifyAndReplaceInHeap05/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/HeapifyAndReplaceInHeap05/MaxHeap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/HeapsBasic02/Array.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/HeapsBasic02/MaxHeap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueue06/Array.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueue06/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueue06/MaxHeap.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueue06/PriorityQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueue06/Queue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueueInJava08/Solution.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueueInJava08/Solution2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueueInJava08/Solution3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueueInJava08/Solution4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueueInJava08/Solution5.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueueProblemsInLeetcode07/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/SetAndMap/LinkedListSet02/a-tale-of-two-cities.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/SetAndMap/LinkedListSet02/pride-and-prejudice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/SetAndMap/SetBasicAndBSTSet01/a-tale-of-two-cities.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/SetAndMap/SetBasicAndBSTSet01/pride-and-prejudice.txt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +64,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/TimeComplexityOfSet03" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/PriorityQueue06" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -54,15 +78,15 @@
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Midiator" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\PriorityQueue06" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\HeapifyAndReplaceInHeap05" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\ExtractAndSiftDownInHeap04" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\AddAndSiftUpInHeap03" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\SetAndMap\TimeComplexityOfSet03" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\resources" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\SetAndMap\LinkedListSet02" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\Recursion\LinkedListAndRecursion04" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="SetAndMap.LinkedListSet02" />
@@ -71,11 +95,11 @@
       <recent name="BinarySearchTree.InOrderAndPostOrderTraverse07" />
       <recent name="Recursion.LinkedListAndRecursion04" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Midiator" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main (3)">
+  <component name="RunManager" selected="Application.Main (4)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BinarySearchTree.InOrderAndPostOrderTraverse07.Main" />
       <module name="DataStructure" />
@@ -115,6 +139,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main (4)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="HeapAndPriorityQueue.ExtractAndSiftDownInHeap04.Main" />
+      <module name="DataStructure" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="HeapAndPriorityQueue.ExtractAndSiftDownInHeap04.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="BinarySearchTree.PreOrderTraverseInBST06.Main" />
       <module name="DataStructure" />
@@ -128,26 +165,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Solution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Recursion.DebugRecursiveSolution06.Solution" />
-      <module name="DataStructure" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Recursion.DebugRecursiveSolution06.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (4)" />
         <item itemvalue="Application.Main (3)" />
         <item itemvalue="Application.Main (2)" />
         <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Solution" />
       </list>
     </recent_temporary>
   </component>
@@ -188,6 +212,7 @@
       <workItem from="1592386127389" duration="4982000" />
       <workItem from="1592633155693" duration="10658000" />
       <workItem from="1592879423441" duration="3842000" />
+      <workItem from="1592967121406" duration="4173000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -229,10 +254,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491041789" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592879943646">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592979359177">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592879943646" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592979359177" />
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589890698689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -257,38 +282,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1591844947675" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1592978529483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529483" />
+    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1592978529481">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1592891639651">
+    <state width="1877" height="284" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529481" />
+    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1592978529481">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639651" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529481" />
+    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1592978529481">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
-    <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529481" />
+    <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1592978529483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
-    <state width="1877" height="284" key="GridCell.Tab.1.center" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529483" />
+    <state width="1877" height="284" key="GridCell.Tab.1.center" timestamp="1592978529483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
-    <state width="1877" height="284" key="GridCell.Tab.1.left" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529483" />
+    <state width="1877" height="284" key="GridCell.Tab.1.left" timestamp="1592978529483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
-    <state width="1877" height="284" key="GridCell.Tab.1.right" timestamp="1592891639652">
+    <state width="1877" height="284" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529483" />
+    <state width="1877" height="284" key="GridCell.Tab.1.right" timestamp="1592978529483">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891639652" />
+    <state width="1877" height="284" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592978529483" />
     <state x="603" y="230" key="RollbackChangesDialog" timestamp="1589940554717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -321,10 +346,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592644737040" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592638477495">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592969023239">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592638477495" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592969023239" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -358,6 +383,26 @@
           <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/SetAndMap/SetBasicAndBSTSet01/FileOperation.java</url>
           <line>22</line>
           <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/Main.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/MaxHeap.java</url>
+          <line>73</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/Array.java</url>
+          <line>58</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/src/main/java/HeapAndPriorityQueue/ExtractAndSiftDownInHeap04/Array.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
