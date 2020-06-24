@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency" />
+    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/025eb154368a4c50a1fdcb487e250e31.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/7ad8d2cf16f347a2a1485341be9ca458.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/89b5db42da23456f9298058957282b43.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/93db0ecbc6ed4c709ecdd72280b19f66.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/e48b6434804d46a48e6aecf0c4119e9a.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/f8e66e885fba4d2e8ac65db744337112.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/JavaBasic/src/main/resources/搞懂Java8的Lambda、函数式接口、Stream用法 原理.md" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,7 +196,7 @@
       <workItem from="1592633155693" duration="10658000" />
       <workItem from="1592879423441" duration="3842000" />
       <workItem from="1592967121406" duration="4215000" />
-      <workItem from="1592980478817" duration="2840000" />
+      <workItem from="1592980478817" duration="3014000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
