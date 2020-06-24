@@ -1,9 +1,8 @@
 package SortingAlgorithm;
 
-import java.security.PrivateKey;
-
 /**
  * 快速排序
+ * 核心思想 分治
  * 时间复杂度O（nlogn）
  *
  * @author zhiyuanliu
@@ -12,7 +11,7 @@ import java.security.PrivateKey;
 public class QuickSort {
 
     /**
-     * 快排
+     * 普通快排
      *
      * @param arr 要进行排序的数组
      * @param L   指向数组最左侧的元素
@@ -45,7 +44,8 @@ public class QuickSort {
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
-                i++; j--;
+                i++;
+                j--;
             }
         }
 
@@ -59,6 +59,16 @@ public class QuickSort {
             quickSort(arr, i, R);
         }
     }
+
+    /**
+     * 双路快排
+     * @param args
+     */
+
+    /**
+     * 三路快排
+     * @param args
+     */
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 5, 3, 7, 6};

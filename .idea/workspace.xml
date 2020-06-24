@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/QuickSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/QuickSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/resources/排序算法总结.md" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/resources/排序算法总结.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/META-INF/DataStructure.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/a-tale-of-two-cities.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/pride-and-prejudice.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/时间复杂度和空间复杂度.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +192,7 @@
       <workItem from="1592633155693" duration="10658000" />
       <workItem from="1592879423441" duration="3842000" />
       <workItem from="1592967121406" duration="4215000" />
-      <workItem from="1592980478817" duration="5819000" />
+      <workItem from="1592980478817" duration="7275000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
