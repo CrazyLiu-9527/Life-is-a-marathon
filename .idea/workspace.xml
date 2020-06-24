@@ -2,39 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/12c5fa80272e40deaf59cc565929abf9" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/12c5fa80272e40deaf59cc565929abf9.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/1516484702085.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/1e8fe8e932ff4b76aa62e1ef6e343cc7" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/1e8fe8e932ff4b76aa62e1ef6e343cc7.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/2d3f829ffaba4a22835179d48d4f66a0" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/2d3f829ffaba4a22835179d48d4f66a0.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/424612368e19428d92ba9d44e4480615" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/424612368e19428d92ba9d44e4480615.jfif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/608eeeedff8c4bbe963cbeeb3139ccba.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/636b37733e9244f38b2c56de22f5b3bb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/636b37733e9244f38b2c56de22f5b3bb.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/8ded3b386f804e4ab67145141f48676a" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/8ded3b386f804e4ab67145141f48676a.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/90d48d3b91ea42348e748d01f591e217" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/90d48d3b91ea42348e748d01f591e217.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/Image(1).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/Image(2).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/Image(3).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/Image(4).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/Image(5).png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/Image.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/bc1785ecf80e4e29ab2bf34838c529ca" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/bc1785ecf80e4e29ab2bf34838c529ca.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/ca2ca9c53a554a0b8d44151290a3e496.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/d3d3edabbeac487e95330aaf1c381bd1" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/d3d3edabbeac487e95330aaf1c381bd1.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/pic/e56078d866944d83a9e6d3af272b7e36.jfif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/排序算法总结.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithms/target/classes/查找算法总结.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/QuickSort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/BubbleSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/BubbleSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/resources/排序算法总结.md" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/resources/排序算法总结.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/META-INF/DataStructure.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/a-tale-of-two-cities.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/pride-and-prejudice.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure/target/classes/时间复杂度和空间复杂度.md" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +37,7 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
+    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -91,11 +64,11 @@
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\PriorityQueue06" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\HeapifyAndReplaceInHeap05" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\ExtractAndSiftDownInHeap04" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\AddAndSiftUpInHeap03" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\SetAndMap\TimeComplexityOfSet03" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="SetAndMap.LinkedListSet02" />
@@ -222,7 +195,7 @@
       <workItem from="1592633155693" duration="10658000" />
       <workItem from="1592879423441" duration="3842000" />
       <workItem from="1592967121406" duration="4215000" />
-      <workItem from="1592980478817" duration="5499000" />
+      <workItem from="1592980478817" duration="5819000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -292,21 +265,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1591844947675" />
-    <state width="1877" height="155" key="GridCell.Tab.0.bottom" timestamp="1592991936404">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1637" height="155" key="GridCell.Tab.0.bottom" timestamp="1592992276245">
+      <screen x="-1680" y="0" width="1680" height="1010" />
     </state>
+    <state width="1637" height="155" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
     <state width="1877" height="155" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592991936404" />
-    <state width="1877" height="155" key="GridCell.Tab.0.center" timestamp="1592991936404">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1637" height="155" key="GridCell.Tab.0.center" timestamp="1592992276245">
+      <screen x="-1680" y="0" width="1680" height="1010" />
     </state>
+    <state width="1637" height="155" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
     <state width="1877" height="155" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592991936404" />
-    <state width="1877" height="155" key="GridCell.Tab.0.left" timestamp="1592991936404">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1637" height="155" key="GridCell.Tab.0.left" timestamp="1592992276245">
+      <screen x="-1680" y="0" width="1680" height="1010" />
     </state>
+    <state width="1637" height="155" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
     <state width="1877" height="155" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592991936404" />
-    <state width="1877" height="155" key="GridCell.Tab.0.right" timestamp="1592991936404">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1637" height="155" key="GridCell.Tab.0.right" timestamp="1592992276245">
+      <screen x="-1680" y="0" width="1680" height="1010" />
     </state>
+    <state width="1637" height="155" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
     <state width="1877" height="155" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592991936404" />
     <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1592990580459">
       <screen x="0" y="0" width="1920" height="1040" />
