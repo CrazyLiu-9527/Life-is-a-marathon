@@ -51,7 +51,7 @@ void linkLast(E e) {
     last = newNode;
     //如果链表为空（l 是尾节点，尾节点为空，链表即空），头部和尾部是同一个节点，都是新建的节点
     if (l == null)
-        first = newNode;![图片描述](//img1.sycdn.imooc.com/5d5fc69600013e4803600240.gif)
+        first = newNode;
     //否则把前尾节点的下一个节点，指向当前尾节点。
     else
         l.next = newNode;
