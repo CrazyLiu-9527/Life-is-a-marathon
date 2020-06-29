@@ -84,7 +84,7 @@ public final static int MAX_PRIORITY = 10;
 
 
 
-###
+
 
 ### 2.4 ClassLoader
 
@@ -260,7 +260,7 @@ private void init(ThreadGroup g, Runnable target, String name,
 join 的意思就是当前线程等待另一个线程执行完成之后，才能继续操作，我们写了一个 demo，如下：
 
 ```java
- @Test
+@Test
 public void join() throws Exception {
     Thread main = Thread.currentThread();
     log.info("{} is run。",main.getName());
@@ -329,7 +329,7 @@ interrupt 中文是打断的意思，意思是可以打断中止正在运行的�
 我们举一个例子来说明如何打断 WAITING 的线程，代码如下：
 
 ```java
- @Test
+@Test
 public void testInterrupt() throws InterruptedException {
     Thread thread = new Thread(new Runnable() {
         @Override

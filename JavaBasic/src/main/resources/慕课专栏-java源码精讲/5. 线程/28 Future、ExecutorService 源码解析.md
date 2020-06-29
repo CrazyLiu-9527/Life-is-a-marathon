@@ -238,7 +238,7 @@ FutureTask 构造器设计很巧妙，将 Runnable 和 Callable 灵活的打通�
 
 我们主要看几个关键的方法实现源码。
 
-3.3.4.1 get
+#### 3.3.4.1 get
 
 get 有无限阻塞和带超时时间两种方法，我们通常建议使用带超时时间的方法，源码如下：
 
@@ -311,7 +311,7 @@ private int awaitDone(boolean timed, long nanos)
 
 get 方法虽然名字叫做 get，但却做了很多 wait 的事情，当发现任务还在进行中，没有完成时，就会阻塞当前进程，等待任务完成后再返回结果值。阻塞底层使用的是 LockSupport.park 方法，使当前线程进入 WAITING 或 TIMED_WAITING 状态。
 
-3.3.4.2 run
+#### 3.3.4.2 run
 
 ```java
 /**
@@ -357,7 +357,7 @@ run 方法我们再说明几点：
 1. run 方法是没有返回值的，通过给 outcome 属性赋值（set(result)），get 时就能从 outcome 属性中拿到返回值；
 2. FutureTask 两种构造器，最终都转化成了 Callable，所以在 run 方法执行的时候，只需要执行 Callable 的 call 方法即可，在执行 c.call() 代码时，如果入参是 Runnable 的话， 调用路径为 c.call() -> RunnableAdapter.call() -> Runnable.run()，如果入参是 Callable 的话，直接调用。
 
-3.3.4.3 cancel
+#### 3.3.4.3 cancel
 
 ```java
 // 取消任务，如果正在运行，尝试去打断
