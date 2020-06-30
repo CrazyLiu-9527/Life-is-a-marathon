@@ -1,7 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency" />
+    <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/constant/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/dto/UserInputDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/constant/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/convert/DtoConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/convert/UserInputDtoConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/dto/UserInputDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/constant/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/convert/Converter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/convert/UserInputConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/dto/UserInputDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/constant/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/controller/ApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/convert/Converter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/convert/UserInputConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/dto/UserInputDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/service/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/resources/这些好用的java技巧，你用过几个.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Others/src/main/resources/题目.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Others/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Others/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Others/src/main/resources/Untitled.md" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,7 +70,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/DataStructure&amp;Algorithms/DataStructure" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Others/src/main/java/refactor/case4" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -47,22 +78,21 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="D:/Work/Nodejs/node" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15654038" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="Midiator" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Others\src\main\java\refactor\case4" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Others\src\main\java\refactor" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Others\src\main\java\refactor\case2\convert\case3" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\PriorityQueue06" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\HeapifyAndReplaceInHeap05" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\ExtractAndSiftDownInHeap04" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\AddAndSiftUpInHeap03" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="SetAndMap.LinkedListSet02" />
@@ -71,8 +101,9 @@
       <recent name="BinarySearchTree.InOrderAndPostOrderTraverse07" />
       <recent name="Recursion.LinkedListAndRecursion04" />
     </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="Midiator" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
   </component>
   <component name="RunManager" selected="Application.ShellSort">
@@ -190,6 +221,7 @@
       <workItem from="1592879423441" duration="3842000" />
       <workItem from="1592967121406" duration="4215000" />
       <workItem from="1592980478817" duration="9931000" />
+      <workItem from="1593486912179" duration="5418000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -223,30 +255,34 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add module concurrency" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Project_Structure" timestamp="1592881251930">
+    <state x="552" y="178" key="#Project_Structure" timestamp="1593487907064">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592881251930" />
+    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593487907064" />
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590491041789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491041789" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1592979359177">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1593491863848">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592979359177" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593491863848" />
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589890698689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589890698689" />
+    <state x="467" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593491587914">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="467" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593491587914" />
     <state x="679" y="378" width="561" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592387130782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="378" width="561" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592387130782" />
-    <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1590134351188">
+    <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1593491785433">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590134351188" />
+    <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593491785433" />
     <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592882084091">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -335,10 +371,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="616" y="240" key="run.anything.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592644737040" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1592969023239">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593496138139">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592969023239" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593496138139" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
