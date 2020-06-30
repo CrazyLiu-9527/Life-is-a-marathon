@@ -20,6 +20,7 @@ public class ApiController {
 
     @PostMapping
     public User addUser(UserInputDto userInputDTO) {
+
         User user = userInputDTO.convertToUser();
 
         // 使用链式调用生成user类 注解 @Accessors(chain = true)

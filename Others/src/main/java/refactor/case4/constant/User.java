@@ -1,7 +1,9 @@
 package refactor.case4.constant;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
@@ -13,6 +15,8 @@ import lombok.experimental.Accessors;
 @Getter
 //@Accessors(chain = true)
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     private String username;
     private int age;

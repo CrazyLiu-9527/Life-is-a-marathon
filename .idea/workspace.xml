@@ -1,37 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="Spring:war exploded" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/constant/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/controller/ApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/dto/UserInputDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case1/service/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/constant/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/controller/ApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/convert/DtoConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/convert/UserInputDtoConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/dto/UserInputDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case2/service/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/constant/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/controller/ApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/convert/Converter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/convert/UserInputConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/dto/UserInputDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case3/service/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/constant/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/controller/ApiController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/convert/Converter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/convert/UserInputConverter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/dto/UserInputDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/service/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/resources/这些好用的java技巧，你用过几个.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Others/src/main/resources/题目.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Others/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Others/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Others/src/main/resources/Untitled.md" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/java/per/lzy/springlearning/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/java/per/lzy/springlearning/controller/AnimalController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/java/per/lzy/springlearning/controller/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/Spring 注解 @Qualifier 详细解析.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Spring/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring AOP代理模式详解.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring IOC和AOP的理解.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring IOC源码分析.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring bean.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring mvc.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring 注解 @Qualifier 详细解析.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring事务管理.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring常见问题.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring注解.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring相关教程资料.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/Spring设计模式.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/0adfc0a543634807a95ddaba7426fb9e.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1591345867496.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a6b2d57b064b" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a6b2d58818e7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a6b2d58ea769" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a6b2d5a2c5ab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a6b2d5a302a7" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a6b2d5fad550" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a71315d1da13" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/1725a71316001230" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/314fd4cd07bd46109a7c1b37ee88ced8.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/3e9878440a2d4b4c8889e76fcc378c75.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/48376272.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/640-1591345547036.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/640.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/663d1ec1-7ebc-41ab-8431-159dc1ec6589.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/69dbcdfd-cd4e-4e31-8baf-bc215fa8b2ca.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/756310-20160924153802543-1643119235.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/756310-20160924161444074-1045394614.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/756310-20161224235824807-1026162849.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724232925685-1218020111-1591269919516.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724232925685-1218020111.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724232926794-492011160.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724232928451-436394388.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724232929357-689970095.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724232930435-505426412.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/799093-20160724233025857-1256444961.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/9122a749-85ea-418e-bbac-104d379812ba.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/a616b84d-9eea-4ad1-b4fc-461ff05e951d.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/ae964c2c-7289-441c-bddd-511161f51ee1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/b4d04547-583f-48ef-b91a-74c0701b220d.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/ba168f13-5de9-495a-8404-09dd71e922e3.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/bda7231b-ab05-4e23-95ee-89ac90ac7fcf.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/c7bacd12-1c1a-4e41-aaaf-4cad840fc073.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/e9430676b1594313be6c6e6c3170f309.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/ed279f05-f5ad-443e-84e9-513a9e777139.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/ee7fb1a1c06f43a88f5fcac2c3ca6daf.jfif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/pic/f6c6f0aa-0f26-49e1-84b3-7f838c7379d1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/doc/敖丙 外行人都能看懂的Spring Cloud.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/Application.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/controller/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SpringFamily/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/constant/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/constant/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/controller/ApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Others/src/main/java/refactor/case4/controller/ApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Spring/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Spring/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +83,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -49,6 +91,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -70,7 +119,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Others/src/main/java/refactor/case4" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/SpringFamily/doc" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -88,25 +137,26 @@
       <recent name="Midiator" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\SpringFamily\doc" />
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\chapter-1-spring-boot-quickstart\src\main\java\com\wdjr\springbootquick" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Others\src\main\java\refactor\case4" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Others\src\main\java\refactor" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Others\src\main\java\refactor\case2\convert\case3" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure" />
-      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms\DataStructure\src\main\java\HeapAndPriorityQueue\PriorityQueue06" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="per.lzy.springlearning" />
       <recent name="SetAndMap.LinkedListSet02" />
       <recent name="SetAndMap.SetBasicAndBSTSet01" />
       <recent name="BinarySearchTree.RemoveMinAndRemoveMaxInBST11" />
       <recent name="BinarySearchTree.InOrderAndPostOrderTraverse07" />
-      <recent name="Recursion.LinkedListAndRecursion04" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\Spring\src\main\java\per" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DataStructure&amp;Algorithms" />
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ShellSort">
+  <component name="RunManager" selected="Tomcat Server.spring-demo">
     <configuration name="BubbleSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.BubbleSort" />
       <module name="Algorithms" />
@@ -172,6 +222,172 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Spring" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="per.lzy.springlearning.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SpringBoot01HelloQuickApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="chapter-1-spring-boot-quickstart" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.wdjr.springbootquick.SpringBoot01HelloQuickApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="spring-demo" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.14" ALTERNATIVE_JRE_ENABLED="true" ALTERNATIVE_JRE_PATH="1.8">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:9000/hello" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_Life-is-a-marathon_4" />
+        <option name="HTTP_PORT" value="9000" />
+        <option name="JNDI_PORT" value="1090" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="55075" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="false" />
+      </method>
+    </configuration>
+    <configuration name="spring" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.14" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:9999/hello" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <artifact name="Spring:war exploded">
+          <settings>
+            <option name="CONTEXT_PATH" value="/" />
+          </settings>
+        </artifact>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="Unnamed_Life-is-a-marathon_3" />
+        <option name="HTTP_PORT" value="9999" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="52131" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="Spring:war exploded" />
+        </option>
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.BubbleSort" />
+      <item itemvalue="Application.InsertionSort" />
+      <item itemvalue="Application.Main (4)" />
+      <item itemvalue="Application.QuickSort" />
+      <item itemvalue="Application.ShellSort" />
+      <item itemvalue="Spring Boot.SpringBoot01HelloQuickApplication" />
+      <item itemvalue="Spring Boot.Application" />
+      <item itemvalue="Tomcat Server.spring" />
+      <item itemvalue="Tomcat Server.spring-demo" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ShellSort" />
@@ -186,8 +402,14 @@
     <option name="viewStates">
       <list>
         <serviceView>
+          <option name="contentProportion" value="0.22619048" />
           <treeState>
-            <expand />
+            <expand>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+            </expand>
             <select />
           </treeState>
         </serviceView>
@@ -221,7 +443,11 @@
       <workItem from="1592879423441" duration="3842000" />
       <workItem from="1592967121406" duration="4215000" />
       <workItem from="1592980478817" duration="9931000" />
-      <workItem from="1593486912179" duration="5418000" />
+      <workItem from="1593486912179" duration="10222000" />
+      <workItem from="1593508283062" duration="5998000" />
+      <workItem from="1593514293042" duration="6075000" />
+      <workItem from="1593521938237" duration="32000" />
+      <workItem from="1593521978062" duration="1518000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -255,26 +481,38 @@
     <option name="LAST_COMMIT_MESSAGE" value="Add module concurrency" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Project_Structure" timestamp="1593487907064">
+    <state x="552" y="178" key="#Notifications" timestamp="1593508291997">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593487907064" />
+    <state x="552" y="178" key="#Notifications/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593508291997" />
+    <state x="552" y="178" key="#Project_Structure" timestamp="1593520684280">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Project_Structure/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593520684280" />
+    <state x="641" y="122" width="652" height="795" key="#Tomcat_9.0.14" timestamp="1593513010403">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="641" y="122" width="652" height="795" key="#Tomcat_9.0.14/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593513010403" />
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593517958092">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="414" y="174" key="#com.intellij.execution.impl.EditConfigurationsDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593517958092" />
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1590491041789">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="682" y="322" key="#com.intellij.fileTypes.FileTypeChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1590491041789" />
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1593491863848">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1593510297618">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593491863848" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593510297618" />
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1589890698689">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="580" y="197" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589890698689" />
-    <state x="467" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593491587914">
+    <state x="467" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog" timestamp="1593519361207">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="467" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593491587914" />
+    <state x="467" y="444" key="#com.intellij.refactoring.move.MoveHandler.SelectRefactoringDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593519361207" />
     <state x="679" y="378" width="561" height="294" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592387130782">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -283,70 +521,110 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="264" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593491785433" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592882084091">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1593508651018">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592882084091" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593508651018" />
+    <state x="641" y="122" key="#spring" timestamp="1593514561173">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="641" y="131" width="652" height="740" key="#spring-demo" timestamp="1593519159312">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="641" y="131" width="652" height="740" key="#spring-demo/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593519159312" />
+    <state x="641" y="122" key="#spring/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593514561173" />
     <state x="453" y="111" key="CommitChangelistDialog2" timestamp="1592891621868">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891621868" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1591844947675">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1593521804114">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1591844947675" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom" timestamp="1593309337371">
+    <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521804114" />
+    <state width="1429" height="366" key="GridCell.Tab.0.bottom" timestamp="1593521862296">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="284" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862296" />
     <state width="1877" height="155" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.0.center" timestamp="1593521862296">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="284" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862296" />
     <state width="1877" height="155" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.0.left" timestamp="1593521862296">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="284" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862296" />
     <state width="1877" height="155" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.0.right" timestamp="1593521862296">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="284" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862296" />
     <state width="1877" height="155" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="284" key="GridCell.Tab.1.bottom" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.1.bottom" timestamp="1593521862297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
     <state width="1877" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="284" key="GridCell.Tab.1.center" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.1.center" timestamp="1593521862297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
     <state width="1877" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="284" key="GridCell.Tab.1.left" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.1.left" timestamp="1593521862297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
     <state width="1877" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="284" key="GridCell.Tab.1.right" timestamp="1593309337371">
+    <state width="1429" height="366" key="GridCell.Tab.1.right" timestamp="1593521862297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="284" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593309337371" />
+    <state width="1429" height="366" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
     <state width="1877" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
+    <state width="1429" height="366" key="GridCell.Tab.2.bottom" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.2.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.2.center" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.2.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.2.left" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.2.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.2.right" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.2.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.3.bottom" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.3.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.3.center" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.3.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.3.left" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.3.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
+    <state width="1429" height="366" key="GridCell.Tab.3.right" timestamp="1593521862297">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1429" height="366" key="GridCell.Tab.3.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521862297" />
     <state x="603" y="230" key="RollbackChangesDialog" timestamp="1589940554717">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="603" y="230" key="RollbackChangesDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589940554717" />
-    <state x="461" y="161" key="SettingsEditor" timestamp="1592386498218">
+    <state x="461" y="161" width="1337" height="717" key="SettingsEditor" timestamp="1593518840574">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="161" key="SettingsEditor/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592386498218" />
+    <state x="461" y="161" width="1337" height="717" key="SettingsEditor/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593518840574" />
     <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1589875356583">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -359,22 +637,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="752" y="436" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592386182743" />
-    <state x="334" y="214" key="new project wizard" timestamp="1592980686702">
+    <state x="636" y="258" width="647" height="524" key="find.popup" timestamp="1593520218591">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="334" y="214" key="new project wizard/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592980686702" />
+    <state x="636" y="258" width="647" height="524" key="find.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593520218591" />
+    <state x="334" y="214" key="new project wizard" timestamp="1593523417172">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="334" y="214" key="new project wizard/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593523417172" />
     <state x="702" y="147" key="refactoring.ChangeSignatureDialog" timestamp="1589979130416">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="702" y="147" key="refactoring.ChangeSignatureDialog/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1589979130416" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1592644737040">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1593522506851">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592644737040" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593496138139">
+    <state x="616" y="240" key="run.anything.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593522506851" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593520283570">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593496138139" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593520283570" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

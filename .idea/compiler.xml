@@ -7,12 +7,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Spring" />
         <module name="MySQL" />
         <module name="DesignPatterns" />
-        <module name="Life-is-a-marathon" />
         <module name="JavaBasic" />
         <module name="Concurrency" />
+        <module name="Life-is-a-marathon" />
+        <module name="SpringFamily" />
         <module name="Others" />
         <module name="DataStructure" />
       </profile>
@@ -23,16 +23,25 @@
         <module name="Algorithms" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="Algorithms" target="1.5" />
+    <bytecodeTargetLevel target="8">
+      <module name="Algorithms" target="8" />
+      <module name="chapter-1-spring-boot-quickstart" target="1.8" />
       <module name="Concurrency" target="1.5" />
       <module name="DataStructure" target="8" />
       <module name="DesignPatterns" target="1.5" />
       <module name="JavaBasic" target="1.5" />
       <module name="Life-is-a-marathon" target="8" />
-      <module name="MySQL" target="1.5" />
+      <module name="MySQL" target="8" />
       <module name="Others" target="1.5" />
-      <module name="Spring" target="1.5" />
+      <module name="Spring" target="1.8" />
+      <module name="SpringFamily" target="1.8" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Spring" options="-parameters" />
+      <module name="SpringFamily" options="-parameters" />
+      <module name="chapter-1-spring-boot-quickstart" options="-parameters" />
+    </option>
   </component>
 </project>
