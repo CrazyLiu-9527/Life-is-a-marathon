@@ -31,4 +31,9 @@ public interface AnimalService {
      * 动物行为 奔跑
      */
     void run();
+
+    /**
+     * 动物行为 发出叫声
+     */
+    void bark();
 }

@@ -3,6 +3,9 @@ package per.lzy.springlearning.model.enums;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import per.lzy.springlearning.service.AnimalService;
+import per.lzy.springlearning.service.impl.CatAnimalServiceImpl;
+import per.lzy.springlearning.service.impl.DogAnimalServiceImpl;
 
 /**
  * 动物枚举类
@@ -13,11 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public enum EnumAnimalType {
-    DOG(1, "狗"),
-    CAT(2, "猫");
+    DOG(1, "狗", "dogAnimalServiceImpl"),
+    CAT(2, "猫", "catAnimalServiceImpl");
 
     private int val;
     private String desc;
+    private String beanName;
 
     /**
      * 根据传入的值找到对应的动物类型

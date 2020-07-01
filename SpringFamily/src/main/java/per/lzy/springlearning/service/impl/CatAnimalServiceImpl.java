@@ -1,5 +1,6 @@
 package per.lzy.springlearning.service.impl;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import per.lzy.springlearning.model.enums.EnumAnimalType;
 import per.lzy.springlearning.service.AnimalService;
@@ -9,6 +10,7 @@ import per.lzy.springlearning.service.AnimalService;
  * @date 2020/6/30 17:38
  */
 @Service
+@Primary
 public class CatAnimalServiceImpl implements AnimalService {
     /**
      * 动物类型
@@ -42,5 +44,13 @@ public class CatAnimalServiceImpl implements AnimalService {
     @Override
     public void run() {
         System.out.println("cat run...");
+    }
+
+    /**
+     * 动物行为 发出叫声
+     */
+    @Override
+    public void bark() {
+        System.out.println("cat bark...");
     }
 }

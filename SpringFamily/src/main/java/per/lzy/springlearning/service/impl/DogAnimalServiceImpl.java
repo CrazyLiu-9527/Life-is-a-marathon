@@ -41,6 +41,14 @@ public class DogAnimalServiceImpl implements AnimalService {
      */
     @Override
     public void run() {
-        System.out.println("dog eat...");
+        System.out.println("dog run...");
+    }
+
+    /**
+     * 动物行为 发出叫声
+     */
+    @Override
+    public void bark() {
+        System.out.println("dog bark...");
     }
 }
