@@ -7,12 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9503c354-26a1-436a-aeae-8871292f2ac9" name="Default Changelist" comment="Add module concurrency">
-      <change afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/controller/AnimalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/commons/helper/ApplicationContextHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/commons/helper/ApplicationContextHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/model/enums/EnumAnimalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/model/enums/EnumAnimalType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/service/AnimalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/service/AnimalService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/service/impl/CatAnimalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/service/impl/CatAnimalServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/service/impl/DogAnimalServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/SpringFamily/src/main/java/per/lzy/springlearning/service/impl/DogAnimalServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/HeapSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/java/SortingAlgorithm/SelectionSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/resources/排序算法总结.md" beforeDir="false" afterPath="$PROJECT_DIR$/DataStructure&amp;Algorithms/Algorithms/src/main/resources/排序算法总结.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +60,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/SpringFamily/doc" />
+    <property name="last_opened_file_path" value="D:/Work/newTeam/application/iquality/iqualitybackmanagesite" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -101,7 +98,7 @@
       <recent name="D:\Users\zhiyuanliu.CN1\Documents\GitHub\Life-is-a-marathon\DesignPatterns\src\main\resources\pic" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.Application">
+  <component name="RunManager" selected="Application.BubbleSort">
     <configuration name="BubbleSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.BubbleSort" />
       <module name="Algorithms" />
@@ -115,8 +112,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InsertionSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.InsertionSort" />
+    <configuration name="HeapSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.HeapSort" />
       <module name="Algorithms" />
       <extension name="coverage">
         <pattern>
@@ -128,8 +125,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QuickSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.QuickSort" />
+    <configuration name="MergeSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.MergeSort" />
       <module name="Algorithms" />
       <extension name="coverage">
         <pattern>
@@ -141,8 +138,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ShellSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.ShellSort" />
+    <configuration name="SelectionSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SortingAlgorithm.SelectionSort" />
       <module name="Algorithms" />
       <extension name="coverage">
         <pattern>
@@ -168,19 +165,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.BubbleSort" />
-      <item itemvalue="Application.InsertionSort" />
-      <item itemvalue="Application.QuickSort" />
-      <item itemvalue="Application.ShellSort" />
       <item itemvalue="Spring Boot.Application" />
+      <item itemvalue="Application.SelectionSort" />
+      <item itemvalue="Application.HeapSort" />
+      <item itemvalue="Application.MergeSort" />
+      <item itemvalue="Application.BubbleSort" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.Application" />
-        <item itemvalue="Application.ShellSort" />
-        <item itemvalue="Application.InsertionSort" />
-        <item itemvalue="Application.QuickSort" />
         <item itemvalue="Application.BubbleSort" />
+        <item itemvalue="Application.MergeSort" />
+        <item itemvalue="Application.HeapSort" />
+        <item itemvalue="Application.SelectionSort" />
+        <item itemvalue="Spring Boot.Application" />
       </list>
     </recent_temporary>
   </component>
@@ -228,7 +225,10 @@
       <workItem from="1593508283062" duration="5998000" />
       <workItem from="1593514293042" duration="6075000" />
       <workItem from="1593521938237" duration="32000" />
-      <workItem from="1593521978062" duration="7534000" />
+      <workItem from="1593521978062" duration="8979000" />
+      <workItem from="1593583868389" duration="1404000" />
+      <workItem from="1593585341931" duration="631000" />
+      <workItem from="1593695086605" duration="1311000" />
     </task>
     <task id="LOCAL-00001" summary="Add module concurrency">
       <created>1589875296410</created>
@@ -318,70 +318,71 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="453" y="111" key="CommitChangelistDialog2/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1592891621868" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1593521804114">
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1593585373492">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593521804114" />
-    <state width="1877" height="317" key="GridCell.Tab.0.bottom" timestamp="1593573981647">
+    <state x="-1032" y="266" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1593584533218" />
+    <state x="740" y="274" key="FileChooserDialogImpl/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593585373492" />
+    <state width="1877" height="138" key="GridCell.Tab.0.bottom" timestamp="1593696603232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="317" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
+    <state width="1877" height="138" key="GridCell.Tab.0.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696603232" />
     <state width="1877" height="155" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="317" key="GridCell.Tab.0.center" timestamp="1593573981646">
+    <state width="1877" height="138" key="GridCell.Tab.0.center" timestamp="1593696603232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="317" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981646" />
+    <state width="1877" height="138" key="GridCell.Tab.0.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696603232" />
     <state width="1877" height="155" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="317" key="GridCell.Tab.0.left" timestamp="1593573981646">
+    <state width="1877" height="138" key="GridCell.Tab.0.left" timestamp="1593696603232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="317" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981646" />
+    <state width="1877" height="138" key="GridCell.Tab.0.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696603232" />
     <state width="1877" height="155" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="317" key="GridCell.Tab.0.right" timestamp="1593573981646">
+    <state width="1877" height="138" key="GridCell.Tab.0.right" timestamp="1593696603232">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1637" height="155" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1592992276245" />
-    <state width="1877" height="317" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981646" />
+    <state width="1877" height="138" key="GridCell.Tab.0.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696603232" />
     <state width="1877" height="155" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593013232226" />
-    <state width="1877" height="317" key="GridCell.Tab.1.bottom" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.1.bottom" timestamp="1593696316121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
+    <state width="1877" height="317" key="GridCell.Tab.1.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696316121" />
     <state width="1877" height="284" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="317" key="GridCell.Tab.1.center" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.1.center" timestamp="1593696316121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
+    <state width="1877" height="317" key="GridCell.Tab.1.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696316121" />
     <state width="1877" height="284" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="317" key="GridCell.Tab.1.left" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.1.left" timestamp="1593696316121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
+    <state width="1877" height="317" key="GridCell.Tab.1.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696316121" />
     <state width="1877" height="284" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="317" key="GridCell.Tab.1.right" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.1.right" timestamp="1593696316121">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
+    <state width="1877" height="317" key="GridCell.Tab.1.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593696316121" />
     <state width="1877" height="284" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593013149054" />
-    <state width="1877" height="317" key="GridCell.Tab.2.bottom" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.2.bottom" timestamp="1593582406448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.2.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
-    <state width="1877" height="317" key="GridCell.Tab.2.center" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.2.bottom/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593582406448" />
+    <state width="1877" height="317" key="GridCell.Tab.2.center" timestamp="1593582406448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.2.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
-    <state width="1877" height="317" key="GridCell.Tab.2.left" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.2.center/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593582406448" />
+    <state width="1877" height="317" key="GridCell.Tab.2.left" timestamp="1593582406448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.2.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
-    <state width="1877" height="317" key="GridCell.Tab.2.right" timestamp="1593573981647">
+    <state width="1877" height="317" key="GridCell.Tab.2.left/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593582406448" />
+    <state width="1877" height="317" key="GridCell.Tab.2.right" timestamp="1593582406448">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="317" key="GridCell.Tab.2.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593573981647" />
+    <state width="1877" height="317" key="GridCell.Tab.2.right/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593582406448" />
     <state width="1429" height="366" key="GridCell.Tab.3.bottom" timestamp="1593521862297">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -422,9 +423,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="636" y="258" width="647" height="524" key="find.popup/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593520218591" />
-    <state x="334" y="214" key="new project wizard" timestamp="1593523417172">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="-1388" y="208" key="new project wizard" timestamp="1593584566144">
+      <screen x="-1680" y="0" width="1680" height="1010" />
     </state>
+    <state x="-1388" y="208" key="new project wizard/-1680.0.1680.1010/0.0.1920.1040@-1680.0.1680.1010" timestamp="1593584566144" />
     <state x="334" y="214" key="new project wizard/-1680.0.1680.1010/0.0.1920.1040@0.0.1920.1040" timestamp="1593523417172" />
     <state x="702" y="147" key="refactoring.ChangeSignatureDialog" timestamp="1589979130416">
       <screen x="0" y="0" width="1920" height="1040" />

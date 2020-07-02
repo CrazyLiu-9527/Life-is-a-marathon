@@ -24,9 +24,8 @@ public class BubbleSort {
     /**
      * 冒泡排序
      * @param arr
-     * @return
      */
-    public static int[] bubbleSort(int[] arr) {
+    public static void bubbleSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - i - 1; j++) {
                 if (arr[j] > arr[j + 1]) {
@@ -37,8 +36,6 @@ public class BubbleSort {
                 }
             }
         }
-
-        return arr;
     }
 
     /**
@@ -46,7 +43,7 @@ public class BubbleSort {
      * @param arr
      * @return
      */
-    public static int[] bubbleSort2(int[] arr) {
+    public static void bubbleSort2(int[] arr) {
         //外层循环是排序的趟数
         for (int i = 0; i < arr.length - 1; i++) {
 
@@ -74,18 +71,17 @@ public class BubbleSort {
             }
 
         }
-        return arr;
     }
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 5, 3, 7, 6};
-        int[] res = BubbleSort.bubbleSort(arr);
-        for (int i : res) {
+        BubbleSort.bubbleSort(arr);
+        for (int i : arr) {
             System.out.println(i);
         }
         System.out.println("======================");
-        int[] res2 = BubbleSort.bubbleSort2(arr);
-        for (int i : res) {
+        BubbleSort.bubbleSort2(arr);
+        for (int i : arr) {
             System.out.println(i);
         }
     }
