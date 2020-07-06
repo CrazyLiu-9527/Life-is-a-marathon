@@ -1,11 +1,11 @@
-package per.lzy.springlearning.model.contract;
+package per.lzy.springlearning.beaninjection.model.contract;
 
 import com.google.common.base.Throwables;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.util.StringUtils;
-import per.lzy.springlearning.commons.exception.BusinessException;
+import per.lzy.springlearning.beaninjection.commons.exception.BusinessException;
 
 /**
  * 接口错误信息

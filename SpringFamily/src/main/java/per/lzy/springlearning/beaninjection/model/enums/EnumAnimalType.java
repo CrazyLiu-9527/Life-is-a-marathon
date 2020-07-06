@@ -1,11 +1,8 @@
-package per.lzy.springlearning.model.enums;
+package per.lzy.springlearning.beaninjection.model.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import per.lzy.springlearning.service.AnimalService;
-import per.lzy.springlearning.service.impl.CatAnimalServiceImpl;
-import per.lzy.springlearning.service.impl.DogAnimalServiceImpl;
 
 /**
  * 动物枚举类

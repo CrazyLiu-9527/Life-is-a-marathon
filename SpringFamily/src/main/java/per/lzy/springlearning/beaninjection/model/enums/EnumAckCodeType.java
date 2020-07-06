@@ -1,4 +1,4 @@
-package per.lzy.springlearning.model.enums;
+package per.lzy.springlearning.beaninjection.model.enums;
 
 /**
  * ack code

@@ -1,14 +1,14 @@
-package per.lzy.springlearning.controller;
+package per.lzy.springlearning.beaninjection.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import per.lzy.springlearning.commons.helper.ApplicationContextHelper;
-import per.lzy.springlearning.model.enums.EnumAnimalType;
-import per.lzy.springlearning.service.AnimalService;
-import per.lzy.springlearning.service.impl.CatAnimalServiceImpl;
-import per.lzy.springlearning.service.impl.DogAnimalServiceImpl;
+import per.lzy.springlearning.beaninjection.commons.helper.ApplicationContextHelper;
+import per.lzy.springlearning.beaninjection.model.enums.EnumAnimalType;
+import per.lzy.springlearning.beaninjection.service.AnimalService;
+import per.lzy.springlearning.beaninjection.service.impl.CatAnimalServiceImpl;
+import per.lzy.springlearning.beaninjection.service.impl.DogAnimalServiceImpl;
 
 import java.util.List;
 import java.util.Map;

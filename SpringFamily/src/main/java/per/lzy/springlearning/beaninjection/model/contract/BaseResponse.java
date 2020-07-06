@@ -1,10 +1,10 @@
-package per.lzy.springlearning.model.contract;
+package per.lzy.springlearning.beaninjection.model.contract;
 
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import per.lzy.springlearning.model.enums.EnumAckCodeType;
+import per.lzy.springlearning.beaninjection.model.enums.EnumAckCodeType;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package per.lzy.springlearning.controller;
+package per.lzy.springlearning.beaninjection.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
