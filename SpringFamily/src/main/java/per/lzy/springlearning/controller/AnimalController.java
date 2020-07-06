@@ -10,6 +10,7 @@ import per.lzy.springlearning.service.AnimalService;
 import per.lzy.springlearning.service.impl.CatAnimalServiceImpl;
 import per.lzy.springlearning.service.impl.DogAnimalServiceImpl;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +35,10 @@ public class AnimalController {
     @Qualifier("dogAnimalServiceImpl")
     @Autowired
     private AnimalService dogAnimalService;*/
+
+    // 通过Autowired注解实现将同类型的所有bean注入到一个list中
+    @Autowired
+    List<AnimalService> animalServiceList;
 
     // 在catServiceImpl中，使用了@primary注解，使得在注入的时候默认就注入catServiceImpl
     @Autowired
@@ -70,6 +75,10 @@ public class AnimalController {
         // 获取所有的AnimalService类型的bean，返回一个map
         Map<String, AnimalService> animalServiceMap = ApplicationContextHelper.getBeanMap(AnimalService.class);
         System.out.println(JSON.toJSONString(animalServiceMap));
+        System.out.println("==================");
+
+        // 将同类型的所有bean注入到一个list中
+        System.out.println(JSON.toJSONString(animalServiceList));
         System.out.println("==================");
     }
 
