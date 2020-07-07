@@ -1,4 +1,4 @@
-package per.lzy.springlearning.beaninjection.service;
+package per.lzy.springlearning.commons;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

@@ -1,9 +1,9 @@
-package per.lzy.springlearning.beaninjection.service.impl;
+package per.lzy.springlearning.service.impl;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-import per.lzy.springlearning.beaninjection.model.enums.EnumAnimalType;
-import per.lzy.springlearning.beaninjection.service.AnimalService;
+import per.lzy.springlearning.model.enums.EnumAnimalType;
+import per.lzy.springlearning.service.AnimalService;
 
 /**
  * @author zhiyuanliu

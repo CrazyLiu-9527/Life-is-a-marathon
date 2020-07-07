@@ -1,4 +1,4 @@
-package per.lzy.springlearning.beaninjection.commons.exception;
+package per.lzy.springlearning.commons.exception;
 
 import lombok.Getter;
 import lombok.Setter;

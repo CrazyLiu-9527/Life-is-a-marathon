@@ -1,10 +1,11 @@
-package per.lzy.springlearning.beaninjection.service.impl;
+package per.lzy.springlearning.service.impl;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
-import per.lzy.springlearning.beaninjection.model.enums.EnumAnimalType;
-import per.lzy.springlearning.beaninjection.service.AnimalService;
+import per.lzy.springlearning.commons.aop.MyAspectPoint;
+import per.lzy.springlearning.model.enums.EnumAnimalType;
+import per.lzy.springlearning.service.AnimalService;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -33,6 +34,7 @@ public class CatAnimalServiceImpl implements AnimalService {
      * 动物行为 吃饭
      */
     @Override
+    @MyAspectPoint
     public void eat() {
         System.out.println("cat eat...");
     }

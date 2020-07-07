@@ -1,11 +1,11 @@
-package per.lzy.springlearning.beaninjection.commons.helper;
+package per.lzy.springlearning.commons.helper;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-import per.lzy.springlearning.beaninjection.model.enums.EnumAnimalType;
-import per.lzy.springlearning.beaninjection.service.AnimalService;
+import per.lzy.springlearning.model.enums.EnumAnimalType;
+import per.lzy.springlearning.service.AnimalService;
 
 import java.util.HashMap;
 import java.util.Map;

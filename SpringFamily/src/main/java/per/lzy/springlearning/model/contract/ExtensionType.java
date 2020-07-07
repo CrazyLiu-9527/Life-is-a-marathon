@@ -1,4 +1,4 @@
-package per.lzy.springlearning.beaninjection.model.contract;
+package per.lzy.springlearning.model.contract;
 
 /**
  * @author zhiyuanliu

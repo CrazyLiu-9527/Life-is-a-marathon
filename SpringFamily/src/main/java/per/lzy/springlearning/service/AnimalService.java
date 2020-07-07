@@ -1,7 +1,7 @@
-package per.lzy.springlearning.beaninjection.service;
+package per.lzy.springlearning.service;
 
 
-import per.lzy.springlearning.beaninjection.model.enums.EnumAnimalType;
+import per.lzy.springlearning.model.enums.EnumAnimalType;
 
 /**
  * 动物接口
