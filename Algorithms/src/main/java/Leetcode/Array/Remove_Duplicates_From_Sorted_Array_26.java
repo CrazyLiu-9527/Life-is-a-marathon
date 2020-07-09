@@ -47,9 +47,9 @@ public class Remove_Duplicates_From_Sorted_Array_26 {
      * @param args
      */
     public static void main(String[] args) {
-        int[] nums = {1, 1, 2};
+//        int[] nums = {1, 1, 2};
 //        int[] nums = {};
-//        int[] nums = {0, 0, 1, 2, 3, 3, 4, 15};
+        int[] nums = {0, 0, 1, 2, 3, 3, 4, 15};
         int len = Remove_Duplicates_From_Sorted_Array_26.removeDuplicates2(nums);
         System.out.println(len);
         System.out.println(Arrays.toString(nums));
