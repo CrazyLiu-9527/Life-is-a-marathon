@@ -21,15 +21,15 @@ import java.util.concurrent.TimeUnit;
 public class MyThreadPool {
 
     /**
-     * 队列容量，也就是最多可以创建500个线程
+     * 队列容量，工作队列最多容纳 DEFAULT_SIZE 个数量的任务
      */
     public static final int DEFAULT_SIZE = 500;
     /**
-     * 线程存活时间
+     * 空闲线程存活时间
      */
     public static final int DEFAULT_KEEP_ALIVE = 60;
     /**
-     * 工作队列
+     * 任务队列
      */
     public static final BlockingQueue<Runnable> executeQueue = new ArrayBlockingQueue<Runnable>(DEFAULT_SIZE);
     /**
