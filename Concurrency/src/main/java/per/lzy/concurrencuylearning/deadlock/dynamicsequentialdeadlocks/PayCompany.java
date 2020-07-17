@@ -19,7 +19,7 @@ public class PayCompany {
 //        ITransfer transfer = new UnsafeTransfer();
 
 //        ITransfer transfer = new SafeTransferOne();
-        ITransfer transfer = new SafeTransferOne();
+        ITransfer transfer = new SafeTransferTwo();
 
         TransferThread jackToRose = new TransferThread("jackToRose", jack, rose, 2000, transfer);
         TransferThread roseToJack = new TransferThread("roseToJack", rose, jack, 4000, transfer);
