@@ -4,7 +4,7 @@ package per.lzy.concurrencuylearning.deadlock.dynamicsequentialdeadlocks;
  * @author zhiyuanliu
  * @date 2020/7/16 12:11
  */
-public class TransferAccount implements ITransfer {
+public class UnsafeTransfer implements ITransfer {
     /**
      * 转账
      *
@@ -21,6 +21,8 @@ public class TransferAccount implements ITransfer {
                 System.out.println(Thread.currentThread().getName() + " to " + to.getName());
                 from.flyMoney(amount);
                 to.addMoney(amount);
+                System.out.println(from);
+                System.out.println(to);
             }
         }
     }

@@ -16,10 +16,10 @@ public class PayCompany {
         // roseToJack get rose
         // jackToRose get jack
         // 双方都在获取对方持有的锁
-        ITransfer transfer = new TransferAccount();
+//        ITransfer transfer = new UnsafeTransfer();
 
-//        ITransfer transfer = new SafeOperate();
-//        ITransfer transfer = new SafeOperateToo();
+//        ITransfer transfer = new SafeTransferOne();
+        ITransfer transfer = new SafeTransferOne();
 
         TransferThread jackToRose = new TransferThread("jackToRose", jack, rose, 2000, transfer);
         TransferThread roseToJack = new TransferThread("roseToJack", rose, jack, 4000, transfer);

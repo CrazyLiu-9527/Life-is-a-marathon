@@ -40,6 +40,6 @@ public class UserAccount {
      * @param amount
      */
     public void flyMoney(int amount) {
-        this.money = this.money + amount;
+        this.money = this.money - amount;
     }
 }
