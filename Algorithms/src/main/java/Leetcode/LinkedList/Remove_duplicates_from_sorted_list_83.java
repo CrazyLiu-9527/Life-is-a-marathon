@@ -66,13 +66,4 @@ public class Remove_duplicates_from_sorted_list_83 {
             node2 = node2.next;
         }
     }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }

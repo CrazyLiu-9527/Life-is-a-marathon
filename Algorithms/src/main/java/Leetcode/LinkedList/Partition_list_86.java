@@ -72,13 +72,4 @@ public class Partition_list_86 {
             node2 = node2.next;
         }
     }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-        }
-    }
 }
