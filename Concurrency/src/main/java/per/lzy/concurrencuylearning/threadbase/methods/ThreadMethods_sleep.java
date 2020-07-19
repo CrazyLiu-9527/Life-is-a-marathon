@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.thread.methods;
+package per.lzy.concurrencuylearning.threadbase.methods;
 
 
 /**

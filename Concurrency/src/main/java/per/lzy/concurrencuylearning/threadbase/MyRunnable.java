@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.thread;
+package per.lzy.concurrencuylearning.threadbase;
 
 /**
  * 实现runnable接口创建线程
