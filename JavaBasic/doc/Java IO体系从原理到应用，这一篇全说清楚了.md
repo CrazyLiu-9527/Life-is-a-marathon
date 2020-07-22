@@ -1,6 +1,6 @@
 本文介绍操作系统I/O工作原理，Java I/O设计，基本使用，开源项目中实现高性能I/O常见方法和实现，彻底搞懂高性能I/O之道
 
-# 基础概念
+## 基础概念
 
 在介绍I/O原理之前，先重温几个基础概念：
 
@@ -30,9 +30,9 @@
 
 
 
-# I/O 工作原理
+## I/O 工作原理
 
-1 磁盘I/O
+### 1 磁盘I/O
 
 典型I/O读写磁盘工作原理如下：
 
@@ -48,7 +48,7 @@
 - 读写操作经过用户缓冲区，内核缓冲区，应用进程并不能直接操作磁盘
 - 应用进程读操作时需阻塞直到读取到数据
 
-2 网络I/O
+### 2 网络I/O
 
 这里先以最经典的阻塞式I/O模型介绍：
 
@@ -67,9 +67,9 @@
 - 网络I/O读写操作经过用户缓冲区，Sokcet缓冲区
 - 服务端线程在从调用recvfrom开始到它返回有数据报准备好这段时间是阻塞的，recvfrom返回成功后，线程开始处理数据报
 
-# Java I/O设计
+## Java I/O设计
 
-1 I/O分类
+### 1 I/O分类
 
 Java中对数据流进行具体化和实现，关于Java数据流一般关注以下几个点：
 
@@ -83,13 +83,15 @@ Java中对数据流进行具体化和实现，关于Java数据流一般关注以
 
 
 
-从/向一个特定的IO设备（如磁盘，网络）或者存储对象(如内存数组)读/写数据的流，称为**节点流**；对一个已有流进行连接和封装，通过封装后的流来实现数据的读/写功能，称为**处理流**(或称为过滤流)；
+从/向一个特定的IO设备（如磁盘，网络）或者存储对象(如内存数组)读/写数据的流，称为**节点流**；
 
-2 I/O操作接口
+对一个已有流进行连接和封装，通过封装后的流来实现数据的读/写功能，称为**处理流**(或称为过滤流)；
+
+### 2 I/O操作接口
 
 java.io包下有一堆I/O操作类，初学时看了容易搞不懂，其实仔细观察其中还是有规律：这些I/O操作类都是在**继承4个基本抽象流的基础上，要么是节点流，要么是处理流**
 
-2.1 四个基本抽象流
+#### 2.1 四个基本抽象流
 
 java.io包中包含了流式I/O所需要的所有类，java.io包中有四个基本抽象流，分别处理字节流和字符流：
 
@@ -102,7 +104,7 @@ java.io包中包含了流式I/O所需要的所有类，java.io包中有四个基
 
 
 
-2.2 节点流
+#### 2.2 节点流
 
 ![Java I/O体系从原理到应用，这一篇全说清楚了](pic/0a2c9d70ff264390bef3af4710f75d9b.jfif)
 
@@ -118,10 +120,11 @@ java.io包中包含了流式I/O所需要的所有类，java.io包中有四个基
 节点流的创建通常是在构造函数传入数据源，例如：
 
 ```java
-FileReader reader = new FileReader(new File("file.txt"));FileWriter writer = new FileWriter(new File("file.txt"));
+FileReader reader = new FileReader(new File("file.txt"));
+FileWriter writer = new FileWriter(new File("file.txt"));
 ```
 
-2.3 处理流
+#### 2.3 处理流
 
 ![Java I/O体系从原理到应用，这一篇全说清楚了](pic/a5748ea2dc6e412485e6cc942253f2fa.jfif)
 
@@ -137,16 +140,17 @@ FileReader reader = new FileReader(new File("file.txt"));FileWriter writer = new
 处理流的应用了适配器/装饰模式，转换/扩展已有流，处理流的创建通常是在构造函数传入已有的节点流或处理流：
 
 ```java
-FileOutputStream fileOutputStream = new FileOutputStream("file.txt");// 扩展提供缓冲写
+FileOutputStream fileOutputStream = new FileOutputStream("file.txt");
+// 扩展提供缓冲写
 BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream); // 扩展提供提供基本数据类型写
 DataOutputStream out = new DataOutputStream(bufferedOutputStream);
 ```
 
-3 Java NIO
+### 3 Java NIO
 
-3.1 标准I/O存在问题
+#### 3.1 标准I/O存在问题
 
-Java NIO(New I/O)是一个可以替代标准Java I/O API的IO API(从Java 1.4开始)，Java NIO提供了与标准I/O不同的I/O工作方式，目的是为了解决标准 I/O存在的以下问题：
+Java NIO（New I/O）是一个可以替代标准Java I/O API的IO API(从Java 1.4开始)，Java NIO提供了与标准I/O不同的I/O工作方式，目的是为了解决标准 I/O存在的以下问题：
 
 - **(1) 数据多次拷贝**
 
@@ -189,7 +193,7 @@ socket.shutdownOutput();
 
 
 
-3.2 Buffer
+#### 3.2 Buffer
 
 **Java NIO核心三大核心组件是Buffer(缓冲区)、Channel(通道)、Selector**
 
@@ -203,7 +207,9 @@ Buffer提供了常用于I/O操作的字节缓冲区，常见的缓存区有ByteB
 ByteBuffer底层堆外内存的分配和释放基于malloc和free函数，对外allocateDirect方法可以申请分配堆外内存，并返回继承ByteBuffer类的DirectByteBuffer对象：
 
 ```java
-public static ByteBuffer allocateDirect(int capacity) { return new DirectByteBuffer(capacity);}
+public static ByteBuffer allocateDirect(int capacity) { 
+    return new DirectByteBuffer(capacity);
+}
 ```
 
 堆外内存的回收基于DirectByteBuffer的成员变量Cleaner类，提供clean方法可以用于主动回收，Netty中大部分堆外内存通过记录定位Cleaner的存在，主动调用clean方法来回收；另外，当DirectByteBuffer对象被GC时，关联的堆外内存也会被回收
@@ -222,7 +228,7 @@ Buffer可以见到理解为一组基本数据类型，存储地址连续的的�
 
 
 
-3.3 Channel
+#### 3.3 Channel
 
 Channel(通道)的概念可以类比I/O流对象，NIO中I/O操作主要基于Channel：从Channel进行数据读取 ：创建一个缓冲区，然后请求Channel读取数据从Channel进行数据写入 ：创建一个缓冲区，填充数据，请求Channel写入数据
 
@@ -267,7 +273,7 @@ while (true) {
 }
 ```
 
-3.4 Selector
+#### 3.4 Selector
 
 Selector(选择器) ，它是Java NIO核心组件中的一个，用于检查一个或多个NIO Channel（通道）的状态是否处于可读、可写。实现单线程管理多个Channel，也就是可以管理多个网络连接
 
@@ -355,15 +361,15 @@ while (true) {
 
 > **tips**: Java NIO基于Selector实现高性能网络I/O这块使用起来比较繁琐，使用不友好，一般业界使用基于Java NIO进行封装优化，扩展丰富功能的Netty框架来优雅实现
 
-# 高性能I/O优化
+## 高性能I/O优化
 
 下面结合业界热门开源项目介绍高性能I/O的优化
 
-1 零拷贝
+### 1 零拷贝
 
 零拷贝(zero copy)技术，用于在数据读写中减少甚至完全避免不必要的CPU拷贝，减少内存带宽的占用，提高执行效率，零拷贝有几种不同的实现原理，下面介绍常见开源项目中零拷贝实现
 
-1.1 Kafka零拷贝
+#### 1.1 Kafka零拷贝
 
 Kafka基于Linux 2.1内核提供，并在2.4 内核改进的的sendfile函数 + 硬件提供的DMA Gather Copy实现零拷贝，将文件通过socket传送
 
@@ -391,7 +397,7 @@ public abstract long transferTo(long position, long count, WritableByteChannel t
 
 transferTo将FileChannel关联的文件发送到指定channel，当Comsumer消费数据，Kafka Server基于FileChannel将文件中的消息数据发送到SocketChannel
 
-1.2 RocketMQ零拷贝
+#### 1.2 RocketMQ零拷贝
 
 RocketMQ基于mmap + write的方式实现零拷贝：mmap() 可以将内核中缓冲区的地址与用户空间的缓冲区进行映射，实现数据共享，省去了将数据从内核缓冲区拷贝到用户缓冲区
 
@@ -449,14 +455,14 @@ RocketMQ 基于 mmap+write 实现零拷贝，适用于业务级消息这种小�
 
 > **tips:** Kafka 的索引文件使用的是 mmap+write 方式，数据文件发送网络使用的是 sendfile 方式
 
-1.3 Netty零拷贝
+#### 1.3 Netty零拷贝
 
 Netty 的零拷贝分为两种：
 
 - 1 基于操作系统实现的零拷贝，底层基于FileChannel的transferTo方法
 - 2 基于Java 层操作优化，对数组缓存对象(ByteBuf )进行封装优化，通过对ByteBuf数据建立数据视图，支持ByteBuf 对象合并，切分，当底层仅保留一份数据存储，减少不必要拷贝
 
-2 多路复用
+### 2 多路复用
 
 Netty中对Java NIO功能封装优化之后，实现I/O多路复用代码优雅了很多：
 
@@ -494,7 +500,7 @@ serverBootstrap.bind(port).addListener(future -> {
 });
 ```
 
-3 页缓存(PageCache)
+### 3 页缓存(PageCache)
 
 页缓存（PageCache)是操作系统对文件的缓存，用来减少对磁盘的 I/O 操作，以页为单位的，内容就是磁盘上的物理块，页缓存能帮助**程序对文件进行顺序读写的速度几乎接近于内存的读写速度**，主要原因就是由于OS使用PageCache机制对读写访问操作进行了性能优化：
 
