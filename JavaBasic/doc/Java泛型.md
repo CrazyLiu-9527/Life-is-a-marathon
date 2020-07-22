@@ -9,8 +9,6 @@
 举个栗子:
  Box类定义为一个泛型类
 
-
-
 ```java
 public class Box<T> {
     private T object;
@@ -22,8 +20,6 @@ public class Box<T> {
 
 创建一个Box对象，不带泛型参数，发现获取对象的时候需要强制转换
 
-
-
 ```java
 Box box2 = new Box();
 box2.set(new Apple());
@@ -31,8 +27,6 @@ Apple apple = (Apple) box2.get();
 ```
 
 创建一个Box对象，带泛型参数，获取对象的时候就不需要强制转换
-
-
 
 ```java
 Box<Apple> box = new Box<Apple>();
@@ -58,8 +52,6 @@ Apple apple = box.get();
 
 举个栗子：
 
-
-
 ```java
 public class Test<T> {    
   public List<T> list = new ArrayList<T>();   
@@ -71,8 +63,6 @@ public class Test<T> {
 ```
 
 和
-
-
 
 ```java
 public class Test<A> {    
@@ -88,8 +78,6 @@ public class Test<A> {
 
 如果要定义**多个**泛型参数，比如说两个泛型参数
  很典型的一个栗子是Map的key,value泛型，我们也可以定义一个这样的
-
-
 
 ```java
 public interface Mymap<K, V> {
@@ -114,8 +102,6 @@ public class MymapImpl<K, V> implements Mymap<K, V> {
 
 下来就可以传入任意类型，创建实例了，不用转化类型
 
-
-
 ```dart
 Mymap<String, Integer> mp1= new MymapImpl<String, Integer>("Even", 8);
 Mymap<String, String>  mp2= new MymapImpl<String, String>("hello", "world");
@@ -123,8 +109,6 @@ Mymap<Integer, Integer> mp3= new MymapImpl<Integer, Integer>(888, 888);
 ```
 
 如果要定义**超过两个，三个或三个以上**的泛型参数可以使用**T1, T2, ..., Tn**，像这样子
-
-
 
 ```java
 public class Test<T1,T2,T3> {
@@ -143,8 +127,6 @@ public class Test<T1,T2,T3> {
 **ArrayList al=new ArrayList<T>();**  指定集合元素只能是T类型
 
 **ArrayList al=new ArrayList();**  集合元素可以是任意类型，这种没有意义，一般是方法中，只是为了说明用法
-
-
 
 **ArrayList al=new ArrayList();**
  泛型的限定：
