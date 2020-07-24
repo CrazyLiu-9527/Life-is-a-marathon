@@ -63,7 +63,7 @@ public class ProducerConsumer {
             while (true) {
                 try {
                     Integer ele = queue.take();
-                    System.out.println("消费者" + Thread.currentThread().getName() + " 正在消费数据 " + ele);
+                    System.out.println("消费者 " + Thread.currentThread().getName() + " 正在消费数据 " + ele);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

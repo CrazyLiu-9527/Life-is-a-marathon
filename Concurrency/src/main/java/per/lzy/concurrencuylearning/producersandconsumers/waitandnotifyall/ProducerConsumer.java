@@ -51,7 +51,7 @@ public class ProducerConsumer {
                         }
                         Random random = new Random();
                         int i = random.nextInt();
-                        System.out.println("生产者 " + Thread.currentThread().getName() + " 生产数据 " + i);
+                        System.out.println("生产者 " + Thread.currentThread().getName() + " 生产数据：" + i);
                         list.add(i);
                         list.notifyAll();
                     } catch (InterruptedException e) {

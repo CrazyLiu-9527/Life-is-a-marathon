@@ -49,13 +49,13 @@ public class ProducerConsumer {
                 lock.lock();
                 try {
                     while (list.size() == maxLength) {
-                        System.out.println("生产者" + Thread.currentThread().getName() + "  list以达到最大容量，进行wait");
+                        System.out.println("生产者 " + Thread.currentThread().getName() + " list以达到最大容量，进行wait");
                         full.await();
-                        System.out.println("生产者" + Thread.currentThread().getName() + "  退出wait");
+                        System.out.println("生产者 " + Thread.currentThread().getName() + " 退出wait");
                     }
                     Random random = new Random();
                     int i = random.nextInt();
-                    System.out.println("生产者" + Thread.currentThread().getName() + " 生产数据" + i);
+                    System.out.println("生产者 " + Thread.currentThread().getName() + " 生产数据：" + i);
                     list.add(i);
                     empty.signalAll();
                 } catch (InterruptedException e) {
@@ -82,12 +82,12 @@ public class ProducerConsumer {
                 lock.lock();
                 try {
                     while (list.isEmpty()) {
-                        System.out.println("消费者" + Thread.currentThread().getName() + "  list为空，进行wait");
+                        System.out.println("消费者 " + Thread.currentThread().getName() + " list为空，进行wait");
                         empty.await();
-                        System.out.println("消费者" + Thread.currentThread().getName() + "  退出wait");
+                        System.out.println("消费者 " + Thread.currentThread().getName() + " 退出wait");
                     }
                     Integer element = list.remove(0);
-                    System.out.println("消费者" + Thread.currentThread().getName() + "  消费数据：" + element);
+                    System.out.println("消费者 " + Thread.currentThread().getName() + "  消费数据：" + element);
                     full.signalAll();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
