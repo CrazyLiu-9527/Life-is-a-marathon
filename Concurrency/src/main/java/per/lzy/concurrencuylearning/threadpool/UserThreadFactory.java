@@ -18,7 +18,6 @@ public class UserThreadFactory implements ThreadFactory {
     //`正例：`自定义线程工厂，并且根据外部特征进行分组，比如，来自同一机房的调用，把机房编号赋值给`whatFeaturOfGroup`
     public UserThreadFactory(String whatFeatureOfGroup) {
         this.namePrefix = "From UserThreadFactory's " + whatFeatureOfGroup + "-Worker-";
-        ;
     }
 
     /**

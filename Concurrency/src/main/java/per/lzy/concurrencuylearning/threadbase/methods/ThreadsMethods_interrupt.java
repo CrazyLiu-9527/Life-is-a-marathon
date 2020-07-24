@@ -39,14 +39,14 @@ public class ThreadsMethods_interrupt implements Runnable {
      * 也就是说：Java设计者实际上是想线程自己来终止，通过上面的信号，就可以判断处理什么业务了。
      * 具体到底中断还是继续运行，应该由被通知的线程自己处理
      * Thread t1 = new Thread( new Runnable(){
-     * public void run(){
-     * // 若未发生中断，就正常执行任务
-     * while(!Thread.currentThread.isInterrupted()){
-     * // 正常任务代码……
-     * }
-     * // 中断的处理代码……
-     * doSomething();
-     * }
+     *      public void run(){
+     *          // 若未发生中断，就正常执行任务
+     *          while(!Thread.currentThread.isInterrupted()){
+     *              // 正常任务代码……
+     *          }
+     *          // 中断的处理代码……
+     *          doSomething();
+     *      }
      * } ).start();
      *
      * @param args

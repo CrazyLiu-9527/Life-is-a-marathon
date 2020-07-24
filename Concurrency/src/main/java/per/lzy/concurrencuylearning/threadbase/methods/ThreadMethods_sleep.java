@@ -30,7 +30,8 @@ public class ThreadMethods_sleep implements Runnable {
     /**
      * 四、sleep方法，休眠当前正在执行的线程
      * 有一点要非常注意，sleep方法不会释放锁，也就是说如果当前线程持有对某个对象的锁，则即使调用sleep方法，其他线程也无法访问这个对象
-     * 注意，如果调用了sleep方法，必须捕获InterruptedException异常或者将该异常向上层抛出。当线程睡眠时间满后，不一定会立即得到执行，因为此时可能CPU正在执行其他的任务。所以说调用sleep方法相当于让线程进入阻塞状态。
+     * 注意，如果调用了sleep方法，必须捕获InterruptedException异常或者将该异常向上层抛出。
+     * 当线程睡眠时间满后，不一定会立即得到执行，因为此时可能CPU正在执行其他的任务。所以说调用sleep方法相当于让线程进入阻塞状态。
      *
      * @param args
      * @throws InterruptedException
