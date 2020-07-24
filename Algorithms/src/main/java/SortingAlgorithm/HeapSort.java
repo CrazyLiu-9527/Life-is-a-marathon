@@ -81,7 +81,7 @@ public class HeapSort {
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 5, 3, 7, 6, 4};
-        SelectionSort.selectionSort(arr);
+        HeapSort.heapSort(arr);
         for (int i : arr) {
             System.out.println(i);
         }
