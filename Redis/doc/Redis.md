@@ -116,7 +116,7 @@ spring:
       pool:
         # 连接池最大连接数(使用负数表示没有限制),默认8
         max-active: 100
-复制代码
+
 ```
 
 创建实体类User.java
@@ -198,7 +198,7 @@ public class UserController {
         User user = (User) redisCacheTemplate.opsForValue().get("userkey");
         logger.info("当前获取对象：{}", user.toString());
     }
-复制代码
+}
 ```
 
 然后在浏览器访问，观察后台日志 http://localhost:8082/user/test
@@ -478,7 +478,6 @@ public static String getData(String key) throws InterruptedException {
 appendfsync yes   
 appendfsync always     #每次有数据修改发生时都会写入AOF文件。
 appendfsync everysec   #每秒钟同步一次，该策略为AOF的缺省策略。
-复制代码
 ```
 
 AOF可以做到全程持久化，只需要在配置中开启 appendonly yes。这样redis每执行一个修改数据的命令，都会把它添加到AOF文件中，当redis重启时，将会读取AOF文件进行重放，恢复到redis关闭前的最后时刻。
