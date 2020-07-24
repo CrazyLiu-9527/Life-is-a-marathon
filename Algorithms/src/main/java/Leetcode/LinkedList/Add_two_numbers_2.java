@@ -70,6 +70,44 @@ public class Add_two_numbers_2 {
         return pre.next;
     }
 
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        // p指向l1的头节点，q指向l2的头节点
+        ListNode p = l1;
+        ListNode q = l2;
+        // cur表示操作的节点
+        ListNode cur = dummyHead;
+
+        // carry表示进位
+        int carry = 0;
+        // 只要有一个链表没有遍历完毕，就继续遍历
+        while (p != null || q != null) {
+            // x表示p链表节点的val, y表示q链表节点的val
+            int x = (p != null) ? p.val : 0;
+            int y = (q != null) ? q.val : 0;
+            int sum = x + y + carry;
+            carry = sum / 10;
+
+            // 拼接节点
+            cur.next = new ListNode(sum % 10);
+            cur = cur.next;
+
+            if (p != null) {
+                p = p.next;
+            }
+            if (q != null) {
+                q = q.next;
+            }
+        }
+
+        // 最后相加是否大于10，是的话多一个节点
+        if (carry > 0) {
+            cur.next = new ListNode(carry);
+        }
+
+        return dummyHead.next;
+    }
+
     /*
     示例：
         输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
