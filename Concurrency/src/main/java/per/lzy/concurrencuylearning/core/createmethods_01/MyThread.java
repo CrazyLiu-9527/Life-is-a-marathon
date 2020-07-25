@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.threadbase;
+package per.lzy.concurrencuylearning.core.createmethods_01;
 
 /**
  * 继承thread创建线程
