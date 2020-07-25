@@ -24,6 +24,7 @@ public class RightWayStopThreadWithSleepEveryLoop implements Runnable {
             // 每次循环都会sleep的，不需要!Thread.currentThread().isInterrupted()判断条件，
             // 因为在抛出InterruptedException之前Java虚拟机会先将该线程的中断标志位复位，
             // 即使调用!Thread.currentThread().isInterrupted()返回也是true
+            // 这里要重点理解，不然后面的最佳实践可能会看不懂
             while (num <= 10000) {
                 if (num % 100 == 0) {
                     // 验证JVM是否将中断标志位复位，返回true，说明复位了，故加在while循环条件中无用

@@ -17,12 +17,17 @@ public class RightWayStopThreadInProd implements Runnable {
 
     @Override
     public void run() {
-        while (true && !Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
             System.out.println("go");
+            System.out.println(Thread.currentThread().isInterrupted());
             try {
                 throwInMethod();
             } catch (InterruptedException e) {
+                System.out.println(Thread.currentThread().isInterrupted());
+                // 阻塞的时候收到interrupt信号所以进到了catch，然后interrupt标识位被复位为false，
+                // 所有下面需要重新将线程中断的标志位设置为true，通知上面的循环停止运行
                 Thread.currentThread().interrupt();
+                System.out.println(Thread.currentThread().isInterrupted());
                 // 保存日志、停止程序
                 System.out.println("保存日志");
                 e.printStackTrace();

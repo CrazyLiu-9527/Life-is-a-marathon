@@ -357,7 +357,7 @@ final class LambdaStyle$$Lambda$1 implements Runnable {
 具体来说，当对一个线程，调用 interrupt() 时：
 
 1. 如果线程处于**正常活动状态**，那么会将该线程的中断标志位设置为 true，仅此而已
-2. 如果线程处于**被阻塞状态**（例如处于sleep, wait, join 等状态），那么线程将立即退出被阻塞状态，并抛出一个InterruptedException异常。仅此而已。
+2. 如果线程处于**被阻塞状态**（例如处于sleep, wait, join 等状态），那么线程会将线程状态复位（标志位设为false），然后立即退出被阻塞状态，并抛出一个InterruptedException异常。仅此而已。
 3. 被设置中断标志的线程将继续正常运行，不受影响，具体停止线程的逻辑需要自己写代码处理
 
 ## 停止正常活动状态线程
