@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ConditionChange {
 
-    private static List<String> lockObject = new ArrayList();
+    private static List<String> lockObject = new ArrayList<>();
 
     public static void main(String[] args) {
         Consumer consumer1 = new Consumer(lockObject);
