@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.producersandconsumers.waitandnotifyall;
+package per.lzy.concurrencuylearning.practice.producersandconsumers.waitandnotifyall;
 
 import java.util.Date;
 import java.util.LinkedList;

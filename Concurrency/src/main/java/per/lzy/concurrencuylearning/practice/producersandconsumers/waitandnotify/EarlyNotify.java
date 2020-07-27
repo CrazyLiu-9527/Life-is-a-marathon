@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.producersandconsumers.waitandnotify;
+package per.lzy.concurrencuylearning.practice.producersandconsumers.waitandnotify;
 
 /**
  * wait notify机制的问题

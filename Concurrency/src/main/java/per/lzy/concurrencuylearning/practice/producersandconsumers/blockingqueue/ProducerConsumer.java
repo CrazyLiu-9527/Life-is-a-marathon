@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.producersandconsumers.blockingqueue;
+package per.lzy.concurrencuylearning.practice.producersandconsumers.blockingqueue;
 
 import java.util.Random;
 import java.util.concurrent.BlockingQueue;

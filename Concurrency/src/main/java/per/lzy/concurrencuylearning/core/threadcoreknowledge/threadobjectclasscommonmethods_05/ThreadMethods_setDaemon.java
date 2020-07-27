@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.threadbase.methods;
+package per.lzy.concurrencuylearning.core.threadcoreknowledge.threadobjectclasscommonmethods_05;
 
 /**
  * @author liuzy

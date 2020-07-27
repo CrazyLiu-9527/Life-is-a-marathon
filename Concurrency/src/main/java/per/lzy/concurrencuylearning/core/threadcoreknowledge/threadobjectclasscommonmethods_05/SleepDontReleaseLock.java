@@ -1,0 +1,35 @@
+package per.lzy.concurrencuylearning.core.threadcoreknowledge.threadobjectclasscommonmethods_05;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+/**
+ * 演示sleep不释放lock（lock需要手动释放）
+ *
+ * @author zhiyuanliu
+ * @date 2020/7/27 11:36
+ */
+public class SleepDontReleaseLock implements Runnable {
+
+    private static final Lock LOCK = new ReentrantLock();
+
+    public static void main(String[] args) {
+        SleepDontReleaseLock sleepDontReleaseLock = new SleepDontReleaseLock();
+        new Thread(sleepDontReleaseLock).start();
+        new Thread(sleepDontReleaseLock).start();
+    }
+
+    @Override
+    public void run() {
+        LOCK.lock();
+        System.out.println("线程" + Thread.currentThread().getName() + "获取到了锁");
+        try {
+            Thread.sleep(5000);
+            System.out.println("线程" + Thread.currentThread().getName() + "已经苏醒");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            LOCK.unlock();
+        }
+    }
+}

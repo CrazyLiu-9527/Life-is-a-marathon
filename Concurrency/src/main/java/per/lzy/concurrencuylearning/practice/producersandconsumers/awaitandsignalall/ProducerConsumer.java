@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.producersandconsumers.awaitandsignalall;
+package per.lzy.concurrencuylearning.practice.producersandconsumers.awaitandsignalall;
 
 import java.util.LinkedList;
 import java.util.List;

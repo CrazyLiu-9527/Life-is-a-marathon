@@ -1,6 +1,5 @@
-package per.lzy.concurrencuylearning.producersandconsumers.waitandnotify;
+package per.lzy.concurrencuylearning.practice.producersandconsumers.waitandnotify;
 
-import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -65,23 +64,23 @@ class EventStorage {
         // 队列中放满时，生产者wait()等待消费者唤醒
         while (linkedList.size() == maxLength) {
             try {
-                wait();
+                this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
         // 没满时就接着放数据
-        linkedList.add(new Date().getTime());
+        linkedList.add(System.nanoTime());
         System.out.println("仓库中有了" + linkedList.size() + "个产品");
-        notify();
+        this.notify();
     }
 
     public synchronized void take() {
         // 队列为空的时候，消费者wait()等待生产者唤醒
         while (linkedList.size() == 0) {
             try {
-                wait();
+                this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -90,6 +89,6 @@ class EventStorage {
         // 不为空的时候就取数据
         long date = linkedList.remove();
         System.out.println("拿到了" + date + ",现在仓库还剩下" + linkedList.size());
-        notify();
+        this.notify();
     }
 }

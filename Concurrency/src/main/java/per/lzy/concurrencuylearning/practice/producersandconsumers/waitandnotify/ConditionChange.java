@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.producersandconsumers.waitandnotify;
+package per.lzy.concurrencuylearning.practice.producersandconsumers.waitandnotify;
 
 import java.util.ArrayList;
 import java.util.List;
