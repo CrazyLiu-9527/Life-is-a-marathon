@@ -1,7 +1,7 @@
 package per.lzy.concurrencuylearning.core.background;
 
 /**
- * 第二章线程安全问题，演示死锁。
+ * 第二种线程安全问题，演示死锁。
  *
  * @author zhiyuanliu
  * @date 2020/7/27 14:36
