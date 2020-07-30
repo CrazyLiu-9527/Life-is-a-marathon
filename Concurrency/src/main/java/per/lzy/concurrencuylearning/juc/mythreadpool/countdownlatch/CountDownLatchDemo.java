@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.juc.threadpool.countdownlatch;
+package per.lzy.concurrencuylearning.juc.mythreadpool.countdownlatch;
 
 import java.util.concurrent.CountDownLatch;
 

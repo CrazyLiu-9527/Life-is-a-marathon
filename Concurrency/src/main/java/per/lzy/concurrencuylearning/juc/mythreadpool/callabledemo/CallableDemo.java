@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.juc.threadpool.callabledemo;
+package per.lzy.concurrencuylearning.juc.mythreadpool.callabledemo;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;

@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.juc.threadpool.semaphore;
+package per.lzy.concurrencuylearning.juc.mythreadpool.semaphore;
 
 import java.util.concurrent.Semaphore;
 

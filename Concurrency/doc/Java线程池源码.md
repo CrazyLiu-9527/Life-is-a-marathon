@@ -724,6 +724,7 @@ final void runWorker(Worker w) {
                 beforeExecute(wt, task);
                 Throwable thrown = null;
                 try {
+                    // 这里调用不同task的run方法
                     task.run();
                 } catch (RuntimeException x) {
                     thrown = x; throw x;

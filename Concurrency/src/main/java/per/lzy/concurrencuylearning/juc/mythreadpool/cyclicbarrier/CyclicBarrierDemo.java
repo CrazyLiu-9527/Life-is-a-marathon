@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.juc.threadpool.cyclicbarrier;
+package per.lzy.concurrencuylearning.juc.mythreadpool.cyclicbarrier;
 
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CyclicBarrier;
