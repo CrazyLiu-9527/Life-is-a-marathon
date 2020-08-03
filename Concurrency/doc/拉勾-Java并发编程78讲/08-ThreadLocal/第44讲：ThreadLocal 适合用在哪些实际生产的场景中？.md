@@ -22,7 +22,7 @@
 
 下面我们用一个案例来说明这种典型的第一个场景。假设有个需求，即 2 个线程都要用到 SimpleDateFormat。代码如下所示：
 
-```
+```java
 public class ThreadLocalDemo01 {
 
     public static void main(String[] args) throws InterruptedException {
@@ -114,7 +114,7 @@ public class ThreadLocalDemo02 {
 
 在这种情况下，我们给出下面这个代码实现的方案：
 
-复制
+```java
 public class ThreadLocalDemo03 {
 
     public static ExecutorService threadPool = Executors.newFixedThreadPool(16);
@@ -138,10 +138,14 @@ public class ThreadLocalDemo03 {
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm:ss");
         return dateFormat.format(date);
     }
+
 }
+```
+
+
 可以看出，我们用了一个 16 线程的线程池，并且给这个线程池提交了 1000 次任务。每个任务中它做的事情和之前是一样的，还是去执行 date 方法，并且在这个方法中创建一个 simpleDateFormat 对象。程序的一种运行结果是（多线程下，运行结果不唯一）：
 
-复制
+```java
 00:00
 00:07
 00:04
@@ -152,9 +156,12 @@ public class ThreadLocalDemo03 {
 16:27
 16:26
 16:39
+```
+
+
 程序运行结果正确，把从 00:00 到 16:39 这 1000 个时间给打印了出来，并且没有重复的时间。我们把这段代码用图形化给表示出来，如图所示：
 
-
+![](../pic/CgpOIF5GbTyAVB13AACRdzpW9yI360.png)
 
 图的左侧是一个线程池，右侧是 1000 个任务。我们刚才所做的就是每个任务都创建了一个 simpleDateFormat 对象，也就是说，1000 个任务对应 1000 个 simpleDateFormat 对象。
 
@@ -162,11 +169,11 @@ public class ThreadLocalDemo03 {
 
 现在我们就来优化一下。既然不想要这么多的 simpleDateFormat 对象，最简单的就是只用一个就可以了。
 
-4. 所有的线程都共用一个 simpleDateFormat 对象
+4. **所有的线程都共用一个 simpleDateFormat 对象**
 
-我们用下面的代码来演示只用一个 simpleDateFormat 对象的情况：
+我们用下面的代码来演示只用一个 **simpleDateFormat** 对象的情况：
 
-复制
+```java
 public class ThreadLocalDemo04 {
 
     public static ExecutorService threadPool = Executors.newFixedThreadPool(16);
@@ -190,18 +197,22 @@ public class ThreadLocalDemo04 {
         Date date = new Date(1000 * seconds);
         return dateFormat.format(date);
     }
+
 }
+```
+
+
 在代码中可以看出，其他的没有变化，变化之处就在于，我们把这个 simpleDateFormat 对象给提取了出来，变成 static 静态变量，需要用的时候直接去获取这个静态对象就可以了。看上去省略掉了创建 1000 个 simpleDateFormat 对象的开销，看上去没有问题，我们用图形的方式把这件事情给表示出来：
 
-
+![](../pic/Cgq2xl5GbXSADJb5AAC0PdMmwSI373.png)
 
 从图中可以看出，我们有不同的线程，并且线程会执行它们的任务。但是不同的任务所调用的 simpleDateFormat 对象都是同一个，所以它们所指向的那个对象都是同一个，但是这样一来就会有线程不安全的问题。
 
-5. 线程不安全，出现了并发安全问题
+5. **线程不安全，出现了并发安全问题**
 
 控制台会打印出（多线程下，运行结果不唯一）：
 
-复制
+```java
 00:04
 00:04
 00:05
@@ -210,13 +221,16 @@ public class ThreadLocalDemo04 {
 16:15
 16:14
 16:13
+```
+
+
 执行上面的代码就会发现，控制台所打印出来的和我们所期待的是不一致的。我们所期待的是打印出来的时间是不重复的，但是可以看出在这里出现了重复，比如第一行和第二行都是 04 秒，这就代表它内部已经出错了。
 
-6. 加锁
+6. **加锁**
 
-出错的原因就在于，simpleDateFormat 这个对象本身不是一个线程安全的对象，不应该被多个线程同时访问。所以我们就想到了一个解决方案，用 synchronized 来加锁。于是代码就修改成下面的样子：
+出错的原因就在于，s**impleDateFormat 这个对象本身不是一个线程安全的对象**，不应该被多个线程同时访问。所以我们就想到了一个解决方案，用 synchronized 来加锁。于是代码就修改成下面的样子：
 
-复制
+```java
 public class ThreadLocalDemo05 {
 
     public static ExecutorService threadPool = Executors.newFixedThreadPool(16);
@@ -244,12 +258,16 @@ public class ThreadLocalDemo05 {
         }
         return s;
     }
+
 }
-可以看出在 date 方法中加入了 synchronized 关键字，把 simpleDateFormat 的调用给上了锁。
+```
+
+
+可以看出在 date 方法中加入了 synchronized 关键字，把 **simpleDateFormat 的调用给上了锁**。
 
 运行这段代码的结果（多线程下，运行结果不唯一）：
 
-复制
+```java
 00:00
 00:01
 00:06
@@ -257,15 +275,18 @@ public class ThreadLocalDemo05 {
 15:56
 16:37
 16:36
+```
+
+
 这样的结果是正常的，没有出现重复的时间。但是由于我们使用了 synchronized 关键字，就会陷入一种排队的状态，多个线程不能同时工作，这样一来，整体的效率就被大大降低了。有没有更好的解决方案呢？
 
-我们希望达到的效果是，既不浪费过多的内存，同时又想保证线程安全。经过思考得出，可以让每个线程都拥有一个自己的 simpleDateFormat 对象来达到这个目的，这样就能两全其美了。
+我们希望达到的效果是，**既不浪费过多的内存，同时又想保证线程安全**。经过思考得出，可以让**每个线程都拥有一个自己的 simpleDateFormat 对象来达到这个目的**，这样就能两全其美了。
 
-7. 使用 ThreadLocal
+7. **使用 ThreadLocal**
 
 那么，要想达到这个目的，我们就可以使用 ThreadLocal。示例代码如下所示：
 
-复制
+```java
 public class ThreadLocalDemo06 {
 
     public static ExecutorService threadPool = Executors.newFixedThreadPool(16);
@@ -289,6 +310,7 @@ public class ThreadLocalDemo06 {
         SimpleDateFormat dateFormat = ThreadSafeFormatter.dateFormatThreadLocal.get();
         return dateFormat.format(date);
     }
+
 }
 
 class ThreadSafeFormatter {
@@ -299,11 +321,14 @@ class ThreadSafeFormatter {
         }
     };
 }
+```
+
+
 在这段代码中，我们使用了 ThreadLocal 帮每个线程去生成它自己的 simpleDateFormat 对象，对于每个线程而言，这个对象是独享的。但与此同时，这个对象就不会创造过多，一共只有 16 个，因为线程只有 16 个。
 
 代码运行结果（多线程下，运行结果不唯一）：
 
-复制
+```java
 00:05
 00:04
 00:01
@@ -311,17 +336,20 @@ class ThreadSafeFormatter {
 16:37
 16:36
 16:32
+```
+
+
 这个结果是正确的，不会出现重复的时间。
 
 我们用图来看一下当前的这种状态：
 
-
+![](../pic/CgpOIF5Gbf2ARIJVAADS5-4CFIM236.png)
 
 在图中的左侧可以看到，这个线程池一共有 16 个线程，对应 16 个 simpleDateFormat 对象。而在这个图画的右侧是 1000 个任务，任务是非常多的，和原来一样有 1000 个任务。但是这里最大的变化就是，虽然任务有 1000 个，但是我们不再需要去创建 1000 个 simpleDateFormat 对象了。即便任务再多，最终也只会有和线程数相同的 simpleDateFormat 对象。这样既高效地使用了内存，又同时保证了线程安全。
 
 以上就是第一种非常典型的适合使用 ThreadLocal 的场景。
 
-典型场景2
+#### 典型场景2
 每个线程内需要保存类似于全局变量的信息（例如在拦截器中获取的用户信息），可以让不同方法直接使用，避免参数传递的麻烦却不想被多线程共享（因为不同线程获取到的用户信息不一样）。
 
 例如，用 ThreadLocal 保存一些业务内容（用户权限信息、从用户系统获取到的用户名、用户ID 等），这些信息在同一个线程内相同，但是不同的线程使用的业务内容是不相同的。
@@ -330,7 +358,7 @@ class ThreadSafeFormatter {
 
 我们用图画的形式举一个实例：
 
-
+![](../pic/Cgq2xl5GbiiALuSeAADH1eeI90E061.png)
 
 比如说我们是一个用户系统。假设不使用 ThreadLocal，那么当一个请求进来的时候，一个线程会负责执行这个请求，然后这个请求就会依次调用 service-1()、service-2()、service-3()、service-4()，这 4 个方法可能是分布在不同的类中的。
 
@@ -338,12 +366,14 @@ class ThreadSafeFormatter {
 
 这样做会导致代码非常冗余，那有没有什么办法可以解决这个问题呢？我们首先想到的方法就是使用一个 HashMap，如下图所示：
 
+![](../pic/Cgq2xl5GbkGAepKRAAE5e9B5GbE065.png)
+
 
 比如说我们使用了这样的 Map 之后，就不需要把 user 对象层层传递了，而是在执行 service-1() 的时候，把这个用户信息给 put 进去，然后后面需要拿用户信息的时候，直接从静态的 User map 里面 get 就可以了。这样一来，无论你执行哪个方法，都可以直接获取到这个用户信息。当然，我们也要考虑到 web 服务器通常都是多线程的，当多个线程同时工作的时候，我们也需要保证线程安全。
 
 所以在这里，如果我们使用 HashMap 是不够的，因为它是线程不安全的，那我们就可以使用 synchronized，或者直接把 HashMap 替换成 ConcurrentHashMap，用类似的方法来保证线程安全，这样的改进如下图所示：
 
-
+![](../pic/CgpOIF5GblqACpu_AAGwufcrq9I360.png)
 
 在这个图中，可以看出有两个线程，并且每个线程所做的事情都是访问 service-1/2/3/4()。那么当它们同时运行的时候，都会同时访问这个 User map，于是就需要 User map 是线程安全的。
 
@@ -351,17 +381,18 @@ class ThreadSafeFormatter {
 
 这样一来，我们就可以在不影响性能的情况下，也无需层层传递参数，就可以达到保存当前线程所对应的用户信息的目的。如下图所示：
 
-
+![](../pic/Cgq2xl5GbvKAJWHOAAHZjE9Vywo159.png)
 
 在这个图中可以看出，同样是多个线程同时去执行，但是这些线程同时去访问这个 ThreadLocal 并且能利用 ThreadLocal 拿到只属于自己的独享对象。这样的话，就无需任何额外的措施，保证了线程安全，因为每个线程是独享 user 对象的。代码如下所示：
 
-复制
+```java
 public class ThreadLocalDemo07 {
 
     public static void main(String[] args) {
         new Service1().service1();
     
     }
+
 }
 
 class Service1 {
@@ -371,6 +402,7 @@ class Service1 {
         UserContextHolder.holder.set(user);
         new Service2().service2();
     }
+
 }
 
 class Service2 {
@@ -380,6 +412,7 @@ class Service2 {
         System.out.println("Service2拿到用户名：" + user.name);
         new Service3().service3();
     }
+
 }
 
 class Service3 {
@@ -389,11 +422,13 @@ class Service3 {
         System.out.println("Service3拿到用户名：" + user.name);
         UserContextHolder.holder.remove();
     }
+
 }
 
 class UserContextHolder {
 
     public static ThreadLocal<User> holder = new ThreadLocal<>();
+
 }
 
 class User {
@@ -403,19 +438,25 @@ class User {
     public User(String name) {
         this.name = n
     }
+
 }
+```
+
+
 在这个代码中我们可以看出，我们有一个 UserContextHolder，里面保存了一个 ThreadLocal，在调用 Service1 的方法的时候，就往里面存入了 user 对象，而在后面去调用的时候，直接从里面用 get 方法取出来就可以了。没有参数层层传递的过程，非常的优雅、方便。
 
 代码运行结果：
 
-复制
+```java
 Service2拿到用户名：拉勾教育
 Service3拿到用户名：拉勾教育
-总结
+```
+
+#### 总结
 下面我们进行总结。
 
 本讲主要介绍了 ThreadLocal 的两个典型的使用场景。
 
-场景1，ThreadLocal 用作保存每个线程独享的对象，为每个线程都创建一个副本，每个线程都只能修改自己所拥有的副本, 而不会影响其他线程的副本，这样就让原本在并发情况下，线程不安全的情况变成了线程安全的情况。
+场景1，**ThreadLocal 用作保存每个线程独享的对象**，为每个线程都创建一个副本，每个线程都只能修改自己所拥有的副本, 而不会影响其他线程的副本，这样就让原本在并发情况下，线程不安全的情况变成了线程安全的情况。
 
-场景2，ThreadLocal 用作每个线程内需要独立保存信息的场景，供其他方法更方便得获取该信息，每个线程获取到的信息都可能是不一样的，前面执行的方法设置了信息后，后续方法可以通过 ThreadLocal 直接获取到，避免了传参。
+场景2，**ThreadLocal 用作每个线程内需要独立保存信息的场景，供其他方法更方便得获取该信息**，每个线程获取到的信息都可能是不一样的，前面执行的方法设置了信息后，后续方法可以通过 ThreadLocal 直接获取到，避免了传参。
