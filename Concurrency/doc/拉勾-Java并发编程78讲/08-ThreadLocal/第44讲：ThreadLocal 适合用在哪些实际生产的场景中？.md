@@ -228,7 +228,7 @@ public class ThreadLocalDemo04 {
 
 6. **加锁**
 
-出错的原因就在于，s**impleDateFormat 这个对象本身不是一个线程安全的对象**，不应该被多个线程同时访问。所以我们就想到了一个解决方案，用 synchronized 来加锁。于是代码就修改成下面的样子：
+出错的原因就在于，**simpleDateFormat 这个对象本身不是一个线程安全的对象**，不应该被多个线程同时访问。所以我们就想到了一个解决方案，用 synchronized 来加锁。于是代码就修改成下面的样子：
 
 ```java
 public class ThreadLocalDemo05 {

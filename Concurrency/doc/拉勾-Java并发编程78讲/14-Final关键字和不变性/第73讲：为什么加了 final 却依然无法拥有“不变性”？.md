@@ -41,21 +41,20 @@ public class Person {
 
 ```java
 /**
-
-描述：     final变量一旦被赋值就不能被修改
-*/
+ * 描述：     final变量一旦被赋值就不能被修改
+ */
 public class FinalVarCantChange {
 
-private final int finalVar = 0;
-private final Random random = new Random();
-private final int array[] = {1,2,3};
+	private final int finalVar = 0;
+	private final Random random = new Random();
+	private final int array[] = {1,2,3};
 
-public static void main(String[] args) {
-    FinalVarCantChange finalVarCantChange = new FinalVarCantChange();
+	public static void main(String[] args) {
+    	FinalVarCantChange finalVarCantChange = new FinalVarCantChange();
 //        finalVarCantChange.finalVar=9;     //编译错误，不允许修改final的变量(基本类型)
 //        finalVarCantChange.random=null;    //编译错误，不允许修改final的变量(对象)
 //        finalVarCantChange.array = new int[5];//编译错误，不允许修改final的变量（数组）
-}
+	}
 }
 ```
 

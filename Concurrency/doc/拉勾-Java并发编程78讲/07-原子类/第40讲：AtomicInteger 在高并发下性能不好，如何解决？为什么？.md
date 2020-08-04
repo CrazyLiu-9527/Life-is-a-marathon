@@ -11,41 +11,34 @@
 
 ~~~java
 /**
-
 描述：     在16个线程下使用AtomicLong
 */
 public class AtomicLongDemo {
 
- public static void main(String[] args) throws InterruptedException {
-     AtomicLong counter = new AtomicLong(0);
-     ExecutorService service = Executors.newFixedThreadPool(16);
-     for (int i = 0; i < 100; i++) {
-         service.submit(new Task(counter));
-     }
+ 	public static void main(String[] args) throws InterruptedException {
+     	AtomicLong counter = new AtomicLong(0);
+     	ExecutorService service = Executors.newFixedThreadPool(16);
+     	for (int i = 0; i < 100; i++) {
+         	service.submit(new Task(counter));
+     	}
 
-```
- Thread.sleep(2000);
- System.out.println(counter.get());
-```
+ 		Thread.sleep(2000);
+ 		System.out.println(counter.get());
+ 	}
 
- }
+ 	static class Task implements Runnable {
 
- static class Task implements Runnable {
-
-```
- private final AtomicLong counter;
+		private final AtomicLong counter;
  
- public Task(AtomicLong counter) {
-     this.counter = counter;
- }
+		public Task(AtomicLong counter) {
+     		this.counter = counter;
+ 		}
  
- @Override
- public void run() {
-     counter.incrementAndGet();
- }
-```
-
- }
+ 		@Override
+ 		public void run() {
+     		counter.incrementAndGet();
+ 		}
+	}
 }
 ~~~
 
@@ -78,40 +71,33 @@ public class AtomicLongDemo {
 
 ~~~java
 /**
-
 描述：     在16个线程下使用LongAdder
 */
 public class LongAdderDemo {
 
- public static void main(String[] args) throws InterruptedException {
-     LongAdder counter = new LongAdder();
-     ExecutorService service = Executors.newFixedThreadPool(16);
-     for (int i = 0; i < 100; i++) {
-         service.submit(new Task(counter));
-     }
-
-```
- Thread.sleep(2000);
- System.out.println(counter.sum());
-```
-
- }
- static class Task implements Runnable {
-
-```
- private final LongAdder counter;
+ 	public static void main(String[] args) throws InterruptedException {
+     	LongAdder counter = new LongAdder();
+     	ExecutorService service = Executors.newFixedThreadPool(16);
+     	for (int i = 0; i < 100; i++) {
+         	service.submit(new Task(counter));
+     	}
+ 	Thread.sleep(2000);
+ 	System.out.println(counter.sum());
+ 	}
  
- public Task(LongAdder counter) {
-     this.counter = counter;
- }
- 
- @Override
- public void run() {
-     counter.increment();
- }
-```
+    static class Task implements Runnable {
 
- }
+ 		private final LongAdder counter;
+ 
+ 		public Task(LongAdder counter) {
+     		this.counter = counter;
+ 		}
+ 
+ 		@Override
+ 		public void run() {
+     		counter.increment();
+ 		}
+ 	}
 }
 ~~~
 
@@ -158,6 +144,3 @@ public long sum() {
 LongAdder 只提供了 add、increment 等简单的方法，适合的是统计求和计数的场景，场景比较单一，而 AtomicLong 还具有 compareAndSet 等高级方法，可以应对除了加减之外的更复杂的需要 CAS 的场景。
 
 结论：如果我们的场景仅仅是需要用到加和减操作的话，那么可以直接使用更高效的 LongAdder，但如果我们需要利用 CAS 比如 compareAndSet 等操作的话，就需要使用 AtomicLong 来完成。
-
-
-00:00 Java 并发编程 78 讲

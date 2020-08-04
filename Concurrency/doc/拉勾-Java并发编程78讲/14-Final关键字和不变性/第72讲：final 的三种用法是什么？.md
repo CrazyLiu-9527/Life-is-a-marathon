@@ -13,9 +13,8 @@ final 是 Java 中的一个关键字，简而言之，final 的作用意味着�
 
 ```java
 /**
-
-描述：     final变量一旦被赋值就不能被修改
-*/
+ * 描述：     final变量一旦被赋值就不能被修改
+ */
 public class FinalVarCantChange {
 
 public final int finalVar = 0;
@@ -108,23 +107,22 @@ class FinalFieldAssignment3 {
 
 ```java
 /**
-
-描述：     空白final提供了灵活性
-*/
+ * 描述：     空白final提供了灵活性
+ */
 public class BlankFinal {
 
-//空白final
-private final int a;
+	//空白final
+	private final int a;
 
-//不传参则把a赋值为默认值0
-public BlankFinal() {
-    this.a = 0;
-}
+	//不传参则把a赋值为默认值0
+	public BlankFinal() {
+    	this.a = 0;
+	}
 
-//传参则把a赋值为传入的参数
-public BlankFinal(int a) {
-    this.a = a;
-}
+	//传参则把a赋值为传入的参数
+	public BlankFinal(int a) {
+	    this.a = a;
+	}
 }
 ```
 
@@ -139,11 +137,10 @@ public BlankFinal(int a) {
 
 ```java
 /**
-
-描述：     演示final的static类变量的赋值时机
-*/
+ * 描述：     演示final的static类变量的赋值时机
+ */
 public class StaticFieldAssignment1 {
-private static final int a = 0;
+	private static final int a = 0;
 }
 ```
 
@@ -177,14 +174,13 @@ class StaticFieldAssignment2 {
 
 ```java
 /**
-
-描述：     本地变量的赋值时机：使用前赋值即可
-*/
+ * 描述：     本地变量的赋值时机：使用前赋值即可
+ */
 public class LocalVarAssignment1 {
 
-public void foo() {
-    final int a = 0;//等号右边直接赋值
-}
+	public void foo() {
+    	final int a = 0;//等号右边直接赋值
+	}
 }
 
 class LocalVarAssignment2 {
@@ -220,9 +216,8 @@ class LocalVarAssignment3 {
 
 ```java
 /**
-
-描述：     final参数
-*/
+ * 描述：     final参数
+ */
 public class FinalPara {
 	public void withFinal(final int a) {
     	System.out.println(a);//可以读取final参数的值
@@ -243,16 +238,15 @@ public class FinalPara {
 
 ```java
 /**
-
-描述：     final的方法不允许被重写
-*/
+ * 描述：     final的方法不允许被重写
+ */
 public class FinalMethod {
 
-public void drink() {
-}
+	public void drink() {
+	}
 
-public final void eat() {
-}
+	public final void eat() {
+	}
 }
 
 class SubClass extends FinalMethod {
@@ -282,13 +276,12 @@ class SubClass extends FinalMethod {
 
 ```java
 /**
-
-描述：     private方法隐式指定为final
-*/
+ * 描述：     private方法隐式指定为final
+ */
 public class PrivateFinalMethod {
 
-private final void privateEat() {
-}
+	private final void privateEat() {
+	}
 }
 
 class SubClass2 extends PrivateFinalMethod {
@@ -313,11 +306,10 @@ class SubClass2 extends PrivateFinalMethod {
 
 ```java
 /**
-
-描述：     测试final class的效果
-*/
+ * 描述：     测试final class的效果
+ */
 public final class FinalClassDemo {
-//code
+	//code
 }
 
 //class A extends FinalClassDemo {}//编译错误，无法继承final的类
