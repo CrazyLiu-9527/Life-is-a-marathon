@@ -1,4 +1,4 @@
-package per.lzy.concurrencuylearning.juc.mythreadpool.atomic;
+package per.lzy.concurrencuylearning.juc.atomic;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
