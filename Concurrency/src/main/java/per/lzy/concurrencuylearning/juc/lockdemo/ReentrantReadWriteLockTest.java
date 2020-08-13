@@ -77,7 +77,6 @@ public class ReentrantReadWriteLockTest {
         }
     }
 
-
     public static void main(String[] args) throws InterruptedException {
         Service service = new Service();
         ThreadA a = new ThreadA(service);

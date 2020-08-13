@@ -2,12 +2,14 @@
 
 #### Future 类
 ##### Future 的作用
+
 Future 最主要的作用是，比如当做一定运算的时候，运算过程可能比较耗时，有时会去查数据库，或是繁重的计算，比如压缩、加密等，在这种情况下，如果我们一直在原地等待方法返回，显然是不明智的，整体程序的运行效率会大大降低。我们可以把运算的过程放到子线程去执行，再通过 Future 去控制子线程执行的计算过程，最后获取到计算结果。这样一来就可以把整个程序的运行效率提高，是一种异步的思想。
 
 ##### Callable 和 Future 的关系
 接下来我们介绍下 Callable 和 Future 的关系，前面讲过，Callable 接口相比于 Runnable 的一大优势是可以有返回结果，那这个返回结果怎么获取呢？就可以用 Future 类的 get 方法来获取 。因此，Future 相当于一个存储器，它存储了 Callable 的 call 方法的任务结果。除此之外，我们还可以通过 Future 的 isDone 方法来判断任务是否已经执行完毕了，还可以通过 cancel 方法取消这个任务，或限时获取任务的结果等，总之 Future 的功能比较丰富。有了这样一个从宏观上的概念之后，我们就来具体看一下 Future 类的主要方法。
 
 ##### Future 的方法和用法
+
 首先看一下 Future 接口的代码，一共有 5 个方法，代码如下所示：
 
 ```java
@@ -31,6 +33,7 @@ public interface Future<V> {
 其中，第 5 个方法是对第 4 个方法的重载，方法名一样，但是参数不一样。
 
 ##### get() 方法：获取结果
+
 get 方法最主要的作用就是获取任务执行的结果，该方法在执行时的行为取决于 Callable 任务的状态，可能会发生以下 5 种情况。
 
 （1）最常见的就是**当执行 get 的时候，任务已经执行完毕**了，可以立刻返回，获取到任务执行的结果。
@@ -55,35 +58,31 @@ get 方法最主要的作用就是获取任务执行的结果，该方法在执�
 
 ```java
 /**
-
-描述：     演示一个 Future 的使用方法
-*/
+ * 描述：     演示一个 Future 的使用方法
+ */
 public class OneFuture {
 
-public static void main(String[] args) {
-    ExecutorService service = Executors.newFixedThreadPool(10);
-    Future<Integer> future = service.submit(new CallableTask());
-    try {
-        System.out.println(future.get());
-    } catch (InterruptedException e) {
-        e.printStackTrace();
-    } catch (ExecutionException e) {
-        e.printStackTrace();
+    public static void main(String[] args) {
+        ExecutorService service = Executors.newFixedThreadPool(10);
+        Future<Integer> future = service.submit(new CallableTask());
+        try {
+            System.out.println(future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        service.shutdown();
     }
-    service.shutdown();
-}
 
-static class CallableTask implements Callable<Integer> {
-
-
-@Override
-public Integer call() throws Exception {
-    Thread.sleep(3000);
-    return new Random().nextInt();
-}
-
-
-}
+	static class CallableTask implements Callable<Integer> {
+        
+        @Override
+        public Integer call() throws Exception {
+            Thread.sleep(3000);
+            return new Random().nextInt();
+        }
+	}
 }
 ```
 
@@ -145,7 +144,6 @@ public class GetException {
 true
 java.util.concurrent.ExecutionException: java.lang.IllegalArgumentException: Callable抛出异常
 ...
-
 ```
 
 **这里要注意**，我们知道这个异常实际上是在任务刚被执行的时候就抛出了，因为我们的计算任务中是没有其他逻辑的，只有抛出异常。我们再来看，控制台是什么时候打印出异常的呢？它是在 true 打印完毕后才打印出异常信息的，也就是说，在调用 get 方法时打印出的异常。
@@ -213,27 +211,24 @@ public interface RunnableFuture<V> extends Runnable, Future<V> {
 
 ~~~java
 /**
-
-描述：     演示 FutureTask 的用法
-*/
+ * 描述：     演示 FutureTask 的用法
+ */
 public class FutureTaskDemo {
 
-public static void main(String[] args) {
-    Task task = new Task();
-    FutureTask<Integer> integerFutureTask = new FutureTask<>(task);
-    new Thread(integerFutureTask).start();
+    public static void main(String[] args) {
+        Task task = new Task();
+        FutureTask<Integer> integerFutureTask = new FutureTask<>(task);
+        new Thread(integerFutureTask).start();
 
-```
-try {
-    System.out.println("task运行结果："+integerFutureTask.get());
-} catch (InterruptedException e) {
-    e.printStackTrace();
-} catch (ExecutionException e) {
-    e.printStackTrace();
-}
-```
+        try {
+            System.out.println("task运行结果："+integerFutureTask.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
 
-}
+    }
 }
 
 class Task implements Callable<Integer> {

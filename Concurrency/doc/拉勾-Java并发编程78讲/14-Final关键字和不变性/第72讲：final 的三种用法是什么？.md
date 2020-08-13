@@ -17,12 +17,12 @@ final 是 Java 中的一个关键字，简而言之，final 的作用意味着�
  */
 public class FinalVarCantChange {
 
-public final int finalVar = 0;
+    public final int finalVar = 0;
 
-public static void main(String[] args) {
-    FinalVarCantChange finalVarCantChange = new FinalVarCantChange();
-//        finalVarCantChange.finalVar=9;     //编译错误，不允许修改final的成员变量
-}
+    public static void main(String[] args) {
+        FinalVarCantChange finalVarCantChange = new FinalVarCantChange();
+    //        finalVarCantChange.finalVar=9;     //编译错误，不允许修改final的成员变量
+    }
 }
 ```
 

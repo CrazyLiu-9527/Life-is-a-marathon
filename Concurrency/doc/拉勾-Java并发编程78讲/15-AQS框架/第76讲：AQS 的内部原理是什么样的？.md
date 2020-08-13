@@ -5,14 +5,14 @@
 
 是哪三大部分呢？AQS 最核心的三大部分就是**状态、队列和期望协作工具类去实现的获取/释放等重要方法**。我们就从这三个部分出发，分别展开讲解。
 
-##### state 状态
+#### state 状态
+
 第一个要讲解的是状态 state，如果我们的 AQS 想要去管理或者想作为协作工具类的一个基础框架，那么它必然要管理一些状态，而这个状态在 AQS 内部就是用 state 变量去表示的。它的定义如下：
 
 ```java
 /**
-
-The synchronization state.
-*/
+ * The synchronization state.
+ */
 private volatile int state;
 ```
 

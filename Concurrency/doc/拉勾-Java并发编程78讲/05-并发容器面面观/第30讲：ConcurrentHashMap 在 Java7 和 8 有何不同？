@@ -210,6 +210,7 @@ Java 7 采用 Segment 分段锁来保证安全，而 Segment 是继承自 Reentr
 Java 8 中放弃了 Segment 的设计，采用 Node + CAS + synchronized 保证线程安全。
 
 ##### 遇到 Hash 碰撞
+
 Java 7 在 Hash 冲突时，会使用拉链法，也就是链表的形式。
 
 Java 8 先使用拉链法，在链表长度超过一定阈值时，将链表转换为红黑树，来提高查找效率。

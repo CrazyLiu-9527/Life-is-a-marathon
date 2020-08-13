@@ -39,9 +39,8 @@ JDK 正是利用了这些 CAS 指令，可以实现并发的数据结构，比�
 
 ```java
 /**
-描述：     模拟CAS操作，等价代码
-*/
-
+ *描述：     模拟CAS操作，等价代码
+ */
 public class SimulatedCAS {
 
     private int value;
