@@ -2,6 +2,10 @@
 
 双亲委派模型是Java加载类的机制.采用双亲委派模型的好处是Java类随着它的类加载器一起具备了一种带有优先级的层级关系，通过这种层级关系可以避免类的重复加载.
 
+JVM的ClassLoader通常采用双亲委派模型，要求除了启动类加载器之外，其余的类加载器都应该有自己的父级加载器。这里的父子关系是组合而不是继承。
+
+双亲委派模型的工作过程是：如果一个类加载器收到了类加载的请求，它首先不会自己尝试去加载这个类，而是把这个请求委派给父加载器去完成，每一层次的类加载器都是如此，因此所有的类加载请求最终都应该送到顶层的启动类加载器中，只有当父加载器反馈自己无法完成类加载的请求的时候（他的搜索范围中没有找到所需的类），子加载器才会尝试自己去加载。
+
 ### 1. 模型基础 
 
 ![img](https://pic4.zhimg.com/80/v2-278989890af96aa77c3ffe5d7042678f_720w.jpg)
@@ -172,6 +176,11 @@ public class ClassLoaderTest extends ClassLoader {
 
 - 执行成功
 - 我们来分析下,Fib类的加载过程,初始化自定义类加载器后,loadClass方法肯定将其委派到双亲Application ClassLoader,而Application ClassLoader又将其委派到Extension ClassLoader,继而委派到Bootstrap ClassLoader.但是Bootstrap ClassLoader发现Fib并不在自己的加载能力范围内,于是移向Extension ClassLoader,同理Extension ClassLoader只能加载/ext中的class,继而让给Application ClassLoader,而Application ClassLoader只加载classpath中的类,于是又回到我们自定义的MyClassLoader,幸好我们重写了findClass方法进而执行了加载,否在findClass抛出找不到类的异常.至此Fib类加载完成.
+
+### 5. 破坏双亲委派模型
+
+- 重写类加载器的loadClass()方法
+- 热部署
 
 ## 结语
 

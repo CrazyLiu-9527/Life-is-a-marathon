@@ -2,7 +2,21 @@
 
 不了解JVM的类加载机制你也可以coding,但是当你了解之后，可以让你在coding的时候避免很多坑，本文将以一道常见的面试题去剖析一下。本文参考 深入理解Java虚拟机（第2版） 。
 
-public class ClassLoadTest { private static ClassLoadTest test = new ClassLoadTest(); static int x; static int y = 0; public ClassLoadTest() { x++; y++; } public static void main(String[] args) { System.out.println(test.x); System.out.println(test.y); } }
+```java
+public class ClassLoadTest { 
+    private static ClassLoadTest test = new ClassLoadTest(); 
+    static int x; 
+    static int y = 0; 
+    
+    public ClassLoadTest() { 
+        x++; y++; 
+    } 
+    
+    public static void main(String[] args) {
+        System.out.println(test.x); System.out.println(test.y); 
+    }
+}
+```
 
 这里大家可以先猜测一下答案，可能结果会出乎你的意料~
 
@@ -46,11 +60,13 @@ public class ClassLoadTest { private static ClassLoadTest test = new ClassLoadTe
 
 ### 准备过程
 
-这个过程相当于给类变量分配内存并设置变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。
+这个过程相当于给类的静态变量分配内存并设置变量初始值的阶段，这些变量所使用的内存都将在方法区中进行分配。
 
 针对上述例子：
 
+```java
 test = null; x = 0; y = 0;
+```
 
 **注意：这里有个特殊情况，如果该字段被** **`final`** **修饰，那么在准备阶段改字段就会被设置成咱们自定义的值。** **`public static final int value = 11`** **,在准备阶段就会直接赋值11，并不是该变量的初始值。**
 
@@ -65,9 +81,11 @@ test = null; x = 0; y = 0;
 
 ### 初始化
 
-在准备阶段，变量已经赋值过系统要求的默认值，在初始化阶段，则会根据程序制定的主观计划去初始化类变量和其他资源。这句话听起来有些绕口，根据上述例子，实际上就是：
+在准备阶段，变量已经赋值过系统要求的默认值，在初始化阶段，则会根据程序制定的主观计划去初始化类的静态变量和其他资源。这句话听起来有些绕口，根据上述例子，实际上就是：
 
+```java
 test = new ClassLoadTest();// x = 1;y =1 y = 0;
+```
 
 这个过程，由于 `x` 咱们自己并没有去设定一个值，所以初始化阶段它不会发生任何改变,但是 `y` 咱们有设定一个值0，所以最后造成最终结果为 `x = 1;y = 0` 。
 
